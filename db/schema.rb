@@ -78,9 +78,6 @@ ActiveRecord::Schema.define(version: 20141204111243) do
     t.datetime "updated_at"
   end
 
-  add_index "user_logins", ["email"], name: "index_user_logins_on_email", unique: true
-  add_index "user_logins", ["reset_password_token"], name: "index_user_logins_on_reset_password_token", unique: true
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
