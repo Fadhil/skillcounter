@@ -12,14 +12,15 @@ How to clone onto C9
 -------------------
 Open up your Dashboard. Create new Workspace. Choose 'Custom'. Give it the name "SkillCounter". 
 Once your workspace is loaded, type :
-	`git init`
-	`git remote add origin git@github.com:Fadhil/skillcounter.git`
-	`git pull --rebase origin master`
 
-	** Note: You might need to add your cloud9 SSH keys to your github account You can get your
-	cloud9 ssh keys by typing this:**
+    git init
+	git remote add origin git@github.com:Fadhil/skillcounter.git
+	git pull --rebase origin master
 
-	`less ~/.ssh/id_rsa.pub`
+**Note: You might need to add your cloud9 SSH keys to your github account You can get your
+cloud9 ssh keys by typing this:**
 
-	Copy the output and add it to your Github account under "Settings->Deploy Keys"
+	less ~/.ssh/id_rsa.pub
+
+Copy the output and add it to your Github account under "Settings->Deploy Keys"
 
