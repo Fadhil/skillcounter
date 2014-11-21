@@ -6,4 +6,5 @@ class Organizer < ActiveRecord::Base
     validates :organizerID, presence: true, uniqueness: true
     
     has_many :contact_numbers
+     has_many :events
 end
