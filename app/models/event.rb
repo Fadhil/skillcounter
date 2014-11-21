@@ -6,8 +6,8 @@ class Event < ActiveRecord::Base
     validates :location, presence: true, length: { maximum: 255 }
     
     belongs_to :organizer
-    validates :start_date_time, presence: true, format: {with: "%FT%R", message: 'invalid format' }
-    validates :end_date_time, presence: true, format: {with: "%FT%R", message: 'invalid format' }
+    validates :start_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
+    validates :end_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
     # validates :venue_capacity, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     # validates :ticket_quantity, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :event_page_url, presence: true, format: {with: /\A((http)s?(:\/\/)|(www.))\D/}

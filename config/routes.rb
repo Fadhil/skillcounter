@@ -1,7 +1,9 @@
 SkillCounter::Application.routes.draw do
   resources :users
+  resources :events
   
   get 'claim_profile' => 'users#new'
+  get 'create_event' => 'events#new'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
