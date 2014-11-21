@@ -1,6 +1,6 @@
 SkillCounter::Application.routes.draw do
 
-  devise_for :organizers, controllers: { registrations: "organizer_registrations" }
+  devise_for :organizers, controllers: { registrations: "organizer_registration" }
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
