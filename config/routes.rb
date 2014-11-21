@@ -1,5 +1,11 @@
 SkillCounter::Application.routes.draw do
   
+  get "organizers/index"
+  get "organizers/show"
+  get "organizers/new"
+  get "organizers/create"
+  get "organizers/update"
+  get "organizers/edit"
   devise_for :users, controllers: { registrations: "user_registration" }
 
   # resources :users
