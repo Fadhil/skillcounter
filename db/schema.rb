@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141121123847) do
+ActiveRecord::Schema.define(version: 20141121132744) do
 
   create_table "contact_numbers", force: true do |t|
     t.datetime "created_at"
@@ -20,6 +20,21 @@ ActiveRecord::Schema.define(version: 20141121123847) do
   end
 
   add_index "contact_numbers", ["organizer_id"], name: "index_contact_numbers_on_organizer_id"
+
+  create_table "events", force: true do |t|
+    t.integer  "event_id"
+    t.string   "event_name"
+    t.text     "desciption"
+    t.string   "location"
+    t.string   "start_date_time"
+    t.string   "end_date_time"
+    t.integer  "venue_capacity"
+    t.integer  "ticket_quantity"
+    t.string   "event_page_url"
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "organizers", force: true do |t|
     t.string   "name"
