@@ -4,4 +4,6 @@ class Organizer < ActiveRecord::Base
     validates :contact_number, presence: true, format: { with: /\A[0][1]\d{1}\-\d{7,8}\z/ }
     validates :address, presence: true, length: { maximum: 255 }
     validates :organizerID, presence: true, uniqueness: true
+    
+    has_many :contact_numbers
 end
