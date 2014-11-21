@@ -61,6 +61,14 @@ ActiveRecord::Schema.define(version: 20141121201617) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
+ActiveRecord::Schema.define(version: 20141121190209) do
+
+  create_table "admins", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "organizers", force: true do |t|
     t.string   "name"
     t.string   "contact_number"
