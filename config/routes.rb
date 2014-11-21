@@ -1,4 +1,8 @@
 SkillCounter::Application.routes.draw do
+  root "static_pages#home"
+  
+  get "static_pages/home"
+  devise_for :user_logins
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
