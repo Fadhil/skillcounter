@@ -1,5 +1,5 @@
 SkillCounter::Application.routes.draw do
-  
+
   devise_for :user_logins, controllers: { registrations: "sessions" }
 
   resources :users
@@ -10,13 +10,18 @@ SkillCounter::Application.routes.draw do
   get 'users/claimed_profile' => 'users#claimed_profile'
   post 'users/create' => 'users#create'
   
+  resources :organizers
+  resources :users
+  resources :events
   
-  
+  get 'organizers/new' => 'organizer#new' 
+  get 'claim_profile' => 'users#new'
   get 'create_event' => 'events#new'
   
   root "static_pages#home"
   
   get "static_pages/home"
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
