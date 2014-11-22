@@ -9,6 +9,16 @@ class OrganizersController < ApplicationController
 
   def create
     @organizer = Organizer.new(organizer_params)
+    
+    if @organizer.save
+      #UserMailer.welcome_email(@user).deliver
+     
+      redirect_to organizer_path(id: @organizer.id), notice: "Successfully Signed Up"
+    else
+
+      render :new
+      #redirent_to new
+    end
   end
 
   def show
@@ -23,7 +33,7 @@ class OrganizersController < ApplicationController
      @organizer = Organizer.find(params[:id])
     
     if  @organizer.update_attributes(organizer_params)
-      redirect_to user_path(id:  @organizer.id), notice: "Successfully Updated"
+      redirect_to organizer_path(id:  @organizer.id), notice: "Successfully Updated"
     else
       render :edit
     end
