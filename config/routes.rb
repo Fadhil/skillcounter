@@ -1,16 +1,12 @@
 SkillCounter::Application.routes.draw do
   
-  get "organizers/index"
-  get "organizers/show"
-  get "organizers/new"
-  get "organizers/create"
-  get "organizers/update"
-  get "organizers/edit"
   
-
+  
+  resources :organizers
   resources :users
   resources :events
   
+  get 'organizers/new' => 'organizer#new' 
   get 'claim_profile' => 'users#new'
   get 'create_event' => 'events#new'
   
