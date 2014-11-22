@@ -1,2 +1,33 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1>Edit Profile</h1>
+<%= form_for @user, url: user_registration_path, method: "post" do |f| %>
+<table>
+    <tr>
+        <td><%= f.label :name, "Name" %></td>
+        <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+        <td>Licence Number:</td>
+        <td><%= @user.licence_number %></td>
+    </tr>
+    <tr>
+        <td>IC Number:</td>
+        <td><%= @user.ic_number %></td>
+    </tr>
+    <tr>
+        <td><%= f.label :contact_number, "Contact Number" %></td>
+        <td><%= f.text_field :contact_number %></td>
+    </tr>
+    <tr>
+        <td><%= f.label :email, "Email" %></td>
+        <td><%= f.email_field :email %></td>
+    </tr>
+    <tr>
+        <td>Current Points:</td>
+        <td><%= @user.current_points%></td>
+    </tr>
+    <tr>
+        <td>Expiring Points:</td>
+        <td><%= @user.expiring_points%></td>
+    </tr>
+    <tr><td><%= f.submit "Update" %></td></tr>
+</table>
