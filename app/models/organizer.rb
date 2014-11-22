@@ -6,5 +6,5 @@ class Organizer < ActiveRecord::Base
     
     
     has_many :contact_numbers
-     has_many :events
+    has_many :events
 end
