@@ -16,7 +16,7 @@
          if user_signed_in?
              the_link = link_to destroy_user_session_path, method: :delete do
 				%>
-					Sign In <span class="glyphicon glyphicon-log-in"></span>
+					Sign Out <span class="glyphicon glyphicon-log-in"></span>
 				<%
 			end
          else
