@@ -1,5 +1,4 @@
-<!-- HEADER -->
-  <div class="navbar navbar-static-top" id="top" role="banner">
+<div class="navbar navbar-static-top" id="top" role="banner">
     <div class="container">
       <div class="navbar-header">
         <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -12,7 +11,8 @@
       </div>
       <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
-           
+            <li><a href="#">Manage Events</a></li>
+            <li><a href="#">Dashboard</a></li>
        <%
          if user_signed_in?
              the_link = link_to destroy_user_session_path, method: :delete do
@@ -36,4 +36,3 @@
       </nav>
     </div>
   </div>
-  <!-- END of HEADER -->
