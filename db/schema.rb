@@ -55,16 +55,6 @@ ActiveRecord::Schema.define(version: 20141128091701) do
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
 
-  create_table "organizers", force: true do |t|
-    t.string   "name"
-    t.string   "contact_number"
-    t.string   "email"
-    t.string   "address"
-    t.integer  "organizerID"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "roles", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -84,7 +74,6 @@ ActiveRecord::Schema.define(version: 20141128091701) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
   end
 
   add_index "user_logins", ["email"], name: "index_user_logins_on_email", unique: true
