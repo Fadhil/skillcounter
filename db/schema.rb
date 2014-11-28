@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141126153006) do
+ActiveRecord::Schema.define(version: 20141128083840) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -55,6 +55,16 @@ ActiveRecord::Schema.define(version: 20141126153006) do
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
 
+  create_table "organizers", force: true do |t|
+    t.string   "name"
+    t.string   "contact_number"
+    t.string   "email"
+    t.string   "address"
+    t.integer  "organizerID"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "user_logins", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -86,6 +96,7 @@ ActiveRecord::Schema.define(version: 20141126153006) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "name"
+    t.string   "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
