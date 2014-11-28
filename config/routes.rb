@@ -1,7 +1,7 @@
 SkillCounter::Application.routes.draw do
 
-  devise_for :user_logins, controllers: { registrations: "sessions" }
-
+  #devise_for :user_logins, controllers: { registrations: "sessions" }
+  devise_for :users
   resources :users
   resources :events
   
