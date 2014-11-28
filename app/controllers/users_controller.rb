@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  
+  
   def index
     @users = User.all
   end
@@ -41,11 +43,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user_login
+    @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+     @user = User.find(params[:id])
     
     if @user.update_attributes(user_params)
       redirect_to user_path(id: @user.id), notice: "Successfully Updated"
@@ -59,6 +61,6 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user).permit(:name, :contact_number, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :ic_number, :contact_number, :email, :licence_number, :current_points, :expiring_points)
   end
 end
