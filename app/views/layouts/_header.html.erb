@@ -1,0 +1,28 @@
+<nav class = "navbar navbar-default">
+    
+    <div class='col-lg-8 col-md-4 col-xl-3'>
+    <h1>Skill Counter</h1>
+    </div>
+    <div class='col-lg-4 col-md-6 col-xl-9'>
+   
+    
+        <ul class="nav nav-pills" role="tablist">
+        
+        <li role="presentation"<%= current_page?(root_path) ? "class=active" : ""%>> <%= link_to 'Home' , root_path %></li>
+       
+         <li role="presentation"<%= current_page?(controller: '/users', action: 'index') ? "class=active" : ""%>> <%= link_to 'list' , users_path %></li>
+       <%
+         if user_signed_in?
+             the_link = link_to 'sign out', destroy_user_session_path, method: :delete
+         else
+             the_link = link_to 'sign in', new_user_session_path
+         end
+       
+       %>
+        <li role="presentation"><%= the_link %></li>
+
+        </ul>
+    </div>
+    
+    
+</nav>

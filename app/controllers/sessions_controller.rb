@@ -11,4 +11,10 @@ class SessionsController < Devise::SessionsController
             redirect_to new_user_login_session_path
         end
     end 
+    
+    def destroy
+        session.delete(:user_id)
+        redirect_to sign_in_path, notice: 'Successfully Signed Out'
+        
+    end
 end
