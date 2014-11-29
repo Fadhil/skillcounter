@@ -1,0 +1,88 @@
+<%= form_for @event do |f| %>
+    <% if @event.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@event.errors.count, "error") %> prohibited this post from being saved:</h2>
+     
+        <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="row">
+      
+      <div class="action">
+       
+    
+        
+      </div>
+    
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label 'Event Name' %></span>
+          <%= f.text_field :event_name, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label 'Date' %></span>
+          <%= f.text_field :start_date_time, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label :Location %></span>
+          <%= f.text_field :location, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label 'Speaker' %></span>
+          <%#= f.text_field :Location, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label 'Speaker Bio' %></span>
+          <%#= f.text_field :Location, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label 'Link to Bio' %></span>
+          <%#= f.text_field :Location, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label 'Schedule' %></span>
+          <%#= f.text_field :Location, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label :Point %></span>
+          <%= f.text_field :point, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <span class="input-group-addon"><%= f.label :Catalog %></span>
+          <%= f.text_field :category, class: "form-control" %>
+        </div>        
+    </div>
+    
+    <div class="row">
+        <div class="input-group col-xs-6">
+          <%= f.submit "Save",  class: "btn btn-default" %>
+        </div>             
+    </div>
+<% end %>    

@@ -1,5 +1,6 @@
 <%= form_for @event do |f| %>
-    <% if @event.errors.any? %>
+
+<% if @event.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@event.errors.count, "error") %> prohibited this post from being saved:</h2>
      
@@ -9,80 +10,98 @@
         <% end %>
         </ul>
       </div>
-    <% end %>
-    <div class="row">
-      
-      <div class="action">
-       
-    
+<% end %>
+
+<div class="container">
         
-      </div>
-    
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label 'Event Name' %></span>
-          <%= f.text_field :event_name, class: "form-control" %>
-        </div>        
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <img src="../images/event-200x200px.jpg" alt="event" class="img-thumbnail">
+            </div>
+            <div class="col-md-9 col-sm-9">
+                <div class="row">
+                    <form class="form-horizontal" role="form">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="nextEvent" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-8">
+                                    
+                                    <%= f.text_field :event_name, class: "form-control"%>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastEvent" class="col-sm-3 control-label">Date</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="9 May 2015" id="lastEvent">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="col-sm-3 control-label">Location</label>
+                                <div class="col-sm-8">
+                                   
+                                    <%= f.text_field :location, class: "form-control" %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="organizer" class="col-sm-3 control-label">Speaker</label>
+                                <div class="col-sm-8">
+                                    <%= f.text_field :speaker, class: "form-control"%>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="speakerBioUpload" class="col-sm-3 control-label">Speaker Bio</label>
+                                <div class="col-sm-8">
+                                    <%#= f.file_field :speaker_bio, id="speakerBioUpload"  %>
+                                    <input type="file" id="speakerBioUpload">
+                                    <input type="text" class="form-control" placeholder="speaker.pdf" id="speaker_bio">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="speakerBioLink" class="col-sm-3 control-label">Link to Bio</label>
+                                <div class="col-sm-8">
+                                    <%= f.text_field :bio_url, class: "form-control" %>
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="speakerOutline" class="col-sm-3 control-label">Outline</label>
+                                <div class="col-sm-8">
+                                     <%#= f.file_field, id="speakerOutline"  %>
+                                    <input type="file" id="speakerOutline">
+                                    <input type="text" class="form-control" placeholder="outline.pdf" id="outline">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="license" class="col-sm-3 control-label">Points</label>
+                                <div class="col-sm-8">
+                                   
+                                     <%= f.text_field :point, class: "form-control" %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="license" class="col-sm-3 control-label">Category</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control">
+                                        <option>Category selection</option>
+                                        <option>Category 2</option>
+                                        <option>Category 3</option>
+                                        <option>Category 4</option>
+                                        <option>Category 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-9 col-md-3">
+                             
+                            <%= f.submit "Create", class:"btn btn-default btn-success" %>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label 'Date' %></span>
-          <%= f.text_field :start_date_time, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label :Location %></span>
-          <%= f.text_field :location, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label 'Speaker' %></span>
-          <%#= f.text_field :Location, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label 'Speaker Bio' %></span>
-          <%#= f.text_field :Location, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label 'Link to Bio' %></span>
-          <%#= f.text_field :Location, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label 'Schedule' %></span>
-          <%#= f.text_field :Location, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label :Point %></span>
-          <%= f.text_field :point, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <span class="input-group-addon"><%= f.label :Catalog %></span>
-          <%= f.text_field :category, class: "form-control" %>
-        </div>        
-    </div>
-    
-    <div class="row">
-        <div class="input-group col-xs-6">
-          <%= f.submit "Save",  class: "btn btn-default" %>
-        </div>             
-    </div>
-<% end %>    
+
+
+
+<% end %>
