@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
     
     validates :event_id, presence: true
     validates :event_name, presence: true
-    validates :desciption, presence: true, length: { maximum: 2500 }
+    validates :description, presence: true, length: { maximum: 2500 }
     validates :location, presence: true, length: { maximum: 255 }
     
     belongs_to :organizer
