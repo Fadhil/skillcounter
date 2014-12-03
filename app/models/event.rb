@@ -14,4 +14,12 @@ class Event < ActiveRecord::Base
     validates :status, presence: true
     validates :point, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :category, presence: true
+    
+    def self.search(search)
+        if search
+        find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
+        else
+        find(:all)
+        end
+    end
 end

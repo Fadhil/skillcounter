@@ -1,9 +1,13 @@
 class EventsController < ApplicationController
     
     
-    def index
-   # @event = Event.all
+  def index
+    if params[:search]
+    @events = Event.search(params[:search])
+    else
+    @events = Event.all
     end
+  end
 
   def new
     @event = Event.new
@@ -30,6 +34,8 @@ class EventsController < ApplicationController
       render :edit
     end
   end
+  
+  
   
   def event_params
     params.require(:event).permit(:name, :email, :password, :password_confirmation)
