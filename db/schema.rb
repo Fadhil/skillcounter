@@ -57,10 +57,20 @@ ActiveRecord::Schema.define(version: 20141202073515) do
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
 
+<<<<<<< Updated upstream
   create_table "roles", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+=======
+  create_table "organizers", force: true do |t|
+    t.string   "name"
+    t.string   "contact_number"
+    t.string   "email"
+    t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+>>>>>>> Stashed changes
   end
 
   create_table "user_logins", force: true do |t|
