@@ -4,5 +4,7 @@
 <p>Name: <%= @organizer.name %></p>
 <p>Email: <%= @organizer.email %></p>
 <p>Contact Number: <%= @organizer.contact_number %></p>
+<p>Image: <%= image_tag @organizer.avatar.url(:thumb) %> </p>
+<p>Biodata: <td><%= @organizer.biodata_file_name %></td> </p>
 
 <%= link_to 'Edit', edit_organizer_path(@organizer)%>

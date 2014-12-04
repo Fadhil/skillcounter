@@ -1,2 +1,23 @@
-<h1>Organizers#index</h1>
-<p>Find me in app/views/organizers/index.html.erb</p>
+<h1>Organizer Index</h1>
+<table>
+    <% @organizer.each do |u| %>
+    <tr>
+        <td>Name:</td>
+        <td>Email:</td>
+        <td>Address:</td>
+        <td>Contact Number:</td>
+        <td>Avatar:</td>
+        <td>Biodata:</td>
+
+    </tr>
+    <tr>
+        <td><%= u.name %></td>
+        <td><%= u.email %></td>
+        <td><%= u.address %></td>
+        <td><%= u.contact_number %></td>
+        <td><%= image_tag u.avatar.url(:thumb) %></td>
+        <td><%= u.biodata_file_name %></td>
+
+    </tr>
+    <% end %>
+</table>

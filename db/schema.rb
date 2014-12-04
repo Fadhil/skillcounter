@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141202073515) do
+ActiveRecord::Schema.define(version: 20141204111243) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -57,20 +57,10 @@ ActiveRecord::Schema.define(version: 20141202073515) do
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
 
-<<<<<<< Updated upstream
   create_table "roles", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
-=======
-  create_table "organizers", force: true do |t|
-    t.string   "name"
-    t.string   "contact_number"
-    t.string   "email"
-    t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
->>>>>>> Stashed changes
   end
 
   create_table "user_logins", force: true do |t|
@@ -111,6 +101,14 @@ ActiveRecord::Schema.define(version: 20141202073515) do
     t.integer  "current_points"
     t.integer  "expiring_points"
     t.string   "address"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "biodata_file_name"
+    t.string   "biodata_content_type"
+    t.integer  "biodata_file_size"
+    t.datetime "biodata_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

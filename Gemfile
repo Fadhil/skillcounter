@@ -36,6 +36,9 @@ gem 'nested_form'
 gem 'devise'
 gem 'cancancan'
 
+# manage file uploads
+gem 'paperclip', '~> 3.0'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -51,6 +54,9 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~>3.0.0'
   gem 'factory_girl_rails'
+
+  # magick handle images 
+  gem 'rmagick', '~> 2.13.4'
 end
 
 group :test do
