@@ -2,24 +2,24 @@ SkillCounter::Application.routes.draw do
 
   #devise_for :user_logins, controllers: { registrations: "sessions" }
   devise_for :users
-  resources :users
+
   resources :events
-  
-  get 'users/new' => 'users#new'
-  post 'users/validate_claim_profile' => 'users#validate_claim_profile'
-  get 'users/claimed_profile' => 'users#claimed_profile'
-  post 'users/create' => 'users#create'
-  
   resources :organizers
-  resources :users
+  resources :vets
   resources :events
+  
+  get 'vets/new' => 'vets#new'
+  post 'vets/validate_claim_profile' => 'vets#validate_claim_profile'
+  get 'vets/claimed_profile' => 'vets#claimed_profile'
+  post 'vets/create' => 'vets#create'
+  get 'claim_profile' => 'vet#new'
+  
   
   get 'organizers/new' => 'organizer#new' 
-  get 'claim_profile' => 'users#new'
+
   get 'create_event' => 'events#new'
   
   root "static_pages#home"
-  
   get "static_pages/home"
   
   # The priority is based upon order of creation: first created -> highest priority.

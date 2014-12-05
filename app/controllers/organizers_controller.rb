@@ -13,7 +13,7 @@ class OrganizersController < ApplicationController
     if @organizer.save
       #UserMailer.welcome_email(@user).deliver
      
-      redirect_to organizer_path(id: @organizer.id), notice: "Successfully Signed Up"
+      redirect_to organizer_path(id: @organizer.id), notice: "Successfully claimed profile"
     else
 
       render :new

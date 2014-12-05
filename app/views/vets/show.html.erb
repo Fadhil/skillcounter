@@ -1,35 +1,35 @@
-<h1>User Profile</h1>
+<h1>Vet Profile</h1>
 <table>
     <tr>
         <td>Email:</td>
-        <td><%= @user.email %></td>
+        <td><%= @vet.email %></td>
     </tr>
     <tr>
         <td>Name:</td>
-        <td><%= @user.name%></td>
+        <td><%= @vet.name%></td>
     </tr>
     <tr>
         <td>IC Number:</td>
-        <td><%= @user.ic_number %></td>
+        <td><%= @vet.ic_number %></td>
     </tr>
     <tr>
         <td>Phone Number:</td>
-        <td><%= @user.contact_number %></td>
+        <td><%= @vet.contact_number %></td>
     </tr>
     <tr>
         <td>Licence Number:</td>
-        <td><%= @user.licence_number %></td>
+        <td><%= @vet.licence_number %></td>
     </tr>
 </table>
 <table>
     <tr><td>Points and Activities</td></tr>
     <tr>
         <td>Current accumulated points:</td>
-        <td><%= (@user.current_points + @user.expiring_points) %></td>
+        <td><%= (@vet.current_points + @vet.expiring_points) %></td>
     </tr>
     <tr>
         <td>Points expiring this year:</td>
-        <td><%= @user.expiring_points %></td>
+        <td><%= @vet.expiring_points %></td>
     </tr>
     <tr><td></td><td><%= link_to "Redeem Licence", '#' %></td></tr>
 </table>
