@@ -1,10 +1,70 @@
 
-<h1><%= @organizer.name %></h1>
-<h3>Details</h3>
-<p>Name: <%= @organizer.name %></p>
-<p>Email: <%= @organizer.email %></p>
-<p>Contact Number: <%= @organizer.contact_number %></p>
-<p>Image: <%= image_tag @organizer.avatar.url(:thumb) %> </p>
-<p>Biodata: <td><%= @organizer.biodata_file_name %></td> </p>
+<%= form_tag(organizers_path, :method => "get",  class:"form-horizontal", role:"form") do %>
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1><%= @organizer.name %> <small>profile</small></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                 <%= image_tag @organizer.avatar.url(:thumb), class:"img-thumbnail"  %>
+               
+            </div>
+            <div class="col-md-9 col-sm-9">
+                <div class="row">
+                    <div class="col-md-5">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="userEmail" class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-8">
+                                     
+                                     <%= text_field_tag :email, @organizer.email , class:"form-control", disabled:true %>
+                                   
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <label for="userPhone" class="col-sm-3 control-label">Phone</label>
+                            <div class="col-sm-8">
+                                
+                                <%= text_field_tag :phone, @organizer.contact_number, class:"form-control", disabled:true %>
+                                
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <label for="address" class="col-sm-3 control-label">Address</label>
+                            <div class="col-sm-8">
+                                
+                                <%= text_field_tag :address, @organizer.address, class:"form-control", disabled:true %>
+                                
+                            </div>
+                            </div>
+                            
+                            <div class="form-group">
+                            <label for="biodata" class="col-sm-3 control-label">Biodata</label>
+                            <div class="col-sm-8">
+                                <%= text_field_tag :biodata, @organizer.biodata_file_name, class:"form-control",disabled:true  %>
+                                
+                            </div>
+                            </div>
+                            <div class="col-md-offset-9 col-md-3">
+                            
+                            
+                           
+                            <%= link_to "Edit", edit_organizer_path(@organizer), class: "btn btn-default btn-success" %>
+                           
+                            
+                           </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+<% end %>
 
-<%= link_to 'Edit', edit_organizer_path(@organizer)%>

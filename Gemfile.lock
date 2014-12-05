@@ -78,6 +78,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_magick (4.0.1)
     mini_portile (0.6.1)
     minitest (4.7.5)
     multi_json (1.10.1)
@@ -118,7 +119,6 @@ GEM
       json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
-    rmagick (2.13.4)
     rspec-core (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.4)
@@ -184,12 +184,12 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder (~> 1.2)
   jquery-rails
+  mini_magick
   nested_form
   paperclip (~> 3.0)
   pg
   rails (= 4.0.3)
   rails_12factor
-  rmagick (~> 2.13.4)
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.0)
   sdoc

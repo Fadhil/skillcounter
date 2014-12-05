@@ -56,7 +56,7 @@ group :development, :test do
   gem 'factory_girl_rails'
 
   # magick handle images 
-  gem 'rmagick', '~> 2.13.4'
+  gem "mini_magick"
 end
 
 group :test do
