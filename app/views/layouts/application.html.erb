@@ -9,7 +9,31 @@
   
 </head>
 <body>
-  <%= render 'layouts/header' %>
+  
+ 
+  <%if current_user
+   
+      if current_user.is_admin?
+        navbar = render 'layouts/headerAdmin'
+        elsif  current_user.is_organizer?
+        
+        navbar = render 'layouts/headerOrganizer'
+        
+        elsif  current_user.is_vet?
+        
+        navbar = render 'layouts/headerVet'
+        else
+        
+        navbar = render 'layouts/header'
+      end
+    else
+          navbar = render 'layouts/header'
+       
+    end
+       %>
+       
+  <%= navbar %>
+  
   <div id="notice"><%= flash[:notice] %></div>
   <div id="error"><%= flash[:error] %></div>
   <div id="alert"><%= flash[:alert] %></div>
