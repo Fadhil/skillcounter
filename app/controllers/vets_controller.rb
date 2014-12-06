@@ -71,6 +71,6 @@ class VetsController < ApplicationController
   end
   
   def vet_params
-    params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points)
+    params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points, :avatar)
   end
 end

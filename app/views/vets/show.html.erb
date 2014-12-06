@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-3">
-                <img src="../images/admin.jpg" alt="" class="img-thumbnail">
+                <%= image_tag @vet.avatar.url(:thumb), class:"img-thumbnail"  %>
             </div>
             <div class="col-md-9 col-sm-9">
                 <div class="row">
@@ -46,6 +46,9 @@
                                 <%= text_field_tag :email, @vet.licence_number , class:"form-control", disabled:true %>
                             </div>
                             </div>
+                            <div class="col-md-offset-9 col-md-3">
+                            <%= link_to "Edit", edit_vet_path(@vet), class: "btn btn-default btn-success" %>
+                           </div>
                         </form>
                     </div>
                 </div>
