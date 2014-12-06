@@ -1,71 +1,98 @@
+
+<%= form_tag(events_path, :method => "get",  class:"form-horizontal", role:"form") do %>
 <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
-                    <h1>Animal Husbandry 101<small> your event</small></h1>
+                    <h1><%= @event.event_name %></h1>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3 col-sm-3">
-                <img src="../images/event-200x200px.jpg" alt="event" class="img-thumbnail">
+                 <%= image_tag @event.poster.url(:thumb), class:"img-thumbnail"  %>
+               
             </div>
             <div class="col-md-9 col-sm-9">
                 <div class="row">
-                    <div class="col-md-offset-9 col-md-3">
-                        <span class="label label-points">
-                            20
-                            <span class="glyphicon glyphicon-fire"></span>
-                        </span>
+                    <div class="col-md-5">
+                        <form class="form-horizontal" role="form">                            
+                            <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Description</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.description, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+
+                           <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Start Date</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.start_date_time, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+
+                           <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">End Date</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.start_date_time, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+
+                           <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Event Date</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.end_date_time, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Event Page Url</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.event_page_url, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+
+                           <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Status</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.status, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+                            
+                           <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Points</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.point, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+                           
+                           <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Schedule</label>
+                                    <div class="col-sm-8">
+                                        <%= link_to "schedule.pdf", @event.schedule.url(:original, false) %>
+                                    </div>
+                            </div>
+
+                           <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Speaker Biodata</label>
+                                    <div class="col-sm-8">
+                                        <%= link_to "biodata.pdf", @event.speaker_bio.url(:original, false) %>
+                                    </div>
+                            </div>
+
+
+
+
+                            <%= link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
+                           
+                            
+                           </div>
+                        </form>
                     </div>
-                </div>
-                <div class="row">
-                    <form class="form-horizontal" role="form">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="nextEvent" class="col-sm-3 control-label">Next Event</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Yst month 2015" id="nextEvent">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastEvent" class="col-sm-3 control-label">Last Event</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Xth month 2014" id="lastEvent">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="location" class="col-sm-3 control-label">Location</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Kuala Lumpur" id="location">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="col-sm-3 control-label">Speaker Bio</label>
-                                <div class="col-sm-8">
-                                    <p class="form-control-static"><a href="http://" target="_blank">link to download PDF</a></p>
-                                    <p class="form-control-static"><a href="http://" target="_blank">link to website</a></p>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="organizer" class="col-sm-3 control-label">Organizer</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="Mega Events Co." id="organizer">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="license" class="col-sm-3 control-label">License</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="XXX-123-ABC" id="license">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-offset-9 col-md-3">
-                            <button type="button" class="btn btn-default btn-success">Update</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
+        
+<% end %>
 

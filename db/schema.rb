@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205101021) do
+ActiveRecord::Schema.define(version: 20141206042120) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20141205101021) do
   add_index "contact_numbers", ["organizer_id"], name: "index_contact_numbers_on_organizer_id"
 
   create_table "events", force: true do |t|
-    t.integer  "event_id"
     t.string   "event_name"
     t.text     "description"
     t.string   "location"
@@ -53,6 +52,18 @@ ActiveRecord::Schema.define(version: 20141205101021) do
     t.string   "category"
     t.string   "bio_url"
     t.string   "speaker"
+    t.string   "speaker_bio_file_name"
+    t.string   "speaker_bio_content_type"
+    t.integer  "speaker_bio_file_size"
+    t.datetime "speaker_bio_updated_at"
+    t.string   "schedule_file_name"
+    t.string   "schedule_content_type"
+    t.integer  "schedule_file_size"
+    t.datetime "schedule_updated_at"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"

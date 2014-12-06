@@ -1,6 +1,10 @@
 class Event < ActiveRecord::Base
     
-    validates :event_id, presence: true
+
+    has_attached_file :speaker_bio
+    has_attached_file :schedule
+    has_attached_file :poster, :styles => {:thumb => "100x100"}
+
     validates :event_name, presence: true
     validates :description, presence: true, length: { maximum: 2500 }
     validates :location, presence: true, length: { maximum: 255 }
@@ -14,6 +18,10 @@ class Event < ActiveRecord::Base
     validates :status, presence: true
     validates :point, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :category, presence: true
+
+    validates_attachment :speaker_bio, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+    validates_attachment :schedule, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+
     
     def self.search(search)
         if search

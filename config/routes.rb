@@ -6,13 +6,12 @@ SkillCounter::Application.routes.draw do
   resources :events
   resources :organizers
   resources :vets
-  resources :events
   
   get 'vets/new' => 'vets#new'
   post 'vets/validate_claim_profile' => 'vets#validate_claim_profile'
   get 'vets/claimed_profile' => 'vets#claimed_profile'
   post 'vets/create' => 'vets#create'
-  get 'claim_profile' => 'vet#new'
+  get 'claim_profile' => 'vets#new'
   
   
   get 'organizers/new' => 'organizer#new' 

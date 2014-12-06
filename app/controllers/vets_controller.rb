@@ -36,12 +36,13 @@ class VetsController < ApplicationController
         current_points: 0, expiring_points: 0, 
         # password:generated_password, password_confirmation: generated_password)
         # changed back to this "password" due to unconfigured sendgrid accout
-        password: "password", password_confirmation: "password")
+        password: "password", password_confirmation: "password",
+        type: "Vet", role: "Vet")
 
       if Vet.exists?(email: email)
         # Mailer.send_email(@vet).deliver
       else
-        redirect_to vets_new_path
+
       end
     
       if vet.save
@@ -49,7 +50,7 @@ class VetsController < ApplicationController
         redirect_to static_pages_home_path, notice: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
       else
         redirect_to vets_new_path, notice: "Failed to create profile. Email or licence number may have been used for another accout"
-    end
+      end
   end
 
   def edit
