@@ -41,7 +41,7 @@ class VetsController < ApplicationController
       if Vet.exists?(email: email)
         # Mailer.send_email(@vet).deliver
       else
-        redirect_to vets_new_path
+        
       end
     
       if vet.save
