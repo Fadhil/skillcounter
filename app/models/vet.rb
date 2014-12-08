@@ -7,4 +7,12 @@ class Vet < User
     validates :current_points, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
     validates :expiring_points, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
      validates_attachment :avatar, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }
+     
+    def self.search(search)
+        if search
+        find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+        else
+        find(:all)
+        end
+    end
 end

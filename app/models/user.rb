@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   
     
     has_and_belongs_to_many :roles
+    
+     
   
   def is_admin?
     self.roles.include?(Role.find_by_name('Admin'))

@@ -2,7 +2,12 @@ class VetsController < ApplicationController
   
   
   def index
-    @vet = Vet.all
+    if params[:search]
+      @vets = Vet.search(params[:search])
+    else
+    @vets = Vet.all
+    end
+
   end
   
   def show

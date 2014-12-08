@@ -1,14 +1,55 @@
-<h1>Vet Index</h1>
-<table>
-    <% @vet.each do |u| %>
-    <tr>
-        <td>Name:</td>
-        <td>Licence Number:</td>
-    </tr>
-    <tr>
-        <td><%= u.name %></td>
-        <td><%= u.licence_number %></td>
-    </tr>
-    <% end %>
-</table>
+
+
+<div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header custom-with_input">
+                    <h1>Users <small>find users here</small></h1>
+                    <%= form_tag(vets_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
+                    
+                        <div class="row">
+                            <div class="col-sm-8 col-xs-8">
+                                 <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here" %>
+                                  
+                            </div>
+                            <div class="col-sm-4 col-xs-4">
+                                 <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
+                                
+                            </div>
+                        </div>
+                    
+                    <% end %>
+                </div>
+                <ul class="media-list">
+                     <% @vets.each do |vet| %>
+                    <li class="media">
+                        <a class="pull-left" href="#">
+                            
+                            <%= image_tag vet.avatar.url(:thumb), class:"img-thumbnail"  %>
+                        </a>
+                        <div class="media-body">
+                            <div class="col-md-9 col-sm-9">
+                                <h3 class="media-heading"><%= vet.name%></h3>
+                                <span>Member since: <span class="member-since">17th June 2014</span></span>
+                                <p>License status: <b class="isactive text-success">Active</b></p>
+                            </div>
+                            <div class="col-md-3 col-sm-3">
+                                <span class="label label-points">
+                                    <span class="text-success"><%= (vet.current_points + vet.expiring_points) %>
+                                        <span class="glyphicon glyphicon-fire"></span>
+                                    </span>
+                                    <hr>
+                                    <span class="text-warning"><%= vet.expiring_points %>
+                                        <span class="glyphicon glyphicon-fire"></span>
+                                        <small>expiring on 31st Sep 2015</small>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
 
