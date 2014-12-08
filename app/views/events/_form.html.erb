@@ -1,14 +1,11 @@
 <%= form_for @event do |f| %>
 
 <% if @event.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@event.errors.count, "error") %> prohibited this post from being saved:</h2>
-     
-        <ul>
+       <div id="error_explanation">
         <% @event.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+          <%flash[:error] = msg %>
         <% end %>
-        </ul>
+       
       </div>
 <% end %>
 

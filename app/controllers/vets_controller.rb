@@ -47,9 +47,9 @@ class VetsController < ApplicationController
     
       if vet.save
         # Mailer.send_welcome_email(@vet).deliver
-        redirect_to static_pages_home_path, notice: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
+        redirect_to static_pages_home_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
       else
-        redirect_to vets_new_path, notice: "Failed to create profile. Email or licence number may have been used for another accout"
+        redirect_to vets_new_path, error: "Failed to create profile. Email or licence number may have been used for another accout"
       end
   end
 
@@ -61,7 +61,7 @@ class VetsController < ApplicationController
      @vet = Vet.find(params[:id])
     
     if @vet.update_attributes(vet_params)
-      redirect_to vet_path(id: @vet.id), notice: "Successfully Updated"
+      redirect_to vet_path(id: @vet.id), sucess: "Successfully Updated"
     else
       render :edit
     end
