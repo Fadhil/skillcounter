@@ -13,7 +13,7 @@ class OrganizersController < ApplicationController
     if @organizer.save
       #UserMailer.welcome_email(@user).deliver
      
-      redirect_to organizer_path(id: @organizer.id), notice: "Successfully claimed profile"
+      redirect_to organizer_path(id: @organizer.id), success: "Successfully claimed profile"
     else
 
       render :new
@@ -33,7 +33,7 @@ class OrganizersController < ApplicationController
      @organizer = Organizer.find(params[:id])
     
     if  @organizer.update_attributes(organizer_params)
-      redirect_to organizer_path(id:  @organizer.id), notice: "Successfully Updated"
+      redirect_to organizer_path(id:  @organizer.id), success: "Successfully Updated"
     else
       render :edit
     end

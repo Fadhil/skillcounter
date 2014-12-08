@@ -38,10 +38,11 @@ class EventsController < ApplicationController
     if event.save
       #UserMailer.welcome_email(@event).deliver
      
-      redirect_to event_path(id: event.id), notice: "Successfully created event"
+      redirect_to event_path(id: event.id), success: "Successfully created event"
     else
 
-      redirect_to static_pages_home_path, notice: "Failed to create event"
+      redirect_to static_pages_home_path, error: "Failed to create event"
+      
       #redirent_to new
     end
   end
@@ -58,7 +59,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     
     if @event.update_attributes(event_params)
-      redirect_to event_path(id: @event.id), notice: "Successfully Updated"
+      redirect_to event_path(id: @event.id), success: "Successfully Updated"
     else
       render :edit
     end
