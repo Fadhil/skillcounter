@@ -20,19 +20,21 @@
                     
                     <% end %>
                 </div>
-                <ul class="media-list">
+                <ul class="media-list effect", event="<%= $event %>">
                      <% @events.each do |event| %>
                     <li class="media">
                         <a class="pull-left" href="#">
-                            <img class="media-object" src="../images/event-80x71px.jpg" alt="...">
+                            <img class="media-object" src="<%=event.poster%>" height="100" width="100">
                         </a>
                         <div class="media-body">
+                        
                             <div class="col-md-10 col-sm-10">
+
                                 <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
                                 <h3 class="media-heading"><%= event.event_name%>
                                 <span class="label label-warning"><%= event.status%></span>
                                 </h3>
-                                <p><%= event.description%></p>
+                                <%= event.description %>
                             </div>
                             <div class="col-md-2 col-sm-2">
                                 <span class="label label-points">
@@ -40,6 +42,8 @@
                                     <span class="glyphicon glyphicon-fire"></span>
                                 </span>
                             </div>
+                            <div class="col-sm-4 col-xs-4">
+                                <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %>
                         </div>
                        <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %> 
                     </li>
@@ -49,8 +53,8 @@
         </div>
     </div>
 
-                                    <script type="text/javascript">
-                                        $(function () {
-                                        $('.datetimepicker1').datetimepicker({pickTime: false});
-                                        $('.typeahead').typeahead();
-                                });</script>
+                            <script type="text/javascript">
+                                $('.effect').click(function() {
+                                    alert ("suppose to link to the event page")
+                                });
+                            </script>

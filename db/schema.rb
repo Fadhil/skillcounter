@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206042120) do
+ActiveRecord::Schema.define(version: 20141209131016) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -125,6 +125,11 @@ ActiveRecord::Schema.define(version: 20141206042120) do
     t.string   "biodata_content_type"
     t.integer  "biodata_file_size"
     t.datetime "biodata_updated_at"
+    t.string   "schedule_file_name"
+    t.string   "schedule_content_type"
+    t.integer  "schedule_file_size"
+    t.datetime "schedule_updated_at"
+    t.string   "member_since"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
