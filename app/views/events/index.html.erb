@@ -28,7 +28,7 @@
                         </a>
                         <div class="media-body">
                             <div class="col-md-10 col-sm-10">
-                                <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> event.start_date_time</span>
+                                <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
                                 <h3 class="media-heading"><%= event.event_name%>
                                 <span class="label label-warning"><%= event.status%></span>
                                 </h3>
@@ -41,6 +41,7 @@
                                 </span>
                             </div>
                         </div>
+                       <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %> 
                     </li>
                     <% end %>
                 </ul>
