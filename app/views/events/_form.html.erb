@@ -30,11 +30,12 @@
                             <div class="form-group">
                                 <label for="StartDate" class="col-sm-3 control-label">Start Date</label>
                                     <div class='input-group date col-sm-8 datetimepicker1'>
-
                                             <%= f.text_field :start_date_time, class: "form-control"%> 
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
+
+
 
                             </div>
 
@@ -133,8 +134,12 @@
                                     <script type="text/javascript">
                                         $(function () {
                                         $('.datetimepicker1').datetimepicker({pickTime: false});
-                                        $('.typeahead').typeahead({return data})
                                 });</script>
+
+                                        <script type="text/javascript">
+                                        $(function ()) {
+                                        $('.typeahead').typeahead({return data})
+                                    });</script>
 
 
 
