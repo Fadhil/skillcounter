@@ -2,6 +2,15 @@ class EventsController < ApplicationController
     
     
   def index
+    gon.eventnames = Event.pluck(:event_name)
+
+     @events = Event.select('event_name').map(&:event_name)
+    respond_to do |format|
+      format.html
+      format.json { render json: @events }
+    end
+
+
     if params[:search]
       @events = Event.search(params[:search])
     else
@@ -11,6 +20,7 @@ class EventsController < ApplicationController
   end
 
   def new
+    gon.eventnames = Event.pluck(:event_name)
     @event = Event.new
   end
 
