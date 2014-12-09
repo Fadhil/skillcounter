@@ -13,7 +13,7 @@ $(document).ready(function() {
     };
   };
   var gravatars = gon.gravatars;
-  varevent_names = gonevent_names;
+  var event_names = gon.event_names;
   $('.typeahead').typeahead({
     hint: true,
     highlight: true,
@@ -30,7 +30,7 @@ $(document).ready(function() {
         'No event_name matches found.',
         '</div>'
       ].join('\n'),
-      suggestion: functionevent_name){
+      suggestion: function event_name){
         return  '<div id="user-selection">' +
                 '<p><strong>' +event_name.value + '</strong></p>' +
                 '<img src="' + gravatars event_names.indexOfevent_name.value)] + '"/>' +
