@@ -21,10 +21,10 @@ $(document).ready ->
   $('.typeahead').typeahead
     hint: false
     highlight: true
-    minLength: 1
+    minLength: 0
   ,
     name: "eventnames"
     displayKey: "value"
     source: substringMatcher(eventnames)
 
-  return 
+  return

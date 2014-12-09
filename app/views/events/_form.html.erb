@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label for="EventName" class="col-sm-3 control-label">Event Name</label>
                                 <div class="col-sm-8">
-                                    <%= f.text_field :event_name, class: "form-control typeahead "%>
+                                    <%= f.text_field :event_name, class: "form-control typeahead", :data => {:provide => "typeahead"}   %>
 
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                     <script type="text/javascript">
                                         $(function () {
                                         $('.datetimepicker1').datetimepicker({pickTime: false});
-                                        $('.typeahead').typeahead()
+                                        $('.typeahead').typeahead({return data})
                                 });</script>
 
 
