@@ -1,4 +1,4 @@
-class AddAttributesToUser < ActiveRecord::Migration
+class AddAttributesToUser2 < ActiveRecord::Migration
   def change
     # vet attributes
       add_column :users, :licence_number, :string

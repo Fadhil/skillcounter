@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206042120) do
+ActiveRecord::Schema.define(version: 20141206015023) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20141206042120) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.integer  "event_id"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
@@ -96,6 +97,9 @@ ActiveRecord::Schema.define(version: 20141206042120) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_logins", ["email"], name: "index_user_logins_on_email", unique: true
+  add_index "user_logins", ["reset_password_token"], name: "index_user_logins_on_reset_password_token", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
