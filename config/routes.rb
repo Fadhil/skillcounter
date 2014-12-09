@@ -7,6 +7,9 @@ SkillCounter::Application.routes.draw do
   resources :organizers
   resources :vets
   
+  resources :attendances, only: [:create, :destroy]
+  
+  
   get 'vets/new' => 'vets#new'
   post 'vets/validate_claim_profile' => 'vets#validate_claim_profile'
   get 'vets/claimed_profile' => 'vets#claimed_profile'

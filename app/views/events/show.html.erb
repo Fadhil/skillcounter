@@ -1,100 +1,22 @@
-
-<%= form_tag(events_path, :method => "get",  class:"form-horizontal", role:"form") do %>
-<div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="page-header">
-                    <h1><%= @event.event_name %></h1>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-3">
-                 <%= image_tag @event.poster.url(:thumb), class:"img-thumbnail"  %>
-               
-            </div>
-            <div class="col-md-9 col-sm-9">
-                <div class="row">
-                    <div class="col-md-5">
-                        <form class="form-horizontal" role="form"> 
-
-                                                   
-                            <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.description, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Start Date</label>
-                                    <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.start_date_time, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">End Date</label>
-                                    <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.start_date_time, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Event Date</label>
-                                    <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.end_date_time, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Event Page Url</label>
-                                    <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.event_page_url, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Status</label>
-                                    <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.status, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-                            
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Points</label>
-                                    <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.point, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-                           
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Schedule</label>
-                                    <div class="col-sm-8">
-                                        <%= link_to "schedule.pdf", @event.schedule.url(:original, false) %>
-                                    </div>
-                            </div>
-
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Speaker Biodata</label>
-                                    <div class="col-sm-8">
-                                        <%= link_to "biodata.pdf", @event.speaker_bio.url(:original, false) %>
-                                    </div>
-                            </div>
+<h1><%= @event.event_name %></h1>
 
 
-
-
-                            <%= link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
-                           
-                            
-                           </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-        
+<% if signed_in? %>
+<div class="text-center"><%= render 'attend_form' %></div>
 <% end %>
 
+<p><b>Location: </b><%= @event.location %></p> 
+<p><b>Host: </b><%= @event.organizer.name %></p>
+
+<p><%= @event.description %></p>
+
+</br>
+
+<b>Who's Going:</b>
+
+<ol>
+<% @event.attendees.each do |attendee| %>
+   <li><%= link_to attendee.name, attendee %></li>
+
+<% end %>
+</ol>

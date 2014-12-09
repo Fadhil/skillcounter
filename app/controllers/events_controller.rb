@@ -13,34 +13,37 @@ class EventsController < ApplicationController
   def new
     gon.eventnames = Event.pluck(:event_name)
     
-    @event = Event.new
+    #@event = Event.new
+    
+    @event = current_user.events.build
   end
 
   def create
-      event_name = params[:event][:event_name]
-      description = params[:event][:description]
-      location = params[:event][:location]
-      start_date_time = params[:event][:start_date_time]
-      end_date_time = params[:event][:end_date_time]
-      event_page_url = params[:event][:event_page_url]
-      category = params[:event][:category]
-      speaker_bio = params[:event][:speaker_bio]
-      schedule = params[:event][:schedule]
-      poster = params[:event][:poster]
-      point = params[:event][:point]
+    #   event_name = params[:event][:event_name]
+    #   description = params[:event][:description]
+    #   location = params[:event][:location]
+    #   start_date_time = params[:event][:start_date_time]
+    #   end_date_time = params[:event][:end_date_time]
+    #   event_page_url = params[:event][:event_page_url]
+    #   category = params[:event][:category]
+    #   speaker_bio = params[:event][:speaker_bio]
+    #   schedule = params[:event][:schedule]
+    #   poster = params[:event][:poster]
+    #   point = params[:event][:point]
 
-    event = Event.create(event_name: event_name, description: description,
-            location: location, start_date_time: start_date_time, end_date_time: end_date_time,
-            event_page_url: event_page_url, category: category, speaker_bio: speaker_bio,
-            schedule: schedule, poster: poster, status: "pending", point: point)
+    # event = Event.create(event_name: event_name, description: description,
+    #         location: location, start_date_time: start_date_time, end_date_time: end_date_time,
+    #         event_page_url: event_page_url, category: category, speaker_bio: speaker_bio,
+    #         schedule: schedule, poster: poster, status: "pending", point: point)
+      @event = current_user.events.build(event_params)
 
 
 
-
-    if event.save
+    if @event.save
       #UserMailer.welcome_email(@event).deliver
      
-      redirect_to event_path(id: event.id), success: "Successfully created event"
+      redirect_to event_path(id: @event.id), success: "Successfully created event"
+      
     else
 
       redirect_to static_pages_home_path, error: "Failed to create event"

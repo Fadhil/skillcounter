@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
   
     
     has_and_belongs_to_many :roles
-    
+    has_many :events, :foreign_key => :organizer_id
+    has_many :attendances, :foreign_key => :attendee_id
+    has_many :attended_events, :through => :attendances
      
   
   def is_admin?
@@ -49,4 +51,18 @@ class User < ActiveRecord::Base
   def self.has_role
     joins(:roles).where("roles.name = 'Admin'") 
   end
+  
+  def attending?(event)
+    event.attendees.include?(self)
+  end
+
+  def attend!(event)
+    self.attendances.create!(attended_event_id: event.id)
+  end
+
+  def cancel!(event)
+    self.attendances.find_by(attended_event_id: event.id).destroy
+  end
+  
+  
 end

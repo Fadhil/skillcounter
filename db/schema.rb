@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141206015023) do
+ActiveRecord::Schema.define(version: 20141209130455) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -19,13 +19,16 @@ ActiveRecord::Schema.define(version: 20141206015023) do
     t.datetime "updated_at"
   end
 
-  create_table "attendance_list", force: true do |t|
-    t.integer "user_id"
-    t.integer "event_id"
+  create_table "attendances", force: true do |t|
+    t.integer  "attendee_id"
+    t.integer  "attended_event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "attendance_list", ["event_id"], name: "index_attendance_list_on_event_id"
-  add_index "attendance_list", ["user_id"], name: "index_attendance_list_on_user_id"
+  add_index "attendances", ["attended_event_id"], name: "index_attendances_on_attended_event_id"
+  add_index "attendances", ["attendee_id", "attended_event_id"], name: "index_attendances_on_attendee_id_and_attended_event_id", unique: true
+  add_index "attendances", ["attendee_id"], name: "index_attendances_on_attendee_id"
 
   create_table "contact_numbers", force: true do |t|
     t.datetime "created_at"
@@ -64,7 +67,6 @@ ActiveRecord::Schema.define(version: 20141206015023) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
-    t.integer  "event_id"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
