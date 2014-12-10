@@ -4,8 +4,8 @@ class Event < ActiveRecord::Base
     belongs_to :creator, :class_name => "User"
     has_many :attendances, :foreign_key => "attended_event_id"
     has_many :attendees, :through => :attendances
-    scope :upcoming, -> { where("start_date_time >= ?", Date.today).order('Date ASC') }
-    scope :past, -> { where("end_date_time < ?", Date.today).order('Date DESC') }
+    scope :upcoming, -> { where("start_date_time >= ?", Date.today).order('start_date_time ASC') }
+    scope :past, -> { where("start_date_time < ?", Date.today).order('start_date_time DESC') }
 
     has_attached_file :speaker_bio
     has_attached_file :schedule

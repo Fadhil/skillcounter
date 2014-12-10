@@ -29,8 +29,8 @@
                   
                             <div class="form-group">
                                 <label for="StartDate" class="col-sm-3 control-label">Start Date</label>
-                                    <div class='input-group date col-sm-8 datetimepicker1'>
-                                            <%= f.text_field :start_date_time, class: "form-control"%> 
+                                    <div class='input-group date col-sm-8 datetimepicker1' >
+                                            <%= f.text_field :start_date_time, class: "form-control", 'data-date-format'=>"YYYY/MM/DD"  %> 
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -42,7 +42,7 @@
                             <div class="form-group">
                                 <label for="EndDate" class="col-sm-3 control-label">End Date</label>
                                     <div class='input-group date col-sm-8 datetimepicker1'>
-                                            <%= f.text_field :end_date_time, class: "form-control"%> 
+                                            <%= f.text_field :end_date_time, class: "form-control", 'data-date-format'=>"YYYY/MM/DD" %> 
 
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>

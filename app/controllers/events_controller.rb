@@ -70,7 +70,17 @@ class EventsController < ApplicationController
     end
   end
   
-  
+  def destroy
+    @event = Event.find(params[:id])
+    
+    if @event.destroy
+    
+      redirect_to events_path, notice: 'Successfully deleted event'
+    else
+      redirect_to request.referrer, "Cannot destroy user"
+      render :index
+    end
+  end
   
   def event_params
     params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker_bio, :schedule, :poster)

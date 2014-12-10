@@ -13,6 +13,12 @@ class VetsController < ApplicationController
   def show
     @vet = Vet.find(params[:id])
   end
+  
+  def my_events
+      @vet = Vet.find(params[:id])
+      @previous_events = @vet.previous_events
+      @upcoming_events = @vet.upcoming_events
+  end
 
   def new
     @vet = Vet.new

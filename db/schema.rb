@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209130455) do
+ActiveRecord::Schema.define(version: 20141210102926) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20141209130455) do
     t.string   "event_name"
     t.text     "description"
     t.string   "location"
-    t.string   "start_date_time"
-    t.string   "end_date_time"
+    t.date     "start_date_time",          limit: 255
+    t.date     "end_date_time",            limit: 255
     t.integer  "venue_capacity"
     t.integer  "ticket_quantity"
     t.string   "event_page_url"
