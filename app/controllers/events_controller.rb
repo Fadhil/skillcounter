@@ -7,6 +7,10 @@ class EventsController < ApplicationController
     else
     @events = Event.all
     end
+    
+    
+    @events_upcoming = Event.upcoming
+    @events_past = Event.past
 
   end
 

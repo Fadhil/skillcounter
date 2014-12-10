@@ -26,13 +26,13 @@
                 </div>
                 <% if @upcoming_events.any? %>
                 <h2>Upcoming events</h2>
-                <%= render 'shared/vet', object: @upcoming_events %>
+                <%= render 'shared/event', object: @upcoming_events %>
                 <% end %>
                 
                 <% if @previous_events.any? %>
                 
                 <h2>Previous events</h2>
-                <%= render 'shared/vet', object: @previous_events %>
+                <%= render 'shared/event', object: @previous_events %>
                 
                 <% end %>
             </div>

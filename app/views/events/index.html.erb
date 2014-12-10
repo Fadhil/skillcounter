@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header custom-with_input">
-                    <h1>Upcoming events <small></small></h1>
+                    <h1>All events<small></small></h1>
                    
                     <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
                     
@@ -20,31 +20,13 @@
                     
                     <% end %>
                 </div>
-                <ul class="media-list">
-                     <% @events.each do |event| %>
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <%= image_tag event.poster.url(:thumb), class:"img-thumbnail"  %>
-                        </a>
-                        <div class="media-body">
-                            <div class="col-md-10 col-sm-10">
-                                <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
-                                <h3 class="media-heading"><%= event.event_name%>
-                                <span class="label label-warning"><%= event.status%></span>
-                                </h3>
-                                <p><%= event.description%></p>
-                            </div>
-                            <div class="col-md-2 col-sm-2">
-                                <span class="label label-points">
-                                    <%= event.point%>
-                                    <span class="glyphicon glyphicon-fire"></span>
-                                </span>
-                            </div>
-                        </div>
-                       <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %> 
-                    </li>
-                    <% end %>
-                </ul>
+                <h2>Upcoming</h2>
+                <%= render 'shared/event', object: @events_upcoming %>
+                
+                
+                <h2>Past</h2>
+                <%= render 'shared/event', object: @events_past %>
+               
             </div>
         </div>
     </div>
