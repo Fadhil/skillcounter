@@ -1,5 +1,5 @@
 
-<%= form_tag(events_path, :method => "get",  class:"form-horizontal", role:"form") do %>
+
 <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -16,6 +16,7 @@
             <div class="col-md-9 col-sm-9">
                 <div class="row">
                     <div class="col-md-5">
+                        <%= form_tag(events_path, :method => "get",  class:"form-horizontal", role:"form") do %>
                         <form class="form-horizontal" role="form"> 
 
                                                    
@@ -36,16 +37,11 @@
                            <div class="form-group">
                                 <label for="userPhone" class="col-sm-3 control-label">End Date</label>
                                     <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.start_date_time, class:"form-control", disabled:true %>
-                                    </div>
-                            </div>
-
-                           <div class="form-group">
-                                <label for="userPhone" class="col-sm-3 control-label">Event Date</label>
-                                    <div class="col-sm-8">
                                         <%= text_field_tag :description, @event.end_date_time, class:"form-control", disabled:true %>
                                     </div>
                             </div>
+
+                           
 
                             <div class="form-group">
                                 <label for="userPhone" class="col-sm-3 control-label">Event Page Url</label>
@@ -81,20 +77,63 @@
                                         <%= link_to "biodata.pdf", @event.speaker_bio.url(:original, false) %>
                                     </div>
                             </div>
-
-
-
-
-                            <%= link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
-                           
-                            
-                           </div>
                         </form>
+                     <% end %>
+                        
                     </div>
+                    
+                    <div class="col-md-5">
+                     <%if current_user
+                    
+                        if current_user.is_admin?
+                        button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
+                        elsif  current_user.is_organizer?
+                        
+                        button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
+                        
+                        elsif  current_user.is_vet?
+                        
+                        button = render 'attend_form'
+                        else
+                        
+                        button = ""
+                        
+                        end
+                        else
+                         
+                        
+                        end
+                    %>
+                     <%= button %>
+                    
+                           <!-- <%#= link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>-->
+                           <!-- <%# if signed_in? %>-->
+                           <!-- <div class="text-center"><%#= render 'attend_form' %></div>-->
+                           <!-- <%# end %>-->
+                            
+                           <!--</div>-->
+                           
+                        <div>
+                            <b>Who's Going:</b>
+                            
+                            <ol>
+                            <% @event.attendees.each do |attendee| %>
+                            <li><%= link_to attendee.name, attendee %></li>
+                            
+                            <% end %>
+                        </div>
+                    </div>
+                   
+                    
                 </div>
             </div>
         </div>
     </div>
+
+
+
         
-<% end %>
+
+
+           
 

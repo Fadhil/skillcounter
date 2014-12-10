@@ -13,7 +13,7 @@ class OrganizersController < ApplicationController
     if @organizer.save
       #UserMailer.welcome_email(@user).deliver
      
-      redirect_to organizer_path(id: @organizer.id), success: "Successfully claimed profile"
+      redirect_to organizer_path(id: @organizer.id), success: "Successfully register"
     else
 
       render :new
@@ -23,6 +23,12 @@ class OrganizersController < ApplicationController
 
   def show
       @organizer = Organizer.find(params[:id])
+  end
+  
+  def organizerEvent
+      @organizer = Organizer.find(params[:id])
+      @previous_events = @organizer.previous_events
+      @upcoming_events = @organizer.upcoming_events
   end
 
   def edit

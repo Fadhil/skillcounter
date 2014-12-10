@@ -1,0 +1,31 @@
+
+
+<% object.each do |event| %>
+  <ul class="media-list">
+    <li class="media">
+        <a class="pull-left" href="#">
+        <%= image_tag event.poster.url(:thumb), class:"img-thumbnail"  %>
+        </a>
+            <div class="media-body">
+            <div class="col-md-10 col-sm-10">
+            <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
+            <h3 class="media-heading"><%= event.event_name%>
+            <span class="label label-warning"><%= event.status%></span>
+            </h3>
+            <p><%= event.description%></p>
+            <h5>number of attendee: <%= event.attendees.count %></h5>
+            </div>
+            
+            <div class="col-md-2 col-sm-2">
+            <span class="label label-points">
+            <%= event.point%>
+            <span class="glyphicon glyphicon-fire"></span>
+            </span>
+            </div>
+            
+    </div>
+      <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %> 
+    </li>
+   
+   </ul>
+  <% end %>   
