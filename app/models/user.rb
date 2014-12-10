@@ -64,5 +64,13 @@ class User < ActiveRecord::Base
     self.attendances.find_by(attended_event_id: event.id).destroy
   end
   
+  def upcoming_events
+    self.attended_events.upcoming
+  end
+
+  def previous_events
+    self.attended_events.past
+  end
+  
   
 end

@@ -24,6 +24,12 @@ class OrganizersController < ApplicationController
   def show
       @organizer = Organizer.find(params[:id])
   end
+  
+  def organizerEvent
+      @organizer = Organizer.find(params[:id])
+      @previous_events = @organizer.previous_events
+      @upcoming_events = @organizer.upcoming_events
+  end
 
   def edit
     @organizer = Organizer.find(params[:id])

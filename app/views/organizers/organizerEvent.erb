@@ -1,9 +1,25 @@
 
- <div class="container">
+
+
+<% if @upcoming_events.any? %>
+<h2>Upcoming</h2>
+<%= render 'shared/table', object: @upcoming_events %>
+<% end %>
+
+<% if @previous_events.any? %>
+
+<h2>Attended</h2>
+<%= render 'shared/table', object: @previous_events %>
+
+<% end %>
+
+
+
+<div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header custom-with_input">
-                    <h1>Upcoming events <small></small></h1>
+                    <h1>Created by <small><%= @organizer.name%></small></h1>
                    
                     <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
                     
@@ -20,8 +36,9 @@
                     
                     <% end %>
                 </div>
+                <% if @organizer.events.any? %>
                 <ul class="media-list">
-                     <% @events.each do |event| %>
+                     <% @organizer.events.each do |event| %>
                     <li class="media">
                         <a class="pull-left" href="#">
                             <%= image_tag event.poster.url(:thumb), class:"img-thumbnail"  %>
@@ -33,6 +50,7 @@
                                 <span class="label label-warning"><%= event.status%></span>
                                 </h3>
                                 <p><%= event.description%></p>
+                                <h5>number of attendee: <%= event.attendees.count %></h5>
                             </div>
                             <div class="col-md-2 col-sm-2">
                                 <span class="label label-points">
@@ -45,6 +63,7 @@
                     </li>
                     <% end %>
                 </ul>
+                <% end %>
             </div>
         </div>
     </div>

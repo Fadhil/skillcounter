@@ -8,7 +8,8 @@ SkillCounter::Application.routes.draw do
   resources :vets
   
   resources :attendances, only: [:create, :destroy]
-  
+  #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
+  get 'organizers/:id/organizerEvent' => 'organizers#organizerEvent'
   
   get 'vets/new' => 'vets#new'
   post 'vets/validate_claim_profile' => 'vets#validate_claim_profile'
