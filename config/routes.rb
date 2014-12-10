@@ -6,7 +6,12 @@ SkillCounter::Application.routes.draw do
   resources :events
   resources :organizers
   resources :vets
-  
+  resource :admin
+
+  get 'admin/event_index' => 'admin#event_index'
+  get 'admin/vet_show/:id' => 'admin#vet_show'
+  get 'admin/validate_event/:id' => 'admin#validate_event'
+
   get 'vets/new' => 'vets#new'
   post 'vets/validate_claim_profile' => 'vets#validate_claim_profile'
   get 'vets/claimed_profile' => 'vets#claimed_profile'

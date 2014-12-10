@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     if params[:search]
       @events = Event.search(params[:search])
     else
-    @events = Event.all
+      @events = Event.all
     end
 
   end

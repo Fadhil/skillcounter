@@ -5,7 +5,7 @@ class VetsController < ApplicationController
     if params[:search]
       @vets = Vet.search(params[:search])
     else
-    @vets = Vet.all
+      @vets = Vet.all
     end
 
   end

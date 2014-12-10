@@ -1,5 +1,4 @@
 class Event < ActiveRecord::Base
-    
 
     has_attached_file :speaker_bio
     has_attached_file :schedule
@@ -30,4 +29,5 @@ class Event < ActiveRecord::Base
         find(:all)
         end
     end
+
 end
