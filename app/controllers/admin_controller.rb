@@ -1,4 +1,9 @@
+require 'SkillCounterParams'
+
 class AdminController < ApplicationController
+	
+	include SkillCounterParams
+
 
 	def event_index
 		if params[:search]
@@ -10,13 +15,21 @@ class AdminController < ApplicationController
 
 	def validate_event
 		@event = Event.find(params[:id])
-    
-    	if @event.update_attribute([:event][:status])  
-      		redirect_to event_path(id: @event.id), success: "Successfully Updated"
-    	else
-      		render :edit
-    	end
+
+
+		def update
+			@event = Event.find(params[:id])
+
+		    if @event.update_attributes(event_params)
+  				redirect_to admin_event_index_path, success: "Successfully Updated"
+			else
+	  			redirect_to admin_event_index_path, success: "Fail to update event status"
+			end
+		end
 	end
+
+
+
 
 	def vet_show
 		@vet = Vet.find(params[:id])

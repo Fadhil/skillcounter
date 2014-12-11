@@ -42,17 +42,17 @@
                             <div class="col-md-10 col-sm-10">
                                 <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
                                 <h3 class="media-heading"><%=event.event_name%>
-                                    <% if event.status == "rejected"    %>
+                                    <% if event.status == "Rejected"    %>
                                         <span class="label label-danger">
                                             <%=event.status%>                                           
                                             </span>
-                                    <% elsif event.status == "pending" %>
+                                    <% elsif event.status == "Approved" %>
                                         <span class="label label-warning">
                                             <%=event.status%> 
                                            </span>
                                     <% end %>
-
                                 </h3>
+                                <p><%=event.reason%></p>
                                 <p><%=event.description%></p>
                             </div>
                             <div class="col-md-2 col-sm-2">

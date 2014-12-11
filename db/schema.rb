@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141209131016) do
+ActiveRecord::Schema.define(version: 20141210180327) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -20,12 +20,11 @@ ActiveRecord::Schema.define(version: 20141209131016) do
   end
 
   create_table "attendance_list", force: true do |t|
-    t.integer "user_id"
-    t.integer "event_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "attendee_id"
+    t.integer  "attended_event_id"
   end
-
-  add_index "attendance_list", ["event_id"], name: "index_attendance_list_on_event_id"
-  add_index "attendance_list", ["user_id"], name: "index_attendance_list_on_user_id"
 
   create_table "contact_numbers", force: true do |t|
     t.datetime "created_at"
@@ -64,6 +63,7 @@ ActiveRecord::Schema.define(version: 20141209131016) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
+    t.string   "reason"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(version: 20141209131016) do
     t.integer  "schedule_file_size"
     t.datetime "schedule_updated_at"
     t.string   "member_since"
+    t.string   "remember_token"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

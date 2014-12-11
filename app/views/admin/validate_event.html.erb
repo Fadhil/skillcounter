@@ -93,14 +93,15 @@
                 </div>
 
                         <div class="col-md-offset-9 col-md-3">
-                             <%= form_for @event do |t| %>
-                                 <%= t.hidden_field :status, :value=>"Approved"%>
-                                 <%= t.submit "Approve", class:"btn btn-default btn-success"%>
-                               <% end %>
-                               <%= form_for @event do |t| %>
-                                 <%= t.hidden_field :status, :value=>"Rejected"%>
-                                 <%= t.submit "Reject", class:"btn btn-default btn-danger", :data => {:toggle=>"modal"}, 'data-target' => "#adminRejectEvent"%>
-                               <% end %>
+                        </div>
+                        <div class="col-md-offset-9 col-md-3">
+                                <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
+                                <% end %>   <!-- redundant form to make the buttons work. Problem should be with the bootstrap or js file -->
+                                <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
+                                    <%= t.hidden_field :status, :value=>"Approved"%>
+                                    <%= t.submit "Approve", class:"btn btn-default btn-success"%>                          
+                                <% end %>
+                                <button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#adminRejectEvent">Reject</button>
                         </div>
                     </form>
                 </div>
@@ -117,31 +118,34 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h3 class="modal-title" id="myModalLabel">Event rejected! <small><a href="http://" target="_blank">Undo here</a></small></h3>
           </div>
+            <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
           <div class="modal-body">
             <h4>Why was this application rejected?</h4>
             <div class="checkbox">
               <label>
-                <input type="checkbox" value="">
-                Incorrect points
+                    <%= t.check_box :reason, {checked: false, class: 'radio' }, "Incorrect points", false%>
+                    Incorrect points
               </label>
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" value="">
-                Innsufficient hours
+                    <%= t.check_box :reason, {checked: false, class: 'radio' }, "Innsufficient hours",false%>
+                    Innsufficient hours
               </label>
             </div>
             <div class="checkbox">
               <label>
-                <input type="checkbox" value="">
-                Wrong type
+                    <%= t.check_box :reason, {checked: false, class: 'radio' }, "Wrong type",false%>
+                    Wrong type
               </label>
             </div>
             <p>other:</p>
             <input type="text" class="form-control" placeholder="Custom reason">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+                <%= t.hidden_field :status, :value=>"Rejected"%>
+                <%= t.submit "OK", class:"btn btn-default btn-success" %>
+            <% end %>
           </div>
         </div>
       </div>
@@ -153,5 +157,8 @@
     <script src="../scripts/vendor.js"></script>
 
         <script src="../scripts/main.js"></script>
+
 </body>
 </html>
+
+
