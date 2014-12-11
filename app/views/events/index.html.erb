@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header custom-with_input">
-                    <h1>All events<small></small></h1>
+                    <h1>Upcoming Events<small></small></h1>
                    
                     <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
                     
@@ -21,12 +21,12 @@
                     <% end %>
                 </div>
 
-                <h2>Upcoming</h2>
+                
                 <%= render 'shared/event', object: @events_upcoming %>
                 
                 
-                <h2>Past</h2>
-                <%= render 'shared/event', object: @events_past %>
+                <!--<h2>Past</h2>-->
+                <%#= render 'shared/event', object: @events_past %>
                
 
             </div>
