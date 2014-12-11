@@ -1,10 +1,21 @@
 
-        <div>
-        <b>Who's Going:</b>
+<h3>Attendance List</h3>
+<table class="table table-condensed">   
+  <thead>
+    <tr>
+      <td class="col-sm-2">Attendee</td>
+      <td class="col-sm-4">Attendance</td>
+     
+    </tr>
+  </thead>
+   <% @event.attendees.each do |attendee| %>
+  <tr>
+   
+    <td><%= attendee.name %></td>
+    <td><%= check_box 'object', 'boolean_attribute', {}, 'true', 'false' %></td>
+    
+  </tr>
+  <% end %>
+  
+ </table>
         
-        <ol>
-        <% @event.attendees.each do |attendee| %>
-        <li><%= link_to attendee.name, attendee %></li>
-        
-        <% end %>
-        </div>

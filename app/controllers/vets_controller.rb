@@ -48,7 +48,7 @@ class VetsController < ApplicationController
         # password:generated_password, password_confirmation: generated_password)
         # changed back to this "password" due to unconfigured sendgrid accout
         password: "password", password_confirmation: "password",
-        type: "Vet", role: "Vet", member_since: Date.today.to_s)
+        type: "Vet", role: "Vet" )#, member_since: Date.today.to_s)
 
       if Vet.exists?(email: email)
         # Mailer.send_email(@vet).deliver
