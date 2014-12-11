@@ -5,7 +5,7 @@ class EventsController < ApplicationController
     if params[:search]
       @events = Event.search(params[:search])
     else
-    @events = Event.all
+      @events = Event.all
     end
     
     
@@ -87,6 +87,6 @@ class EventsController < ApplicationController
   end
   
   def event_params
-    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker_bio, :schedule, :poster)
+    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker_bio, :schedule, :poster, :reason)
   end
 end

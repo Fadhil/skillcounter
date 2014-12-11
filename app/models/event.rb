@@ -36,4 +36,5 @@ class Event < ActiveRecord::Base
         find(:all)
         end
     end
+
 end
