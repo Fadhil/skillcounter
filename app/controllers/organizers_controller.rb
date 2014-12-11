@@ -25,7 +25,7 @@ class OrganizersController < ApplicationController
       @organizer = Organizer.find(params[:id])
   end
   
-  def organizerEvent
+  def manage_event
       @organizer = Organizer.find(params[:id])
       @previous_events = @organizer.previous_events
       @upcoming_events = @organizer.upcoming_events

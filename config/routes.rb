@@ -9,7 +9,7 @@ SkillCounter::Application.routes.draw do
   
   resources :attendances, only: [:create, :destroy]
   #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
-  get 'organizers/:id/organizer_event' => 'organizers#organizerEvent', as:'organizer_event'
+  get 'organizers/:id/manage_event' => 'organizers#manage_event', as:'manage_event'
   get 'vets/:id/my_events' => 'vets#my_events'
   
   get 'vets/new' => 'vets#new'
