@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   
     validates :name, presence: true, length: { maximum: 50 }, on: :update
-    validates :type, presence: true
+    #validates :type, presence: true
   
     
     has_and_belongs_to_many :roles

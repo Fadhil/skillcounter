@@ -11,8 +11,9 @@
       </div>
       <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Manage Users</a></li>
-            <li><a href="#">Manage Events</a></li>
+            
+            <li><%= link_to 'Manage Users', admin_vet_show_path %> </li>
+            <li><%= link_to 'Manage Events', admin_event_index_path %> </li>
             <li><a href="#">Admin Dashboard</a></li>
        <%
          if user_signed_in?

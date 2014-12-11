@@ -1,8 +1,9 @@
 
-<% object.each do |event| %>
+
        <ul class="media-list">
-                     
+                      <% object.each do |event| %>
                     <li class="media">
+                       
                         <a class="pull-left" href="#">
                             <%= image_tag event.poster.url(:thumb), class:"img-thumbnail"  %>
                         </a>
@@ -23,7 +24,7 @@
                             </div>
                         </div>
                        <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %> 
+                       <% end %>
                     </li>
                    
                 </ul>
-<% end %>
