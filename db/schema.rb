@@ -11,19 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20141210102926) do
+ActiveRecord::Schema.define(version: 20141210180327) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
 
   create_table "attendances", force: true do |t|
     t.integer  "attendee_id"
     t.integer  "attended_event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
 
   add_index "attendances", ["attended_event_id"], name: "index_attendances_on_attended_event_id"
   add_index "attendances", ["attendee_id", "attended_event_id"], name: "index_attendances_on_attendee_id_and_attended_event_id", unique: true
@@ -33,6 +34,7 @@ ActiveRecord::Schema.define(version: 20141210102926) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "organizer_id"
+  end
 
   add_index "contact_numbers", ["organizer_id"], name: "index_contact_numbers_on_organizer_id"
 
@@ -130,12 +132,8 @@ ActiveRecord::Schema.define(version: 20141210102926) do
     t.string   "biodata_content_type"
     t.integer  "biodata_file_size"
     t.datetime "biodata_updated_at"
-    t.string   "schedule_file_name"
-    t.string   "schedule_content_type"
-    t.integer  "schedule_file_size"
-    t.datetime "schedule_updated_at"
     t.string   "member_since"
-    t.string   "remember_token"
+  end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
