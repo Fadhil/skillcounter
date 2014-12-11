@@ -87,10 +87,11 @@
                     
                         if current_user.is_admin?
                         button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
+                         attendance = render 'attendance_list'
                         elsif  current_user.is_organizer?
                         
                         button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
-                        
+                        attendance = render 'attendance_list'
                         elsif  current_user.is_vet?
                         
                         button = render 'attend_form'
@@ -105,6 +106,7 @@
                         end
                     %>
                      <%= button %>
+                     <%= attendance %>
                     
                            <!-- <%#= link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>-->
                            <!-- <%# if signed_in? %>-->
@@ -112,18 +114,13 @@
                            <!-- <%# end %>-->
                             
                            <!--</div>-->
-                           
-                        <div>
-                            <b>Who's Going:</b>
-                            
-                            <ol>
-                            <% @event.attendees.each do |attendee| %>
-                            <li><%= link_to attendee.name, attendee %></li>
-                            
-                            <% end %>
-                        </div>
+                    
+                     
+                     
+                     
+                       
                     </div>
-                   
+                    
                     
                 </div>
             </div>

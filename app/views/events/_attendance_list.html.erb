@@ -1,0 +1,10 @@
+
+        <div>
+        <b>Who's Going:</b>
+        
+        <ol>
+        <% @event.attendees.each do |attendee| %>
+        <li><%= link_to attendee.name, attendee %></li>
+        
+        <% end %>
+        </div>
