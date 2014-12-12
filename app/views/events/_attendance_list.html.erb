@@ -12,10 +12,12 @@
   <tr>
    
     <td><%= attendee.name %></td>
-    <td><%= check_box 'object', 'boolean_attribute', {}, 'true', 'false' %></td>
+    <td><%= check_box_tag "attendee_ids[]", attendee.id %></td>
+    <td><%#= check_box 'object', 'boolean_attribute', {}, 'true', 'false' %></td>
     
   </tr>
   <% end %>
+  
   
  </table>
         

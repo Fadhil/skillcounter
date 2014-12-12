@@ -11,4 +11,8 @@ class AttendancesController < ApplicationController
     current_user.cancel!(@event)
     redirect_to @event
   end
+  
+  def present
+    Attendance.update_all(["present=?", 'true'], :id => params[:attendee_ids])
+  end
 end
