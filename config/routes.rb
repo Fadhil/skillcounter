@@ -8,10 +8,15 @@ SkillCounter::Application.routes.draw do
   resources :vets
   resource :admin
   
-  resources :attendances, only: [:create, :destroy]
+  resources :attendances, only: [:create, :destroy] do
+    collection do
+      put 'present' => 'attendances#present', as: :update
+    end
+  end
   #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
   get 'organizers/:id/manage_event' => 'organizers#manage_event', as:'manage_event'
   get 'vets/:id/my_events' => 'vets#my_events', as:'my_events'
+  
 
   get 'admin/event_index' => 'admin#event_index'
   get 'admin/vet_show/:id' => 'admin#vet_show'

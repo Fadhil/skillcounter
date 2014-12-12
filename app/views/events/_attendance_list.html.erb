@@ -8,14 +8,26 @@
      
     </tr>
   </thead>
-   <% @event.attendees.each do |attendee| %>
-  <tr>
-   
-    <td><%= attendee.name %></td>
-    <td><%= check_box_tag "attendee_ids[]", attendee.id %></td>
-    <td><%#= check_box 'object', 'boolean_attribute', {}, 'true', 'false' %></td>
+  
+  <%= form_tag update_attendances_path(event_id: @event.id), :method => :put do %>
+    <% @event.attendees.each do |attendee| %>
+      <% attendance = Attendance.where(attended_event_id: @event.id, attendee_id: attendee.id).first %>
+    <tr>
     
-  </tr>
+    <td><%= attendee.name %></td>
+
+    <td><%= check_box_tag 'present[]', attendee.id , attendance.present? %></td>
+   
+    
+    </tr>
+    <% end %>
+    
+    <%= submit_tag "Mark attendance", class: "btn btn-default btn-success" %>
+  <% end %>
+  
+  <%= form_tag update_attendances_path(event_id: @event.id), :method => :put do %>
+  
+  <%= submit_tag "Confirm attendance", class: "btn btn-default btn-success" %>
   <% end %>
   
   

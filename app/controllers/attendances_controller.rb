@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
     
-    def create
+  def create
     @event = Event.find(params[:attendance][:attended_event_id])
     current_user.attend!(@event)
     redirect_to @event
@@ -13,6 +13,20 @@ class AttendancesController < ApplicationController
   end
   
   def present
-    Attendance.update_all(["present=?", 'true'], :id => params[:attendee_ids])
+    @event = Event.find(params[:event_id]) 
+    
+    present_vet_ids = params[:present]
+    event_attendances = Attendance.where(attended_event_id: @event.id)
+    event_attendances.update_all(present: false)
+    event_attendances = event_attendances.where('attendee_id in (?)',present_vet_ids)
+
+    if !event_attendances.empty?
+      event_attendances.each do |a|
+        a.present = true
+        a.save
+      end
+    end
+    @params = params.inspect
+    redirect_to @event
   end
 end
