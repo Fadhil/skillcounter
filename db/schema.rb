@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212091136) do
+ActiveRecord::Schema.define(version: 20141212101244) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20141212091136) do
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
     t.string   "reason"
+    t.boolean  "finish"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"

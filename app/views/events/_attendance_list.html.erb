@@ -16,8 +16,8 @@
     
     <td><%= attendee.name %></td>
 
-    <td><%= check_box_tag 'present[]', attendee.id , attendance.present? %></td>
-   
+    <td><%= check_box_tag 'present[]', attendee.id , attendance.present?, disabled: @event.finish? %></td>
+    
     
     </tr>
     <% end %>
@@ -27,7 +27,12 @@
   
   <%= form_tag update_attendances_path(event_id: @event.id), :method => :put do %>
   
-  <%= submit_tag "Confirm attendance", class: "btn btn-default btn-success" %>
+   <%= hidden_field_tag :finish, 'true' %>
+   
+   
+  
+  
+  <%= submit_tag "Confirm attendance",   :onclick => "return confirm('Are you sure?')", class: "btn btn-default btn-success"  %>
   <% end %>
   
   

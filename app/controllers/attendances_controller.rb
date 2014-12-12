@@ -15,18 +15,26 @@ class AttendancesController < ApplicationController
   def present
     @event = Event.find(params[:event_id]) 
     
-    present_vet_ids = params[:present]
-    event_attendances = Attendance.where(attended_event_id: @event.id)
-    event_attendances.update_all(present: false)
-    event_attendances = event_attendances.where('attendee_id in (?)',present_vet_ids)
-
-    if !event_attendances.empty?
-      event_attendances.each do |a|
-        a.present = true
-        a.save
+    if params.has_key?(:finish)
+      @event.finish = true
+      @event.save
+      
+      redirect_to @event
+    else
+      
+      present_vet_ids = params[:present]
+      event_attendances = Attendance.where(attended_event_id: @event.id)
+      event_attendances.update_all(present: false)
+      event_attendances = event_attendances.where('attendee_id in (?)',present_vet_ids)
+  
+      if !event_attendances.empty?
+        event_attendances.each do |a|
+          a.present = true
+          a.save
+        end
       end
+      @params = params.inspect
+      redirect_to @event
     end
-    @params = params.inspect
-    redirect_to @event
   end
 end
