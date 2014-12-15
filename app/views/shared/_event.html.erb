@@ -1,13 +1,17 @@
 
 
        <ul class="media-list">
+          
+ 
+
                       <% object.each do |event| %>
+                       
                     <li class="media">
                        
                         <a class="pull-left" href="#">
                             <%= image_tag event.poster.url(:thumb), class:"img-thumbnail"  %>
                         </a>
-                        <div class="media-body">
+                        <div class="media-body" >
                             <div class="col-md-10 col-sm-10">
                                 <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
                                 <h3 class="media-heading"><%= event.event_name%>
@@ -26,5 +30,6 @@
                        <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %> 
                        <% end %>
                     </li>
+                   
                    
                 </ul>

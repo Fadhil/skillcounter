@@ -86,19 +86,21 @@ class VetsController < ApplicationController
   end
   
   def redeem_licence
-    @vet = Vet.find(params[:id])
-    points = params[:current_points]
+   @vet = Vet.find(params[:id])
+    points = @vet.current_points
     
     if points > 80
-      
-       flash[:notice] = "You had redeem your licence"
+     
+       flash[:success] = "You had redeem your licence"
      
     else
-      flash[:notice] = "Not enough points, you can get points by sign up more events"
+      
+      flash[:error] = "Not enough points, you can get points by sign up more events"
        
     end
     
-    redirect_to vet_path(id: @vet.id)
+    #redirect_to vet_path(current_user)
+    redirect_to :back
     
   end
   
