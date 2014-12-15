@@ -5,12 +5,15 @@ class EventsController < ApplicationController
     if params[:search]
       @events = Event.search(params[:search])
     else
-      @events = Event.all
+      # @events = Event.all
+    
+    
+
+    @events_upcoming = Event.upcoming.paginate(page: params[:upcoming]).per_page(12)
+
+    # @events_upcoming = Event.upcoming
+    # @events_past = Event.past
     end
-    
-    
-    @events_upcoming = Event.upcoming
-    @events_past = Event.past
 
   end
 
