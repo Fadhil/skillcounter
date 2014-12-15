@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20141129043119) do
     t.string   "category"
     t.string   "bio_url"
     t.string   "speaker"
+    t.string   "upload_file"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
