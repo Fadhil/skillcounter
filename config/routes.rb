@@ -4,22 +4,38 @@ SkillCounter::Application.routes.draw do
   devise_for :users
   resources :users
   resources :events
-  
-  get 'users/new' => 'users#new'
-  post 'users/validate_claim_profile' => 'users#validate_claim_profile'
-  get 'users/claimed_profile' => 'users#claimed_profile'
-  post 'users/create' => 'users#create'
-  
   resources :organizers
-  resources :users
-  resources :events
+  resources :vets
+  resource :admin
+  
+  resources :attendances, only: [:create, :destroy] do
+    collection do
+      put 'present' => 'attendances#present', as: :update
+    end
+  end
+  #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
+  get 'organizers/:id/manage_event' => 'organizers#manage_event', as:'manage_event'
+  get 'vets/:id/my_events' => 'vets#my_events', as:'my_events'
+  
+
+  get 'admin/event_index' => 'admin#event_index'
+  get 'admin/vet_show/:id' => 'admin#vet_show'
+  get 'admin/vet_show' => 'vets#index'
+  get 'admin/validate_event/:id' => 'admin#validate_event'
+  patch 'admin/validate_event/:id' => 'admin#update', as: :validate_event
+
+  get 'vets/new' => 'vets#new'
+  post 'vets/validate_claim_profile' => 'vets#validate_claim_profile'
+  get 'vets/claimed_profile' => 'vets#claimed_profile'
+  post 'vets/create' => 'vets#create'
+  get 'claim_profile' => 'vets#new'
+  
   
   get 'organizers/new' => 'organizer#new' 
-  get 'claim_profile' => 'users#new'
+
   get 'create_event' => 'events#new'
   
   root "static_pages#home"
-  
   get "static_pages/home"
   
   # The priority is based upon order of creation: first created -> highest priority.

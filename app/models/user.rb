@@ -5,13 +5,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
          
     validates :name, presence: true, length: { maximum: 50 }, on: :update
-    # validates :licence_number, presence: true, uniqueness: true
-    # validates :ic_number, presence: true, format: { with: /\A\d{6}\-\d{2}\-\d{4}\z/ }
-    # validates :contact_number, presence: true, format: { with: /\A[0][1]\d{1}\-\d{7,8}\z/ }
-    # validates :current_points, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-    # validates :expiring_points, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+    #validates :type, presence: true
+  
     
     has_and_belongs_to_many :roles
+    has_many :events, :foreign_key => :organizer_id
+    has_many :attendances, :foreign_key => :attendee_id
+    has_many :attended_events, :through => :attendances
+     
   
   def is_admin?
     self.roles.include?(Role.find_by_name('Admin'))
@@ -50,4 +51,26 @@ class User < ActiveRecord::Base
   def self.has_role
     joins(:roles).where("roles.name = 'Admin'") 
   end
+  
+  def attending?(event)
+    event.attendees.include?(self)
+  end
+
+  def attend!(event)
+    self.attendances.create!(attended_event_id: event.id)
+  end
+
+  def cancel!(event)
+    self.attendances.find_by(attended_event_id: event.id).destroy
+  end
+  
+  def upcoming_events
+    self.attended_events.upcoming
+  end
+
+  def previous_events
+    self.attended_events.past
+  end
+  
+  
 end

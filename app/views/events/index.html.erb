@@ -1,75 +1,40 @@
+
  <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header custom-with_input">
-                    <h1>Upcoming events <small></small></h1>
-                    <form class="navbar-form" role="search">
+                    <h1>Upcoming Events<small></small></h1>
+                   
+                    <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
+                    
                         <div class="row">
                             <div class="col-sm-8 col-xs-8">
-                                <input type="text" class="form-control" placeholder="search here">
+                                 <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here"%>
+                                  
                             </div>
                             <div class="col-sm-4 col-xs-4">
-                                <button type="button" class="btn btn-default">filter</button>
+                                 <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
+                                
                             </div>
                         </div>
-                    </form>
+                    
+                    <% end %>
                 </div>
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="../images/event-80x71px.jpg" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <div class="col-md-10 col-sm-10">
-                                <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> 5th February 2015</span>
-                                <h3 class="media-heading">Upcoming Vet forum</h3>
-                                <p>Everything you ever wanted to know about animal husbandry.</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2">
-                                <span class="label label-points">
-                                    30
-                                    <span class="glyphicon glyphicon-fire"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="../images/event-80x71px.jpg" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <div class="col-md-10 col-sm-10">
-                                <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> 5th February 2015</span>
-                                <h3 class="media-heading">Medicines for Cats</h3>
-                                <p>Everything you ever wanted to know about animal husbandry.</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2">
-                                <span class="label label-points">
-                                    50
-                                    <span class="glyphicon glyphicon-fire"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="../images/event-80x71px.jpg" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <div class="col-md-10 col-sm-10">
-                                <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> 5th February 2015</span>
-                                <h3 class="media-heading">Random Forum</h3>
-                                <p>Everything you ever wanted to know about animal husbandry.</p>
-                            </div>
-                            <div class="col-md-2 col-sm-2">
-                                <span class="label label-points">
-                                    20
-                                    <span class="glyphicon glyphicon-fire"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+
+                
+                <%= render 'shared/event', object: @events_upcoming %>
+                
+                
+                <!--<h2>Past</h2>-->
+                <%#= render 'shared/event', object: @events_past %>
+               
+
             </div>
         </div>
     </div>
+
+                            <script type="text/javascript">
+                                $('.effect').click(function() {
+                                    alert ("suppose to link to the event page")
+                                });
+                            </script>

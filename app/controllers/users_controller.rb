@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   
   
+  
   def index
     @users = User.all
   end
@@ -70,6 +71,8 @@ class UsersController < ApplicationController
   def claimed_profile
     @user = current_user_login
   end
+  
+  
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

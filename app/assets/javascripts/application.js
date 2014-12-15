@@ -17,3 +17,7 @@
 //= main
 //= vendor
 //= require_tree .
+//= require moment
+//= require bootstrap-datetimepicker
+//= require twitter/typeahead
+
