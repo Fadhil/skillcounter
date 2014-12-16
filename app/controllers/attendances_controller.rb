@@ -2,8 +2,9 @@ class AttendancesController < ApplicationController
     
   def create
     @event = Event.find(params[:attendance][:attended_event_id])
+   
     
-    
+    current_user.add_point!(@event.point)
     current_user.attend!(@event)
     redirect_to @event
     
@@ -11,6 +12,7 @@ class AttendancesController < ApplicationController
   
   def destroy
     @event = Attendance.find(params[:id]).attended_event
+    current_user.minus_point!(@event.point)
     current_user.cancel!(@event)
     redirect_to @event
   end

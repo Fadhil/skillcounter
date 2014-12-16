@@ -72,10 +72,16 @@ class User < ActiveRecord::Base
     self.attended_events.past
   end
   
-  def add_point
-    
-    
+  def add_point!(points)
+   
+    self.current_points += points
+    self.save
   end
   
+  def minus_point!(points)
+   
+    self.current_points -= points
+    self.save
+  end
   
 end
