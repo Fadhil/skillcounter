@@ -45,11 +45,11 @@ class AdminController < ApplicationController
 	end
 
 
-	def event.search(search)
-    	if search
-    		find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
-    	else
+	# def event.search(search)
+ #   	if search
+ #   		find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
+ #   	else
     		
-    	end
-    end
+ #   	end
+ #   end
 end

@@ -5,7 +5,7 @@
  
 
                       <% object.each do |event| %>
-                    <a href="www.google.com">  
+                    <a href="<%= event_path(event) %>">  
                     <li class="media">
                        
                         <span class="pull-left">
@@ -27,7 +27,7 @@
                                 </span>
                             </div>
                         </div>
-                       <%= link_to "show", event_path(event), class: "btn btn-default btn-success" %> 
+                      
                        <% end %>
                     </li>
                     </a>
