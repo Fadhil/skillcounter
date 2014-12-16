@@ -6,12 +6,15 @@ class VetsController < ApplicationController
       @vets = Vet.search(params[:search])
     else
       @vets = Vet.all
+      
     end
 
   end
   
   def show
     @vet = Vet.find(params[:id])
+    
+  
   end
   
   def my_events
@@ -72,7 +75,7 @@ class VetsController < ApplicationController
      @vet = Vet.find(params[:id])
     
     if @vet.update_attributes(vet_params)
-      redirect_to vet_path(id: @vet.id), sucess: "Successfully Updated"
+      redirect_to vet_path(id: @vet.id), success: "Successfully Updated"
     else
       render :edit
     end
@@ -81,6 +84,26 @@ class VetsController < ApplicationController
   def claimed_profile
     @vet = current_vet_login
   end
+  
+  def redeem_licence
+   @vet = Vet.find(params[:id])
+    points = @vet.current_points
+    
+    if points > 80
+     
+       flash[:success] = "You had redeem your licence"
+     
+    else
+      
+      flash[:error] = "Not enough points, you can get points by sign up more events"
+       
+    end
+    
+    #redirect_to vet_path(current_user)
+    redirect_to :back
+    
+  end
+  
   
   def vet_params
     params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points, :avatar)
