@@ -11,6 +11,7 @@ class OrganizersController < ApplicationController
     @organizer = Organizer.new(organizer_params)
     
     if @organizer.save
+      @organizer.add_role("Organizer")
       #UserMailer.welcome_email(@user).deliver
      
       redirect_to organizer_path(id: @organizer.id), success: "Successfully register"

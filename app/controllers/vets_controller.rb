@@ -60,6 +60,8 @@ class VetsController < ApplicationController
       end
     
       if vet.save
+        vet.add_role("Vet")
+
         # Mailer.send_welcome_email(@vet).deliver
         redirect_to static_pages_home_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
       else
