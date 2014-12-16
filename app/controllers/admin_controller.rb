@@ -5,6 +5,15 @@ class AdminController < ApplicationController
 	include SkillCounterParams
 
 
+  def new
+    @admin = Admin.new
+  end
+
+  def show
+    @admin = Admin.find(params[:id])
+  end
+
+
 	def event_index
 		if params[:search]
 			@events = Event.search(params[:search])
@@ -35,4 +44,12 @@ class AdminController < ApplicationController
 		@vet = Vet.find(params[:id])
 	end
 
+
+	def event.search(search)
+    	if search
+    		find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
+    	else
+    		
+    	end
+    end
 end
