@@ -9,9 +9,6 @@ class AdminController < ApplicationController
     @admin = Admin.new
   end
 
-  def show
-    @admin = Admin.find(params[:id])
-  end
 
 
 	def event_index
@@ -35,6 +32,7 @@ class AdminController < ApplicationController
 	  			redirect_to admin_event_index_path, success: "Fail to update event status"
 			end
 		end
+
 	end
 
 
@@ -45,11 +43,11 @@ class AdminController < ApplicationController
 	end
 
 
-	def event.search(search)
-    	if search
-    		find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
-    	else
+		# def event.search(search)
+  #   	if search
+  #   		find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
+  #   	else
     		
-    	end
-    end
+  #   	end
+  #   end
 end

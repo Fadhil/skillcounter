@@ -7,7 +7,7 @@ SkillCounter::Application.routes.draw do
   resources :organizers
   resources :vets
     
-  resources :admin
+  resources :admin, only: [:new]
   
   resources :attendances, only: [:create, :destroy] do
     collection do
@@ -20,7 +20,7 @@ SkillCounter::Application.routes.draw do
   get 'vets/:id/redeem_licence' => 'vets#redeem_licence', as:'redeem_licence'
   
 
-  get 'admin/event_index' => 'admin#event_index'
+  get 'admin/event_index' => 'admin#event_index' 
   get 'admin/vet_show/:id' => 'admin#vet_show'
   get 'admin/vet_show' => 'vets#index'
   get 'admin/validate_event/:id' => 'admin#validate_event'

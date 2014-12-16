@@ -99,6 +99,7 @@
                                 <% end %>   <!-- redundant form to make the buttons work. Problem should be with the bootstrap or js file -->
                                 <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
                                     <%= t.hidden_field :status, :value=>"Approved"%>
+                                    <%= t.hidden_field :reason, :value=>"" %>
                                     <%= t.submit "Approve", class:"btn btn-default btn-success"%>                          
                                 <% end %>
                                 <button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#adminRejectEvent">Reject</button>
