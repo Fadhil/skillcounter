@@ -72,5 +72,10 @@ class User < ActiveRecord::Base
     self.attended_events.past
   end
   
+  def add_point
+    
+    
+  end
+  
   
 end

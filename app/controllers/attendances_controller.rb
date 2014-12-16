@@ -2,8 +2,11 @@ class AttendancesController < ApplicationController
     
   def create
     @event = Event.find(params[:attendance][:attended_event_id])
+    
+    
     current_user.attend!(@event)
     redirect_to @event
+    
   end
   
   def destroy
