@@ -1,6 +1,6 @@
 
 
-<%= form_tag(vet_path, :method => "get",  class:"form-horizontal", role:"form") do %>
+
 <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -72,10 +72,11 @@
                     <span class="text-warning"><%= @vet.expiring_points %></span> <small>points expiring on 31st September 2015</small>
                 </h3>
                 <br>
-                <% end %>
-                <%= form_tag redeem_licence_path, :method => :post do %>
+   
+
+                <%= form_tag redeem_licence_path, :method => :get do %>
                 
-                <%#= form_for @vet, :url => { :action => "redeem_licence" }, :html => { :method => "put" } do |f| %>
+                    <%#= form_for @vet, :url => { :action => "redeem_licence" }, :html => { :method => "put" } do |f| %>
                 
                  
                     <%#= form_tag(redeem_licence_path, :method => "get",  class:"form-horizontal", role:"form") do %>
