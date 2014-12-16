@@ -1,6 +1,6 @@
 class ChangePresentFormatInAttendanceTable < ActiveRecord::Migration
   def up
-    change_column :attendances, :present, :boolean
+    change_column :attendances, :present, 'boolean USING CAST(present AS boolean)'
     
   end
 
