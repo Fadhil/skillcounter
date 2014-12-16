@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
     has_attached_file :speaker_bio
     has_attached_file :schedule
     has_attached_file :poster, :styles => {:thumb => "100x100"}
+    has_attached_file :attendance_list
 
     validates :event_name, presence: true
     validates :description, presence: true, length: { maximum: 2500 }
@@ -27,7 +28,7 @@ class Event < ActiveRecord::Base
 
     validates_attachment :speaker_bio, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
     validates_attachment :schedule, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
-
+    # validates_attachment :attendance_list, :content_type => {"application/pdf","application/vnd.ms-excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"}
     
     def self.search(search)
         if search

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212101244) do
+ActiveRecord::Schema.define(version: 20141216083957) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.string   "event_name"
     t.text     "description"
     t.string   "location"
-    t.date     "start_date_time",          limit: 255
-    t.date     "end_date_time",            limit: 255
+    t.date     "start_date_time",              limit: 255
+    t.date     "end_date_time",                limit: 255
     t.integer  "venue_capacity"
     t.integer  "ticket_quantity"
     t.string   "event_page_url"
@@ -70,6 +70,10 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.datetime "poster_updated_at"
     t.string   "reason"
     t.boolean  "finish"
+    t.string   "attendance_list_file_name"
+    t.string   "attendance_list_content_type"
+    t.integer  "attendance_list_file_size"
+    t.datetime "attendance_list_updated_at"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
@@ -102,6 +106,9 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "user_logins", ["email"], name: "index_user_logins_on_email", unique: true
+  add_index "user_logins", ["reset_password_token"], name: "index_user_logins_on_reset_password_token", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

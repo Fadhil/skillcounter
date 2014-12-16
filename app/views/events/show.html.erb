@@ -16,7 +16,6 @@
             <div class="col-md-9 col-sm-9">
                 <div class="row">
                     <div class="col-md-5">
-                        <%= form_tag(events_path, :method => "get",  class:"form-horizontal", role:"form") do %>
                         <form class="form-horizontal" role="form"> 
 
                                                    
@@ -78,7 +77,6 @@
                                     </div>
                             </div>
                         </form>
-                     <% end %>
                         
                     </div>
                     
@@ -86,15 +84,13 @@
                      <%if current_user
                     
                         if current_user.is_admin?
-                        button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
-                         attendance = render 'attendance_list'
+                            button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
+                            attendance = render 'attendance_list'
                         elsif  current_user.is_organizer?
-                        
-                        button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
-                        attendance = render 'attendance_list'
+                            button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
+                            attendance = render 'attendance_list'
                         elsif  current_user.is_vet?
-                        
-                        button = render 'attend_form'
+                            button = render 'attend_form'
                         else
                         
                         button = ""
