@@ -17,6 +17,11 @@ class VetsController < ApplicationController
   
   end
   
+  def vet_event
+      @vet = Vet.find(params[:id])
+     
+  end
+  
   def my_events
       @vet = Vet.find(params[:id])
       @previous_events = @vet.previous_events

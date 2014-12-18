@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header custom-with_input">
-                    <h1>Created by <small><%= @organizer.name%></small></h1>
+                    <h1>Created by <small><%= @vet.name%></small></h1>
                    
                     <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
                     
@@ -30,21 +30,11 @@
          </div>
                 
             
-                <% if @upcoming_events.any? %>
-                <h2>Upcoming events</h2>
-                <%= render 'shared/organizer', object: @upcoming_events %>
-                <% end %>
                 
-                <% if @previous_events.any? %>
                 
-                <h2>Pass events</h2>
-                <%= render 'shared/organizer', object: @previous_events %>
-                
-                <% end %>
-                
-                <% if @organizer.events.any? %>
+                <% if @vet.events.any? %>
                 <h2>All events</h2>
-                <%= render 'shared/organizer', object: @organizer.events %>
+                <%= render 'shared/organizer', object: @vet.events %>
                 <% end %>
                 
         <div class="row">

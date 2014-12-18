@@ -16,6 +16,11 @@
    
       if current_user.is_admin?
         navbar = render 'layouts/headerAdmin'
+        
+        elsif  current_user.is_vet? and current_user.is_organizer?
+        
+        navbar = render 'layouts/headerVetOr'
+        
         elsif  current_user.is_organizer?
         
         navbar = render 'layouts/headerOrganizer'
@@ -23,6 +28,8 @@
         elsif  current_user.is_vet?
         
         navbar = render 'layouts/headerVet'
+        
+        
         else
         
         navbar = render 'layouts/header'
