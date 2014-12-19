@@ -13,7 +13,7 @@ class VetsController < ApplicationController
   
   def show
     @vet = Vet.find(params[:id])
-    
+    @vet.check_point!(@vet.current_points)
   
   end
   
