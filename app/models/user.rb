@@ -86,6 +86,7 @@ class User < ActiveRecord::Base
   end
   
   def check_point!(points)
+  
     expiring_date = "11/30/" + (Date.today.year).to_s
     
      today = Date.today().strftime("%m/%d/%Y")

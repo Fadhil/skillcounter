@@ -8,6 +8,7 @@ class AttendancesController < ApplicationController
     current_user.attend!(@event)
     redirect_to @event
     
+    
   end
   
   def destroy
