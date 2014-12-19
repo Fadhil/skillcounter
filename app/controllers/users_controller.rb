@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  
+  include SkillCounterParams
   
   def index
     @users = User.all
@@ -83,6 +83,31 @@ class UsersController < ApplicationController
       @previous_events = @user.previous_events
       @upcoming_events = @user.upcoming_events
   end
+  
+  	def validate_event
+		@event = Event.find(params[:event_id])
+
+
+		def check
+			@event = Event.find(params[:event_id])
+
+		    if @event.update_attributes(event_params)
+  				redirect_to admin_event_path, success: "Successfully Updated"
+			else
+	  			redirect_to admin_event_path, success: "Fail to update event status"
+			end
+		end
+
+	end
+	
+	def admin_event
+		if params[:search]
+			@events = Event.search(params[:search])
+		else
+	      	@events = Event.all
+		end
+		  @user = User.find(params[:id])
+	end
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
