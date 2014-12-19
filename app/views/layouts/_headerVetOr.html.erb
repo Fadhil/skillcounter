@@ -11,10 +11,10 @@
       </div>
       <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to 'Manage Events', vet_event_path(current_user) %> </li>
-           <li><%= link_to "Events I've attended", my_events_path(current_user) %> </li>
+            <li><%= link_to 'Manage Events', check_event_path(current_user) %> </li>
+           <li><%= link_to "Events I've attended", user_event_path(current_user) %> </li>
             <li><%= link_to 'Upcoming Cources', events_path %> </li>
-            <li><%= link_to 'My Profile', vet_path(current_user) %> </li>
+            <li><%= link_to 'My Profile', user_path(current_user) %> </li>
             <li><a href="#">Dashboard</a></li>
        <%
          if user_signed_in?

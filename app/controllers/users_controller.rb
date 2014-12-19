@@ -72,7 +72,17 @@ class UsersController < ApplicationController
     @user = current_user_login
   end
   
+  def check_event
+      @user = User.find(params[:id])
+      @previous_events = @user.previous_events
+      @upcoming_events = @user.upcoming_events
+  end
   
+  def user_event
+      @user = User.find(params[:id])
+      @previous_events = @user.previous_events
+      @upcoming_events = @user.upcoming_events
+  end
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
