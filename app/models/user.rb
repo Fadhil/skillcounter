@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
   end
 
   def attend!(event)
-    self.attendances.create!(attended_event_id: event.id)
+    self.attendances.where(attended_event_id: event.id, attendee_id: self.id).first_or_create
   end
 
   def cancel!(event)

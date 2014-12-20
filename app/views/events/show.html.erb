@@ -81,26 +81,34 @@
                     </div>
                     
                     <div class="col-md-5">
-                     <%if current_user
+                     <% if current_user %>
                     
-                        if current_user.is_admin?
-                            button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
-                            attendance = render 'attendance_list'
-                        elsif  current_user.is_organizer?
-                            button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success"
-                            attendance = render 'attendance_list'
-                        elsif  current_user.is_vet?
-                            button = render 'attend_form'
-                        else
+                        <% if current_user.is_admin? %>
+<!--                             <#% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
+                            <#% attendance = render 'attendance_list' %> -->
+
+                            <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
+                                <%= f.file_field :attendance_list %>
+                                <%= f.submit "Upload attendance" %>
+                            <% end %>
+
+                            <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+
+                        <% elsif  current_user.is_organizer? %>
+                            <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
+                            <% attendance = render 'attendance_list' %>
+                        <% elsif  current_user.is_vet? %>
+                            <% button = render 'attend_form' %>
+                        <% else %>
                         
-                        button = ""
+                        <% button = "" %>
                         
-                        end
-                        else
+                        <% end %>
+                        <% else %>
                          
                         
-                        end
-                    %>
+                        <% end %>
+                    
                      <%= button %>
                      <%= attendance %>
                     
