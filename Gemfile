@@ -46,13 +46,15 @@ gem 'sendgrid'
 gem 'momentjs-rails', '>= 2.8.1'
 gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
 
+# autocompelete event creation
 gem 'twitter-typeahead-rails'
 gem 'gon'
 
+# limits number of event listed
 gem 'will_paginate', '~> 3.0.6'
 
+# handles importing and exporting for excel files
 gem 'roo'
-
 gem "spreadsheet"
 
 group :doc do
