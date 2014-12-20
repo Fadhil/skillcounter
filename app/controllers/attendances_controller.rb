@@ -59,7 +59,7 @@ class AttendancesController < ApplicationController
         file = @event.attendance_list
 
         spreadsheet = open_spreadsheet(file)
-        # spreadsheet = Roo::Excelx.new(file.path)
+
         header = spreadsheet.row(1)
         (2..spreadsheet.last_row).each do |i|
           row = Hash[[header, spreadsheet.row(i)].transpose]
@@ -71,20 +71,9 @@ class AttendancesController < ApplicationController
           vet.add_point!(@event.point)
           vet.attend!(@event)
           vet.save
-          # redirect_to event_path(id: @event.id), success: "#{row['attendee_id']}"
-            
 
-            
           end
-          # @params = params.inspect
-          # redirect_to @event
 
-            
-
-
-            # end
-          
-        # end
         redirect_to event_path(id: @event.id), success: "Updated attendance list"
     else
         redirect_to event_path(id: @event.id), error: "Fail to update attendance list"
@@ -94,15 +83,6 @@ class AttendancesController < ApplicationController
   end
 
   def download
-      # book = Spreadsheet::Workbook.new
-
-      # sheet1 = book.create_worksheet
-
-      # sheet1.row(1).concat ["Attendee_id", "Present"]
-
-      # # we can access the instance variable we set in the controller, just like
-      # # in erb template
-      # book.write "sample.xls"
 
       @event = Event.find(params[:id])
       
@@ -111,7 +91,7 @@ class AttendancesController < ApplicationController
       respond_to do |format|
         format.html
         format.csv { send_data @attendance.to_csv }
-        format.xls { send_data @attendance.to_csv(col_sep: "\t") }
+        format.xls #{ send_data @attendance.to_csv(col_sep: "\t") }
       end
 
 
