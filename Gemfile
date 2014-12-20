@@ -51,6 +51,10 @@ gem 'gon'
 
 gem 'will_paginate', '~> 3.0.6'
 
+gem 'roo'
+
+gem "spreadsheet"
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
