@@ -1,9 +1,12 @@
 SkillCounter::Application.routes.draw do
 
   #devise_for :user_logins, controllers: { registrations: "sessions" }
+
   devise_for :users
   resources :users
-  resources :events
+
+  
+  resources :events 
   resources :organizers
   resources :vets
     
@@ -11,7 +14,10 @@ SkillCounter::Application.routes.draw do
   
   resources :attendances, only: [:create, :destroy] do
     collection do
+
+      patch 'events/:id' => 'attendances#import', as: :import
       put 'present' => 'attendances#present', as: :update
+      get 'events/:id' => 'attendances#download', as: :download
     end
   end
   #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
@@ -41,6 +47,7 @@ SkillCounter::Application.routes.draw do
   get 'organizers/new' => 'organizer#new' 
 
   get 'create_event' => 'events#new'
+
   
   root "static_pages#home"
   get "static_pages/home"
