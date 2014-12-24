@@ -45,7 +45,7 @@ class VetsController < ApplicationController
     #if paypal returns success message
 
 
-      valid = pay_to_claim
+      valid = claim_profile
 
       if valid == 1
         email = params[:vet][:email]
@@ -117,7 +117,8 @@ class VetsController < ApplicationController
     
   end
 
-  def pay_to_claim
+  def express_checkout
+    token = params[:token]
 
   end
 
@@ -126,8 +127,8 @@ class VetsController < ApplicationController
 
     response = EXPRESS_GATEWAY.setup_purchase(@payment.total_in_cents,
       ip: request.remote_ip,
-      return_url: pay_to_claim_vets_url,
-      cancel_return_url: pay_to_claim_vets_url,
+      return_url: express_checkout_vets_url,
+      cancel_return_url: express_checkout_vets_url,
       currency: "USD",
       allow_guest_checkout: true,
       items: [{name: "Fee", description: @payment.description, quantity: "1", amount: @payment.total_in_cents}]
