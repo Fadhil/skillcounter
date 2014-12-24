@@ -43,34 +43,40 @@ class VetsController < ApplicationController
 
   def create
     #if paypal returns success message
-      email = params[:vet][:email]
-      ic = params[:vet][:ic_number]
-      licence = params[:vet][:licence_number]
+
+
+      valid = pay_to_claim
+
+      if valid == 1
+        email = params[:vet][:email]
+        ic = params[:vet][:ic_number]
+        licence = params[:vet][:licence_number]
+        
+        generated_password = email[0..2] + ic[0..2] + licence[0..2]
+
+        vet = Vet.create(
+          name: "PENDING ACCOUNT NAME", email: email, ic_number: ic,
+          licence_number: licence, contact_number: "012-1234567",
+          current_points: 0, expiring_points: 0, 
+          # password:generated_password, password_confirmation: generated_password)
+          # changed back to this "password" due to unconfigured sendgrid accout
+          password: "password", password_confirmation: "password",
+          type: "Vet", role: "Vet")#, member_since: Date.today.to_s)
+
+        if Vet.exists?(email: email)
+          # Mailer.send_email(@vet).deliver
+        else
+
+        end
       
-      generated_password = email[0..2] + ic[0..2] + licence[0..2]
+        if vet.save
+          vet.add_role("Vet")
 
-      vet = Vet.create(
-        name: "PENDING ACCOUNT NAME", email: email, ic_number: ic,
-        licence_number: licence, contact_number: "012-1234567",
-        current_points: 0, expiring_points: 0, 
-        # password:generated_password, password_confirmation: generated_password)
-        # changed back to this "password" due to unconfigured sendgrid accout
-        password: "password", password_confirmation: "password",
-        type: "Vet", role: "Vet" )#, member_since: Date.today.to_s)
-
-      if Vet.exists?(email: email)
-        # Mailer.send_email(@vet).deliver
-      else
-
-      end
-    
-      if vet.save
-        vet.add_role("Vet")
-
-        # Mailer.send_welcome_email(@vet).deliver
-        redirect_to static_pages_home_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
-      else
-        redirect_to vets_new_path, error: "Failed to create profile. Email or licence number may have been used for another accout"
+          # Mailer.send_welcome_email(@vet).deliver
+          redirect_to static_pages_home_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
+        else
+          redirect_to vets_new_path, error: "Failed to create profile. Email or licence number may have been used for another accout"
+        end
       end
   end
 
@@ -109,6 +115,26 @@ class VetsController < ApplicationController
     #redirect_to vet_path(current_user)
     redirect_to :back
     
+  end
+
+  def pay_to_claim
+
+  end
+
+  def claim_profile
+    @payment = Payment.find_by(description:"Profile claim fee")
+
+    response = EXPRESS_GATEWAY.setup_purchase(@payment.total_in_cents,
+      ip: request.remote_ip,
+      return_url: pay_to_claim_vets_url,
+      cancel_return_url: pay_to_claim_vets_url,
+      currency: "USD",
+      allow_guest_checkout: true,
+      items: [{name: "Fee", description: @payment.description, quantity: "1", amount: @payment.total_in_cents}]
+      )
+
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+
   end
   
   

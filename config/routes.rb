@@ -1,5 +1,10 @@
 SkillCounter::Application.routes.draw do
 
+  get "payments/new"
+  get "payments/create"
+  get "payments/edit"
+  get "payments/update"
+  get "payments/delete"
   #devise_for :user_logins, controllers: { registrations: "sessions" }
 
   devise_for :users
@@ -8,7 +13,13 @@ SkillCounter::Application.routes.draw do
   
   resources :events 
   resources :organizers
-  resources :vets
+  resources :vets do
+    collection do
+      get 'claim_profile' => 'vets#claim_profile'
+      get 'pay_to_claim' => 'vets#pay_to_claim'
+    end
+
+  end
     
   resources :admin, only: [:new]
   

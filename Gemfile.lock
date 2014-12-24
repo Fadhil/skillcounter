@@ -10,6 +10,17 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    active_utils (2.2.3)
+      activesupport (>= 2.3.11)
+      i18n
+    activemerchant (1.43.3)
+      active_utils (~> 2.0, >= 2.0.1)
+      activesupport (>= 2.3.14, < 5.0.0)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (~> 0.5)
+      json (~> 1.7)
+      money (< 7.0.0)
+      nokogiri (~> 1.4)
     activemodel (4.0.3)
       activesupport (= 4.0.3)
       builder (~> 3.1.0)
@@ -90,6 +101,8 @@ GEM
     minitest (4.7.5)
     momentjs-rails (2.8.3)
       railties (>= 3.1)
+    money (6.5.0)
+      i18n (>= 0.6.4, <= 0.7.0)
     multi_json (1.10.1)
     nested_form (0.3.2)
     nokogiri (1.6.4.1)
@@ -200,6 +213,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemerchant (= 1.43.3)
   autoprefixer-rails
   bootstrap-sass
   bootstrap3-datetimepicker-rails (~> 3.1.3)
@@ -213,6 +227,7 @@ DEPENDENCIES
   jquery-rails
   mini_magick
   momentjs-rails (>= 2.8.1)
+  money
   nested_form
   paperclip (~> 3.0)
   pg

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219101111) do
+ActiveRecord::Schema.define(version: 20141224131955) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -82,6 +82,14 @@ ActiveRecord::Schema.define(version: 20141219101111) do
   add_index "events", ["user_id"], name: "index_events_on_user_id"
   add_index "events", ["vet_id"], name: "index_events_on_vet_id"
 
+  create_table "payments", force: true do |t|
+    t.integer  "fee"
+    t.integer  "total_in_cents"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+  end
+
   create_table "roles", force: true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -143,6 +151,9 @@ ActiveRecord::Schema.define(version: 20141219101111) do
     t.integer  "biodata_file_size"
     t.datetime "biodata_updated_at"
     t.string   "member_since"
+    t.string   "id_address"
+    t.string   "express_token"
+    t.string   "express_payer_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
