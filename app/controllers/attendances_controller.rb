@@ -24,60 +24,63 @@ class AttendancesController < ApplicationController
     redirect_to @event
   end
   
-  def present
-    @event = Event.find(params[:event_id]) 
+  # def present
+  #   @event = Event.find(params[:event_id]) 
     
-    if params.has_key?(:finish)
-      @event.finish = true
-      @event.save
+  #   if params.has_key?(:finish)
+  #     @event.finish = true
+  #     @event.save
       
-      redirect_to @event
-    else
+  #     redirect_to @event
+  #   else
       
-      present_vet_ids = params[:present]
-      event_attendances = Attendance.where(attended_event_id: @event.id)
-      event_attendances.update_all(present: false)
-      event_attendances = event_attendances.where('attendee_id in (?)',present_vet_ids)
+  #     present_vet_ids = params[:present]
+  #     event_attendances = Attendance.where(attended_event_id: @event.id)
+  #     event_attendances.update_all(present: false)
+  #     event_attendances = event_attendances.where('attendee_id in (?)',present_vet_ids)
   
-      if !event_attendances.empty?
-        event_attendances.each do |a|
-          a.present = true
-          a.save
-        end
-      end
-      @params = params.inspect
-      redirect_to @event
-    end
-  end
+  #     if !event_attendances.empty?
+  #       event_attendances.each do |a|
+  #         a.present = true
+  #         a.save
+  #       end
+  #     end
+  #     @params = params.inspect
+  #     redirect_to @event
+  #   end
+  # end
 
   def import
 
-    @event = Event.find(params[:id])
-    
-    if @event.update_attributes(event_params)
+      @event = Event.find(params[:id])
+      
+      if @event.update_attributes(event_params)
 
-        file = @event.attendance_list
+          file = @event.attendance_list
 
-        spreadsheet = open_spreadsheet(file)
+          spreadsheet = open_spreadsheet(file)
 
-        header = spreadsheet.row(1)
-        (2..spreadsheet.last_row).each do |i|
-          row = Hash[[header, spreadsheet.row(i)].transpose]
+          header = spreadsheet.row(1)
+          (2..spreadsheet.last_row).each do |i|
+            row = Hash[[header, spreadsheet.row(i)].transpose]
 
 
-          vet_id = row['attendee_id']
+            vet_id = row['attendee_id']
+            
+            if row['present'] == 1
+                vet = Vet.find(vet_id)
+                vet.add_point!(@event.point)
+                vet.save
+            end
 
-          vet = Vet.find(vet_id)
-          vet.add_point!(@event.point)
-          vet.attend!(@event)
-          vet.save
+            
 
-          end
+            end
 
-        redirect_to event_path(id: @event.id), success: "Updated attendance list"
-    else
-        redirect_to event_path(id: @event.id), error: "Fail to update attendance list"
-    end
+          redirect_to event_path(id: @event.id), success: "Updated attendance list"
+      else
+          redirect_to event_path(id: @event.id), error: "Fail to update attendance list"
+      end
 
 
   end
@@ -91,7 +94,7 @@ class AttendancesController < ApplicationController
       respond_to do |format|
         format.html
         format.csv { send_data @attendance.to_csv }
-        format.xls #{ send_data @attendance.to_csv(col_sep: "\t") }
+        format.xls #{ send_data @attendance.to_csv(col_sep: "\t") } #uncomment this if format of the attendance list follows the attendance table format
       end
 
 

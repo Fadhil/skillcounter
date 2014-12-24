@@ -7,6 +7,8 @@
 	<% @attendance.each do |f| %>
 	<tr>
 		<th><%= f.attendee_id %> </th>
+		<% vet= Vet.find(f.attendee_id) %>
+		<th><%=vet.name%></th>
 		<th><%= f.present %> </th>
 	</tr>
 	<% end %>
