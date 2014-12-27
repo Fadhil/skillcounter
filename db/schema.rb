@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224131955) do
+ActiveRecord::Schema.define(version: 20141227082841) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -104,6 +104,15 @@ ActiveRecord::Schema.define(version: 20141224131955) do
   add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id"
 
+  create_table "transactions", force: true do |t|
+    t.string   "ip_address"
+    t.string   "express_token"
+    t.string   "express_payer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "purchased_at"
+  end
+
   create_table "user_logins", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -151,9 +160,6 @@ ActiveRecord::Schema.define(version: 20141224131955) do
     t.integer  "biodata_file_size"
     t.datetime "biodata_updated_at"
     t.string   "member_since"
-    t.string   "id_address"
-    t.string   "express_token"
-    t.string   "express_payer_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

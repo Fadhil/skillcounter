@@ -1,0 +1,13 @@
+<%= form_for @transaction do |f| %>
+  <%= @transaction.errors.full_messages %>
+  <% if @transaction.express_token.blank? %>
+ 		<p>Transaction failed</p>
+  <% else %>
+    <%= f.hidden_field :express_token %>
+    <% fee = Payment.find_by(description:"Profile claim fee") %>
+    <p>Name: <%= fee.description%> </p>
+    <p>Total: RM <%= fee.fee %></p>
+    
+  <% end %>
+  <p><%= f.submit "Complete Order" %></p>
+<% end %>
