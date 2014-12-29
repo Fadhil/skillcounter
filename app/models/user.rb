@@ -106,5 +106,15 @@ class User < ActiveRecord::Base
      
    end
   end
+
+  def update_points
+    @user.all.each do |user|
+      user.current_points = points
+      user.current_points = 0
+      user.expiring_points = points
+      user.save
+    end
+
+  end
   
 end
