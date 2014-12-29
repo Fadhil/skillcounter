@@ -57,6 +57,7 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'roo'
 gem "spreadsheet"
 
+# schedules task 
 gem 'whenever', :require => false
 
 group :doc do
