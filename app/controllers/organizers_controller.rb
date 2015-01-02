@@ -46,6 +46,16 @@ class OrganizersController < ApplicationController
     end
   end
   
+  def destroy
+    @organizer = Organizer.find(params[:id])
+    if @organizer.destroy
+      redirect_to users_path, notice: 'delete success'
+    else
+      redirect_to users_path, error: 'Fail'
+    end
+    
+  end
+  
   def organizer_params
     params.require(:organizer).permit(:name, :email, :password, :password_confirmation, :address, :contact_number, :avatar, :biodata,)
   end

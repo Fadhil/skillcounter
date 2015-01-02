@@ -112,6 +112,16 @@ class VetsController < ApplicationController
   end
   
   
+  def destroy
+    @vet = Vet.find(params[:id])
+    if @vet.destroy
+      redirect_to users_path, notice: 'delete success'
+    else
+      redirect_to users_path, error: 'Fail'
+    end
+    
+  end
+  
   def vet_params
     params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points, :avatar)
   end
