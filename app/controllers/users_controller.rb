@@ -1,3 +1,4 @@
+require 'SkillCounterParams'
 class UsersController < ApplicationController
   
   include SkillCounterParams
@@ -50,8 +51,8 @@ class UsersController < ApplicationController
       else
     
       render :new
-    #redirent_to new
-    end
+      #redirent_to new
+      end
   end
 
   def edit
@@ -67,6 +68,18 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+  
+  
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to users_path, notice: 'delete success'
+    else
+      redirect_to users_path, error: 'Fail'
+    end
+    
+  end
+  
 
   def claimed_profile
     @user = current_user_login
