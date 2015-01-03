@@ -49,7 +49,7 @@ SkillCounter::Application.routes.draw do
   get 'create_event' => 'events#new'
 
   
-  root "static_pages#home"
+  root "static_pages#holding"
   get "static_pages/home"
   
   # The priority is based upon order of creation: first created -> highest priority.
