@@ -30,9 +30,9 @@ SkillCounter::Application.configure do
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test
     paypal_options = {
-      login: "",
-      password: "",
-      signature: ""
+      login: ENV['PAYPALEXPRESS_LOGIN'],
+      password: ENV['PAYPALEXPRESS_PASSWORD'],
+      signature: ENV['PAYPALEXPRESS_SIGNATURE'] 
     }
     ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
   end
