@@ -1,5 +1,5 @@
 class Mailer < ActionMailer::Base
-  default :from => 'any_from_address@example.com'
+  default :from => 'skillcounter@codemalaysia.com'
 
   # send a signup email to the vet, pass in the vet object that   contains the vets's email address
   def send_email(vet)
