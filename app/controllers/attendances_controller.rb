@@ -9,6 +9,8 @@ class AttendancesController < ApplicationController
 
 
   def create
+    Rails.logger.info ("The params are #{params}")
+    Rails.logger.info " "
     @event = Event.find(params[:attendance][:attended_event_id])
    
     current_user.attend!(@event)

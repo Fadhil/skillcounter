@@ -84,7 +84,7 @@
                      <% if current_user %>
                     
                         <% if current_user.is_admin? %>
-<!--                             <#% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
+<!--                             <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                             <#% attendance = render 'attendance_list' %> -->
 
                             <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
@@ -95,7 +95,7 @@
                             <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
 
                         <% elsif  current_user.is_organizer? %>
-<!--                             <#% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
+<!--                             <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                             <#% attendance = render 'attendance_list' %> -->
 
                             <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
@@ -117,7 +117,7 @@
                         
                         <% end %>
                     
-                     <%#    = button %>
+                     <%= button %>
                      <%#= attendance %>
                     
                            <!-- <%#= link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>-->
