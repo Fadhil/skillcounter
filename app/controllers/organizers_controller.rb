@@ -12,7 +12,7 @@ class OrganizersController < ApplicationController
     
     if @organizer.save
       @organizer.add_role("Organizer")
-      #UserMailer.welcome_email(@user).deliver
+      Mailer.organizer_welcome_email(@organizer).deliver
      
       redirect_to organizer_path(id: @organizer.id), success: "Successfully register"
     else

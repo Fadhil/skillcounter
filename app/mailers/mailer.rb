@@ -14,4 +14,9 @@ class Mailer < ActionMailer::Base
     mail( :to => @vet.email,
     :subject => "Succcessfully registered!")
   end
+
+  def organizer_welcome_email(organizer)
+    @organizer = organizer
+    mail( to: @organizer.email, subject: "Welcome to our platform!")
+  end
 end
