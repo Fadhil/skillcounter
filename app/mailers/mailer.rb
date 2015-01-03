@@ -8,8 +8,9 @@ class Mailer < ActionMailer::Base
     :subject => "Welcome #{vet.name}")
   end
 
-   def send_welcome_email(vet)
+   def send_welcome_email(vet, generated_password)
     @vet = vet
+    @generated_password = generated_password
     mail( :to => @vet.email,
     :subject => "Succcessfully registered!")
   end
