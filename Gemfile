@@ -36,6 +36,30 @@ gem 'nested_form'
 gem 'devise'
 gem 'cancancan'
 
+# manage file uploads
+gem 'paperclip', '~> 3.0'
+
+# manage mailing 
+gem 'sendgrid'
+
+# datatime picker
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
+
+# autocompelete event creation
+gem 'twitter-typeahead-rails'
+gem 'gon'
+
+# limits number of event listed
+gem 'will_paginate', '~> 3.0.6'
+
+# handles importing and exporting for excel files
+gem 'roo'
+gem "spreadsheet"
+
+# schedules task 
+gem 'whenever', :require => false
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -51,6 +75,13 @@ group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails', '~>3.0.0'
   gem 'factory_girl_rails'
+
+  # magick handle images 
+  gem "mini_magick"
+end
+
+group :development do
+  gem 'letter_opener'
 end
 
 group :test do

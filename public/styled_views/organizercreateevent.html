@@ -1,0 +1,135 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>codemalaysiaskillcounter</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+
+    <!-- ADMIN HEADER -->
+    <div class="navbar navbar-static-top" id="top" role="banner">
+      <div class="container">
+        <div class="navbar-header">
+          <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="../" class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Skill Counter</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Manage Events</a></li>
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Sign Out <span class="glyphicon glyphicon-log-out"></span></a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- END of ADMIN HEADER -->
+
+    <!-- MAIN -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>Create event <small></small></h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <img src="../images/event-200x200px.jpg" alt="event" class="img-thumbnail">
+            </div>
+            <div class="col-md-9 col-sm-9">
+                <div class="row">
+                    <form class="form-horizontal" role="form">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="nextEvent" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Event Name" id="nextEvent">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastEvent" class="col-sm-3 control-label">Date</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="9 May 2015" id="lastEvent">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="col-sm-3 control-label">Location</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Kuala Lumpur" id="location">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="organizer" class="col-sm-3 control-label">Speaker</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="Some speaker" id="organizer">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="speakerBioUpload" class="col-sm-3 control-label">Speaker Bio</label>
+                                <div class="col-sm-8">
+                                    <input type="file" id="speakerBioUpload">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="speakerBioLink" class="col-sm-3 control-label">Link to Bio</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="http://" id="speakerBioLink">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="speakerOutline" class="col-sm-3 control-label">Outline</label>
+                                <div class="col-sm-8">
+                                    <input type="file" id="speakerOutline">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="license" class="col-sm-3 control-label">Points</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="40" id="license">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="license" class="col-sm-3 control-label">Category</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control">
+                                        <option>Category selection</option>
+                                        <option>Category 2</option>
+                                        <option>Category 3</option>
+                                        <option>Category 4</option>
+                                        <option>Category 5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-offset-9 col-md-3">
+                            <button type="button" class="btn btn-default btn-success">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- END of MAIN -->
+
+    <script src="scripts/vendor.js"></script>
+
+        <script src="scripts/main.js"></script>
+</body>
+</html>

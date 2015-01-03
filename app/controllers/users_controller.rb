@@ -1,5 +1,7 @@
+require 'SkillCounterParams'
 class UsersController < ApplicationController
   
+  include SkillCounterParams
   
   def index
     @users = User.all
@@ -49,8 +51,8 @@ class UsersController < ApplicationController
       else
     
       render :new
-    #redirent_to new
-    end
+      #redirent_to new
+      end
   end
 
   def edit
@@ -66,10 +68,59 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+  
+  
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to users_path, notice: 'delete success'
+    else
+      redirect_to users_path, error: 'Fail'
+    end
+    
+  end
+  
 
   def claimed_profile
     @user = current_user_login
   end
+  
+  def check_event
+      @user = User.find(params[:id])
+      @previous_events = @user.previous_events
+      @upcoming_events = @user.upcoming_events
+  end
+  
+  def user_event
+      @user = User.find(params[:id])
+      @previous_events = @user.previous_events
+      @upcoming_events = @user.upcoming_events
+  end
+  
+  	def validate_event
+		@event = Event.find(params[:event_id])
+
+
+		def check
+			@event = Event.find(params[:event_id])
+
+		    if @event.update_attributes(event_params)
+  				redirect_to admin_event_path, success: "Successfully Updated"
+			else
+	  			redirect_to admin_event_path, success: "Fail to update event status"
+			end
+		end
+
+	end
+	
+	def admin_event
+		if params[:search]
+			@events = Event.search(params[:search])
+		else
+	      	@events = Event.all
+		end
+		  @user = User.find(params[:id])
+	end
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
