@@ -22,3 +22,4 @@
 *LOCAL*
 .ruby-version
 *.orig
+/public/system/*

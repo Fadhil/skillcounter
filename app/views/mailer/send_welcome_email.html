@@ -4,9 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome <%= @user.name %>!</h1>
+    <h1>Welcome <%= @vet.name %>!</h1>
     <p>
-      You have successfully registered to SkillCounter!   
+      You have successfully registered to SkillCounter! </p>
+    <p>
+      You can login with your email <%= @vet.email %> and 
+      the password <%= @generated_password %>.   
     </p>
     <p>Thanks for joining and have a great day!</p>
   </body>
