@@ -100,7 +100,7 @@ class VetsController < ApplicationController
         @vet.add_role("Vet")
 
         Mailer.send_welcome_email(@vet, generated_password).deliver
-        redirect_to static_pages_home_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
+        redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
       else
         redirect_to vets_new_path, error: "Failed to create profile. Email or licence number may have been used for another accout"
       end

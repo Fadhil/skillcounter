@@ -1,15 +1,15 @@
 
-<%= form_for @user do |f| %>
- <div class="container">
+
+ 
         
         
         <div class="row">
             <div class="col-md-3 col-sm-3">
-                <img src="../images/event-200x200px.jpg" alt="event" class="img-thumbnail">
+                
             </div>
             <div class="col-md-9 col-sm-9">
                 <div class="row">
-                    <form class="form-horizontal" role="form">
+                    <%= form_for @user, :html => {class: "form-horizontal" } do |f| %>
                         <div class="col-md-8">
                             <div class="form-group">
                                 <label for="vetname" class="col-sm-3 control-label">Name</label>
@@ -59,22 +59,24 @@
                                 </div>
                             </div>
                             
-                            <div class="row">
-                                <div class="input-group col-xs-6">
-                                <span class="input-group-addon"><%= f.label "Avatar" %></span>
-                                <%= f.file_field :avatar, class: "form-control" %>
-                                </div>        
+                            <div class="form-group">
+                                <label for="avatar" class="col-sm-3 control-label">Avatar</label>
+                                <div class="col-sm-8">
+                                     <%= f.file_field :avatar, class: "form-control" %>
+                                </div>
                             </div>
+                            
+                            
                             
                         </div>
                         <div class="col-md-offset-9 col-md-3">
                               <%= f.submit "Update",  class:"btn btn-default btn-success" %>
+                              <%= link_to 'Back', request.referrer %>
                             
                         </div>
-                    </form>
+                    <% end %>
                 </div>
             </div>
         </div>
-    </div>
+    
 
-<% end %>
