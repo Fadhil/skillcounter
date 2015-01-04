@@ -57,6 +57,11 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'roo'
 gem "spreadsheet"
 
+# handles paypal and credit card payments
+gem 'activemerchant', '1.43.3'
+
+gem 'money'
+
 # schedules task 
 gem 'whenever', :require => false
 

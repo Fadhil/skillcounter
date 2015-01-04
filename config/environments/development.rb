@@ -28,6 +28,16 @@ SkillCounter::Application.configure do
   config.assets.debug = true
 
 
-  #User letter opener for local mailing test
+  #Use letter opener for local mailing test
   config.action_mailer.delivery_method = :letter_opener
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+      login: ENV['PAYPALEXPRESS_LOGIN'],
+      password: ENV['PAYPALEXPRESS_PASSWORD'],
+      signature: ENV['PAYPALEXPRESS_SIGNATURE'] 
+    }
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+  end
 end

@@ -1,5 +1,7 @@
 SkillCounter::Application.routes.draw do
 
+
+  resource :payments 
   #devise_for :user_logins, controllers: { registrations: "sessions" }
 
   devise_for :users
@@ -11,6 +13,16 @@ SkillCounter::Application.routes.draw do
   resources :vets
     
   resources :admin, only: [:new]
+
+  resources :transactions do
+    collection do
+      get 'pay_to_claim' => 'transactions#pay_to_claim'
+      get 'express_checkout' => 'transactions#express_checkout', as: :express_checkout
+      get 'successful' => 'transactions#successful'
+      get 'failed' => 'transactions#failed'
+    end
+  end
+
   
   resources :attendances, only: [:create, :destroy] do
     collection do
