@@ -53,7 +53,7 @@ class EventsController < ApplicationController
       
     else
 
-      redirect_to static_pages_home_path, error: "Failed to create event"
+      redirect_to root_path, error: "Failed to create event"
       
       #redirent_to new
     end
