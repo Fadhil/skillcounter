@@ -42,6 +42,10 @@ class AdminController < ApplicationController
 		@vet = Vet.find(params[:id])
 	end
 
+	def upload_vets
+
+	end
+
 
 	# def event.search(search)
  #   	if search

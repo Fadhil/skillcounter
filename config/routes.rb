@@ -47,6 +47,7 @@ SkillCounter::Application.routes.draw do
   get 'admin/vet_show/:id' => 'admin#vet_show'
   get 'admin/vet_show' => 'vets#index'
   get 'admin/validate_event/:id' => 'admin#validate_event'
+  get 'admin/upload_vets' => 'admin#upload_vets'
   patch 'admin/validate_event/:id' => 'admin#update', as: :validate_event
 
   get 'vets/new' => 'vets#new'
