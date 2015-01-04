@@ -23,14 +23,14 @@
             <form class="form-signin" role="form">
                 <h4 class="form-signin-heading">Payment</h4>
                 <p>You will need to make a payment of
-                <span class="text-success"><% fee = Payment.find_by(description: "Profile claim fee"%><%=fee.fee%></span> before you can claim your profile</p>
+                <span class="text-success"><% fee = Payment.find_by(description: "Profile claim fee")%><%=fee.fee%></span> before you can claim your profile</p>
                 <p>Click below to proceed with payment</p>
                 <br>
 <!--                 <input type="text" class="form-control input-lg" placeholder="Credit card no." required="" autofocus="">
                 <input type="text" class="form-control input-lg ic" placeholder="Valid thru, ex.: 2018-12-31" required="">
                 <input type="text" class="form-control input-lg license" placeholder="CVV#" required="">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm Payment</button> -->
-                <%= link_to(image_tag("https://www.paypalobjects.com/webstatic/en_MY/mktg/logos/AM_SbyPP_mc_vs_dc_ae.jpg"), express_checkout_transaction_path) %>
+                <%= link_to(image_tag("https://www.paypalobjects.com/webstatic/en_MY/mktg/logos/AM_SbyPP_mc_vs_dc_ae.jpg"), express_checkout_transactions_path) %>
             </form>
         </div>
     </div>

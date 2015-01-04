@@ -15,4 +15,5 @@ class Vet < User
         find(:all)
         end
     end
+
 end
