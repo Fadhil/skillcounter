@@ -13,6 +13,8 @@ class VetsController < ApplicationController
   
   def show
     @vet = Vet.find(params[:id])
+    @previous_events = @vet.previous_events
+      @upcoming_events = @vet.upcoming_events
     @vet.check_point!(@vet.current_points)
   
   end
@@ -30,7 +32,6 @@ class VetsController < ApplicationController
 
   def new
     @vet = Vet.new
-
   end
 
   def validate_claim_profile
@@ -84,10 +85,10 @@ class VetsController < ApplicationController
         name: "PENDING ACCOUNT NAME", email: email, ic_number: ic,
         licence_number: licence, contact_number: "012-1234567",
         current_points: 0, expiring_points: 0, 
-        # password:generated_password, password_confirmation: generated_password)
+        password: generated_password, password_confirmation: generated_password,
         # changed back to this "password" due to unconfigured sendgrid accout
-        password: "password", password_confirmation: "password",
-        type: "Vet", role: "Vet")#, member_since: Date.today.to_s)
+        # password: "password", password_confirmation: "password",
+        type: "Vet", role: "Vet" )#, member_since: Date.today.to_s)
 
       if Vet.exists?(email: email)
         # Mailer.send_email(@vet).deliver
@@ -98,9 +99,8 @@ class VetsController < ApplicationController
       if @vet.save
         @vet.add_role("Vet")
 
-        # Mailer.send_welcome_email(@vet).deliver
-        
-        redirect_to @vet.claim_profile(vet_path(@vet))
+        Mailer.send_welcome_email(@vet, generated_password).deliver
+        redirect_to static_pages_home_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
       else
         redirect_to vets_new_path, error: "Failed to create profile. Email or licence number may have been used for another accout"
       end
@@ -144,6 +144,17 @@ class VetsController < ApplicationController
     
   end
 
+  
+  
+  def destroy
+    @vet = Vet.find(params[:id])
+    if @vet.destroy
+      redirect_to users_path, notice: 'delete success'
+    else
+      redirect_to users_path, error: 'Fail'
+    end
+    
+  end
   
   def vet_params
     params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points, :avatar, :ip_address, :express_token, :express_payer_id, :purchased_at)

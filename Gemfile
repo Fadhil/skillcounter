@@ -62,6 +62,9 @@ gem 'activemerchant', '1.43.3'
 
 gem 'money'
 
+# schedules task 
+gem 'whenever', :require => false
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
@@ -80,6 +83,10 @@ group :development, :test do
 
   # magick handle images 
   gem "mini_magick"
+end
+
+group :development do
+  gem 'letter_opener'
 end
 
 group :test do

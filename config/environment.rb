@@ -5,6 +5,8 @@ require File.expand_path('../application', __FILE__)
 SkillCounter::Application.initialize!
 
 
+
+
 # ActionMailer::Base.smtp_settings = {
 #   :address => "smtp.sendgrid.net",
 #   :port => 25,

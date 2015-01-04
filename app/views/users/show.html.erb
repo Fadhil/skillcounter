@@ -47,7 +47,7 @@
                             </div>
                             </div>
                             <div class="col-md-offset-9 col-md-3">
-                            <%= link_to "Edit", edit_vet_path(@user), class: "btn btn-default btn-success" %>
+                            <%= link_to "Edit", edit_user_path(@user), class: "btn btn-default btn-success" %>
                            </div>
                         </form>
                     </div>
@@ -65,7 +65,7 @@
                 </div>
                 <h3>
                     <small>Current Accumulated Points:</small>
-                    <span class="text-success"><%= (@user.current_points + @user.expiring_points) %></span>
+                    <span class="text-success"><%= @user.current_points %></span>
                 </h3>
                 <h3>
                     <small>Points Expiring This Year:</small>

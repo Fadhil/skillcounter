@@ -27,6 +27,10 @@ SkillCounter::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+
+  #Use letter opener for local mailing test
+  config.action_mailer.delivery_method = :letter_opener
+
   config.after_initialize do
     ActiveMerchant::Billing::Base.mode = :test
     paypal_options = {

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   
     validates :name, presence: true, length: { maximum: 50 }, on: :update
     #validates :type, presence: true
-  
+   has_attached_file :avatar, :styles => {:thumb => "100x100"}
     
     has_and_belongs_to_many :roles
     has_many :events, :foreign_key => :organizer_id
@@ -105,6 +105,16 @@ class User < ActiveRecord::Base
      self.save
      
    end
+  end
+
+  def update_points
+    @user.all.each do |user|
+      user.current_points = points
+      user.current_points = 0
+      user.expiring_points = points
+      user.save
+    end
+
   end
   
 end
