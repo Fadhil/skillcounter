@@ -6,5 +6,9 @@ class StaticPagesController < ApplicationController
   def holding
 
   end
+  
+  def about
+    
+  end
 end
 

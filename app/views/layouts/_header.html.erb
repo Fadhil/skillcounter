@@ -14,7 +14,7 @@
         <ul class="nav navbar-nav navbar-right">
            <li <%= current_page?(root_path) ? "class=active" : ""%>> <%= link_to 'Home' , root_path %></li>
           
-           <li><a href="#">About</a></li>
+           <li><%= link_to 'about' , about_path %></li>
        <%
          if user_signed_in?
              the_link = link_to destroy_user_session_path, method: :delete do
