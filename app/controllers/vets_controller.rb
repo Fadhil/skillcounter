@@ -91,7 +91,6 @@ class VetsController < ApplicationController
         @vet.password = generated_password
         @vet.password_confirmation = generated_password
 
-        @vet.add_role('Vet')
         if @vet.save
           @vet.add_role("Vet")
 
