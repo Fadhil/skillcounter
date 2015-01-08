@@ -87,7 +87,7 @@ class VetsController < ApplicationController
       generated_password = email[0..2] + ic[0..2] + licence[0..2]
       @vet = Vet.where(params[:vet]).first
 
-      if @vet && @vet.password.blank? # Make sure @vet has not been claimed before. Unclaimed @vets don't have passwords.
+      if @vet && @vet.encrypted_password.blank? # Make sure @vet has not been claimed before. Unclaimed @vets don't have passwords.
         @vet.password = generated_password
         @vet.password_confirmation = generated_password
 
@@ -100,7 +100,7 @@ class VetsController < ApplicationController
           redirect_to vets_new_path, error: 'Unable to claim your profile. Please contact the admins'
         end
       else
-        redirect_to vets_new_path, error: "Failed to claim profile. Email or licence number may have been used for another accout"
+        redirect_to vets_new_path, error: "Failed to claim profile. Email or licence may have already been claimed, or is not valid"
       end
   end
 
