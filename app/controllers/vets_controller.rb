@@ -34,12 +34,18 @@ class VetsController < ApplicationController
     @vet = Vet.new
   end
 
+  ##
+  # Claiming a profile comes here first. If a valid unclaimed vet exists,
+  # We'll render the paypal checkout button, otherwise we redirect to 
+  # the claim page with a notification
+  #
   def validate_claim_profile
 
     @vet = Vet.where(params[:vet]).first # Look for a Vet with the params given
 
     if @vet && @vet.encrypted_password.blank? # A valid unclaimed vet exists
-      redirect_to vets_new_path, notice: "Now we should bring you to the payment site"
+      flash.now[:notice] = "Found your profile. <br/>You will need to make a payment of RM XX before you can claim your profile.".html_safe
+      render 'transactions/pay_to_claim'
     else # No such Vet, or previously claimed
       redirect_to vets_new_path, error: "Failed to claim profile. Email or licence may have already been claimed, or is not valid"
     end

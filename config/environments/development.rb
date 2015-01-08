@@ -38,6 +38,6 @@ SkillCounter::Application.configure do
       password: ENV['PAYPALEXPRESS_PASSWORD'],
       signature: ENV['PAYPALEXPRESS_SIGNATURE'] 
     }
-    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::BogusGateway.new
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
   end
 end

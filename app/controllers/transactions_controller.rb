@@ -19,6 +19,9 @@ class TransactionsController < ApplicationController
 	end
 
 	def create
+		#TODO: Move claim_vet here. Should probably make claim_vet a method inside the Vet Model
+		#      and just call it here if it's a successful transaction.
+		#
 		fee = Payment.find_by(description:"Profile claim fee")
 
 	  @transaction = Transaction.new(transaction_params)
