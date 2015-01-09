@@ -4,12 +4,12 @@ class TransactionsController < ApplicationController
 		fee = nil
 		payment_type = params[:payment_type]
 		vet_id = params[:vet_id]
-		case payment_type
 
+		case payment_type
 		when :claim_profile.to_s
 			fee = Payment.find_by(description:"Profile claim fee")
 		else
-			fee = Payment.create(fee: 0, total_in_cents: 0, description: 'zero payment')
+			fee = Payment.create(fee: 0, total_in_cents: 0, description: 'zero payment') # We'll next need to sort out payments of type points for organizers.
 		end
 
 	  response = EXPRESS_GATEWAY.setup_purchase(fee.total_in_cents,
@@ -40,20 +40,12 @@ class TransactionsController < ApplicationController
 
 
 	def create
-		#TODO: Move claim_vet here. Should probably make claim_vet a method inside the Vet Model
-		#      and just call it here if it's a successful transaction.
-		#
 
 		payment_type = params[:transaction][:payment_type] # From the hidden field in :new
 
 		vet = Vet.find_by_email(params[:email]) # From the hidden field in :new
 
 		fee = Payment.find(params[:payment_id])
-
-		# case payment_type
-		# when :claim_profile.to_s
-		# 	fee = Payment.find_by(description:"Profile claim fee")
-		# end
 
 		if fee && !vet.nil? # Only continue if we find a valid fee and vet
 		  @transaction = Transaction.new(transaction_params)
@@ -62,11 +54,14 @@ class TransactionsController < ApplicationController
 		  if @transaction.save 
 		    if @transaction.purchase(fee) # this is where we purchase the transaction. refer to the model method below
 
-		    	##
-		    	# This is where we should be claiming the vet and sending out emails and things. Or 
-		    	# buypoints for organizers, depending on what payment_type it is
-		    	#
-		      redirect_to successful_transactions_path 
+		    	if vet.claim                # Claim the vet (set password)
+		    		vet.add_role('Vet')
+		    	
+          	Mailer.send_welcome_email(vet, vet.generate_password).deliver
+		        redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
+		      else
+		      	redirect_to root_path, notice: 'Your payment was successful, but something went wrong with claiming your profile. Please contact the admins.'
+		      end
 		    else
 		      redirect_to new_vet_path, notice: "Failed to complete your payment."
 		    end

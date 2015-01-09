@@ -55,35 +55,10 @@ class VetsController < ApplicationController
     end
   end
 
-  # Vets should have already been created at this point by 
-  # the admin via upload_vets. 
-  # Now we just need to make sure that the IC and License Numbers
-  # match those that we have in our database. 
-  #
-  # If a match is found, we'll update the vet's password and confirmation
-  # with the generated_password we created, and email him the details
-  #
+
   def create
-    #if paypal returns success message
 
-      generated_password = email[0..2] + ic[0..2] + licence[0..2]
-      @vet = Vet.where(params[:vet]).first
 
-      if @vet && @vet.encrypted_password.blank? # Make sure @vet has not been claimed before. Unclaimed @vets don't have passwords.
-        @vet.password = generated_password
-        @vet.password_confirmation = generated_password
-
-        if @vet.save
-          @vet.add_role("Vet")
-
-          Mailer.send_welcome_email(@vet, generated_password).deliver
-          redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
-        else
-          redirect_to vets_new_path, error: 'Unable to claim your profile. Please contact the admins'
-        end
-      else
-        redirect_to vets_new_path, error: "Failed to claim profile. Email or licence may have already been claimed, or is not valid"
-      end
   end
 
   def edit

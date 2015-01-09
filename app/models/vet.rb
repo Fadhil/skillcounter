@@ -24,4 +24,23 @@ class Vet < User
         self.expiring_points = 0
     end
 
+    ##
+    # Sets a temporary password and saves the vet
+    #
+    def claim
+        if encrypted_password.blank? # Vet hasn't been claimed before
+            if generated_password = generate_password 
+                Rails.logger.info 'generating'
+                self.password                = generated_password
+                self.password_confirmation   = generated_password
+
+            end
+            save
+        end
+    end
+
+    def generate_password
+        email[0..2] + ic_number[0..2] + licence_number[0..2] if !email.blank? && !ic_number.blank? && !licence_number.blank?
+    end
+
 end
