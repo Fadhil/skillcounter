@@ -4,6 +4,7 @@
  		<p>Transaction failed</p>
   <% else %>
     <%= f.hidden_field :express_token %>
+    <%= f.hidden_field :payment_type, value: @payment_type %>
     <% fee = Payment.find_by(description:"Profile claim fee") %>
     <p>Name: <%= fee.description%> </p>
     <p>Total: RM <%= fee.fee %></p>

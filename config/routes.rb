@@ -14,10 +14,17 @@ SkillCounter::Application.routes.draw do
     
   resources :admin, only: [:new]
 
-  resources :transactions do
+  resources :transactions, except: [:new] do
+    #
+    # Modify the new_transaction path to take a parameter 'payment_type', 
+    # which we'll use to determine what sort of payment we're doing. 
+    #
+    new do
+      get ':payment_type' => 'transactions#new', as: '' # this will give us 'new_transaction'
+    end
     collection do
       get 'pay_to_claim' => 'transactions#pay_to_claim'
-      get 'express_checkout' => 'transactions#express_checkout', as: :express_checkout
+      post 'express_checkout' => 'transactions#express_checkout', as: :express_checkout
       get 'successful' => 'transactions#successful'
       get 'failed' => 'transactions#failed'
       get 'cancelled' => 'transactions#cancelled'
