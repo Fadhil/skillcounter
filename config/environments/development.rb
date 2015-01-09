@@ -38,6 +38,11 @@ SkillCounter::Application.configure do
       password: ENV['PAYPALEXPRESS_PASSWORD'],
       signature: ENV['PAYPALEXPRESS_SIGNATURE'] 
     }
-    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+
+    if ENV['PAYPALEXPRESS_LOGIN'].blank?  # In case you haven't set paypal envs, you can still run this app. Somewhat.
+      ::EXPRESS_GATEWAY = ActiveMerchant::Billing::BogusGateway
+    else
+      ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+    end
   end
 end
