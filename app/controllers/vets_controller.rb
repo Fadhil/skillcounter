@@ -12,7 +12,11 @@ class VetsController < ApplicationController
   end
   
   def show
-    @vet = Vet.find(params[:id])
+    begin
+      @vet = Vet.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to vets_new_path
+    end
     @previous_events = @vet.previous_events
       @upcoming_events = @vet.upcoming_events
     @vet.check_point!(@vet.current_points)

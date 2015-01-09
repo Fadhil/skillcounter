@@ -30,7 +30,7 @@
                 <input type="text" class="form-control input-lg ic" placeholder="Valid thru, ex.: 2018-12-31" required="">
                 <input type="text" class="form-control input-lg license" placeholder="CVV#" required="">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm Payment</button> -->
-                <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_checkout_transactions_path(payment_type: :claim_profile), method: :post) %>
+                <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_checkout_transactions_path(payment_type: :claim_profile, vet_id: @vet.id), method: :post) %>
             </form>
         </div>
     </div>

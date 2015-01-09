@@ -20,7 +20,7 @@ SkillCounter::Application.routes.draw do
     # which we'll use to determine what sort of payment we're doing. 
     #
     new do
-      get ':payment_type' => 'transactions#new', as: '' # this will give us 'new_transaction'
+      get ':payment_type/:vet_id/:payment_id' => 'transactions#new', as: '' # this will give us 'new_transaction'
     end
     collection do
       get 'pay_to_claim' => 'transactions#pay_to_claim'
