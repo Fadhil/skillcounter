@@ -20,6 +20,7 @@ SkillCounter::Application.routes.draw do
       get 'express_checkout' => 'transactions#express_checkout', as: :express_checkout
       get 'successful' => 'transactions#successful'
       get 'failed' => 'transactions#failed'
+      get 'cancelled' => 'transactions#cancelled'
     end
   end
 
