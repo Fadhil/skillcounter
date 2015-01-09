@@ -5,7 +5,20 @@ class Transaction < ActiveRecord::Base
 
 
     response = EXPRESS_GATEWAY.purchase(payment.total_in_cents, express_purchase_options)
-    self.update_attribute(:purchased_at, Time.now) if response.success?
+
+
+    if response.success?
+      ##
+      # If purchase was a success, we update the purchased_at field and add status :success
+      #
+      self.update_attribute(:purchased_at, Time.now) 
+      self.update_attribute(:status, :success)
+    else
+      ##
+      # Update status to :failure if purchase unsuccessful
+      #
+      self.update_attribute(:status, :failure)
+    end
     response.success?
   end
 

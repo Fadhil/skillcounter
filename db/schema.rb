@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141227082841) do
+ActiveRecord::Schema.define(version: 20150109135213) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(version: 20141227082841) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "purchased_at"
+    t.string   "status"
+    t.string   "payment_type"
   end
 
   create_table "user_logins", force: true do |t|
@@ -127,9 +129,6 @@ ActiveRecord::Schema.define(version: 20141227082841) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "user_logins", ["email"], name: "index_user_logins_on_email", unique: true
-  add_index "user_logins", ["reset_password_token"], name: "index_user_logins_on_reset_password_token", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

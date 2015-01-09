@@ -1,5 +1,5 @@
 class VetsController < ApplicationController
-  
+
   
   def index
     if params[:search]
@@ -12,7 +12,11 @@ class VetsController < ApplicationController
   end
   
   def show
-    @vet = Vet.find(params[:id])
+    begin
+      @vet = Vet.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      redirect_to vets_new_path
+    end
     @previous_events = @vet.previous_events
       @upcoming_events = @vet.upcoming_events
     @vet.check_point!(@vet.current_points)
@@ -34,76 +38,26 @@ class VetsController < ApplicationController
     @vet = Vet.new
   end
 
+  ##
+  # Claiming a profile comes here first. If a valid unclaimed vet exists,
+  # We'll render the paypal checkout button, otherwise we redirect to 
+  # the claim page with a notification
+  #
   def validate_claim_profile
 
-    email = params[:vet][:email]
-    ic = params[:vet][:ic_number]
-    licence = params[:vet][:licence_number]
-    
-    generated_password = email[0..2] + ic[0..2] + licence[0..2]
+    @vet = Vet.where(params[:vet]).first # Look for a Vet with the params given
 
-    vet = Vet.create(
-      name: "PENDING ACCOUNT NAME", email: email, ic_number: ic,
-      licence_number: licence, contact_number: "012-1234567",
-      current_points: 0, expiring_points: 0, 
-      # password:generated_password, password_confirmation: generated_password)
-      # changed back to this "password" due to unconfigured sendgrid accout
-      password: "password", password_confirmation: "password",
-      type: "Vet", role: "Vet")#, member_since: Date.today.to_s)
-
-    if Vet.exists?(email: email)
-      # Mailer.send_email(@vet).deliver
-    else
-
+    if @vet && @vet.encrypted_password.blank? # A valid unclaimed vet exists
+      flash.now[:notice] = "Found your profile. <br/>You will need to make a payment of RM XX before you can claim your profile.".html_safe
+      render 'transactions/pay_to_claim'
+    else # No such Vet, or previously claimed
+      redirect_to vets_new_path, error: "Failed to claim profile. Email or licence may have already been claimed, or is not valid"
     end
-  
-    if vet.save
-      vet.add_role("Vet")
-
-      # Mailer.send_welcome_email(@vet).deliver
-      redirect_to @vet.claim_profile(vet_path(@vet))
-    else
-      redirect_to vets_new_path, error: "Failed to create profile. Email or licence number may have been used for another accout"
-    end
-
-
   end
 
+
   def create
-    #if paypal returns success message
 
-
-    # valid = claim_profile
-
-      email = params[:vet][:email]
-      ic = params[:vet][:ic_number]
-      licence = params[:vet][:licence_number]
-      
-      generated_password = email[0..2] + ic[0..2] + licence[0..2]
-
-      @vet = Vet.create(
-        name: "PENDING ACCOUNT NAME", email: email, ic_number: ic,
-        licence_number: licence, contact_number: "012-1234567",
-        current_points: 0, expiring_points: 0, 
-        password: generated_password, password_confirmation: generated_password,
-        # changed back to this "password" due to unconfigured sendgrid accout
-        # password: "password", password_confirmation: "password",
-        type: "Vet", role: "Vet" )#, member_since: Date.today.to_s)
-
-      if Vet.exists?(email: email)
-        # Mailer.send_email(@vet).deliver
-      else
-
-      end
-    
-      if @vet.save
-        @vet.add_role("Vet")
-
-        Mailer.send_welcome_email(@vet, generated_password).deliver
-        redirect_to static_pages_home_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
-      else
-        redirect_to vets_new_path, error: "Failed to create profile. Email or licence number may have been used for another accout"
-      end
 
   end
 
