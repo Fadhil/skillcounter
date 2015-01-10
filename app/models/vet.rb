@@ -1,6 +1,6 @@
 class Vet < User
 
-    before_save :initialize_points
+    after_initialize :initialize_points
      has_attached_file :avatar, :styles => {:thumb => "100x100"}
     
     validates :licence_number, presence: true, uniqueness: true
