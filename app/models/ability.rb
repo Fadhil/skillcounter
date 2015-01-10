@@ -27,7 +27,7 @@ class Ability
       if user.is_admin?
         can :manage, :all
       elsif user.is_organizer?
-        can :manage, :all
+        can :manage, Event, :edit, :update, :delete
       elsif user.vet?
         can :manage, :all
           

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  
+         
     validates :name, presence: true, length: { maximum: 50 }, on: :update
     #validates :type, presence: true
    has_attached_file :avatar, :styles => {:thumb => "100x100"}

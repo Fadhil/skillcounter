@@ -61,7 +61,28 @@
                            <div class="form-group">
                                 <label for="userPhone" class="col-sm-3 control-label">Status</label>
                                     <div class="col-sm-8">
-                                        <%= text_field_tag :description, @event.status, class:"form-control", disabled:true %>
+                                        <%#= text_field_tag :description, @event.status, class:"form-control", disabled:true %>
+
+
+                                        <% if @event.status == "Pending"    %>
+                                            <span class="label label-warning">
+                                                <%=@event.status%>                                           
+                                                </span>
+                                        <% elsif @event.status == "Rejected"    %>
+                                            <span class="label label-danger">
+                                                <%=@event.status%>                                           
+                                                </span>
+                                        <% elsif @event.status == "Approved"    %>
+                                            <span class="label label-info">
+                                                <%=@event.status%>                                           
+                                                </span>
+                                        <% elsif @event.status == "Live" %>
+                                            <span class="label label-success">
+                                                <%=@event.status%> 
+                                               </span>
+                                        <% end %>
+
+
                                     </div>
                             </div>
                             

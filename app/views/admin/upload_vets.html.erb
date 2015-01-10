@@ -3,6 +3,22 @@
     <h2>Upload Vets</h2>
     <div class="panel panel-default top10">
       <div class="panel-body">
+          <br>
+            <p>To upload vet records, create a CSV (.csv) file with the following column headers and upload the file here.</p>
+            <p style="font-size:15px">PROTIP: To create a CSV file, click "Save As" in Microsoft Excel and select CSV under "Save as type". </p>
+              <ul> 
+                <li>name</li>
+                <li>email</li>
+                <li>ic_number</li>
+                <li>licence_number</li>
+              </ul>
+              <p>It is important that the column headers are named exactly as listed above.</p>
+              <br>
+              <p>If the record already exist in the system, it will not create a new record.</p>
+           
+
+          <br>
+          <br>
         <%= form_tag admin_upload_vets_path, multipart: true do %>
           <div class="input-group center-eight">
 
@@ -14,3 +30,4 @@
     </div>
   </div>
 </div>
+
