@@ -57,11 +57,11 @@ class TransactionsController < ApplicationController
 		    	if vet.claim                # Claim the vet (set password)
 		    		vet.add_role('Vet')
 		    	
-          	Mailer.send_welcome_email(vet, vet.generate_password).deliver
+          	    Mailer.send_welcome_email(vet, vet.generate_password).deliver
 		        redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
-		      else
+		        else
 		      	redirect_to root_path, notice: 'Your payment was successful, but something went wrong with claiming your profile. Please contact the admins.'
-		      end
+		        end
 		    else
 		      redirect_to new_vet_path, notice: "Failed to complete your payment."
 		    end
