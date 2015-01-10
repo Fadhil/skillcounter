@@ -11,6 +11,7 @@
       </div>
       <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to 'Manage Users', users_path %> </li>
             <li><%= link_to 'Validate Event', admin_event_path(current_user) %> </li>
             <li><%= link_to 'Manage Events', check_event_path(current_user) %> </li>
            <li><%= link_to "Events I've attended", user_event_path(current_user) %> </li>

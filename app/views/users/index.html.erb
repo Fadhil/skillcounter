@@ -15,12 +15,21 @@
                             </div>
                         </div>
                     </form>
+                    
                 </div>
+                
+                
+                    <% if can? :manage, :all %>
+                    <%= link_to 'Upload Vets', admin_upload_vets_path, class: 'btn btn-primary' %>
+                    <% end %>
+                   
+                  
                 <ul class="media-list">
                  <% @users.each do |user| %>
                     <li class="media">
                         <a class="pull-left" href="#">
-                            <img class="media-object" src="../images/event-80x71px.jpg" alt="...">
+                            
+                            <%= image_tag user.avatar.url(:thumb), class:"img-thumbnail"  %>
                         </a>
                         <div class="media-body">
                             <div class="col-md-9 col-sm-9">
@@ -48,6 +57,7 @@
                     </li>
                      <% end %>  
                 </ul>
+                
             </div>
         </div>
     </div>
