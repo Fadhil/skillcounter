@@ -58,6 +58,13 @@
                                     </div>
                             </div>
 
+                            <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Number of participants</label>
+                                    <div class="col-sm-8">
+                                        <%= text_field_tag :description, @event.number_participants, class:"form-control", disabled:true %>
+                                    </div>
+                            </div>
+
                            <div class="form-group">
                                 <label for="userPhone" class="col-sm-3 control-label">Status</label>
                                     <div class="col-sm-8">
@@ -108,6 +115,10 @@
                             </div>
                             
                          </div>
+
+                         
+                            
+                         </div>
                          
                           <div class="col-md-12 ">
                               
@@ -116,24 +127,35 @@
                                 <% if current_user.is_admin? %>
                                     <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     <%# attendance = render 'attendance_list' %>
-            
+                                    
                                     <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
                                         <%= f.file_field :attendance_list %>
                                         <%= f.submit "Upload attendance" %>
                                     <% end %>
-            
+                                    
                                     <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+                                    
             
                                 <% elsif  current_user.is_organizer? %>
+
                                     <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     <%#= attendance = render 'attendance_list' %>
+                                    
+                                    <p>Please download 
+                                    <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+                                     to use as a template.
+                                    </p>
             
                                     <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
                                         <%= f.file_field :attendance_list %>
                                         <%= f.submit "Upload attendance" %>
                                     <% end %>
-            
-                                    <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+                                    <% if @event.status == "Pending" %>
+                                        <%= link_to "Purchase points", purchase_points_path(@event), class:"btn btn-default btn-success" %>
+                                    <% end %>
+
+                                
+
             
                                 <% elsif  current_user.is_vet? %>
                                     <% button = render 'attend_form' %>

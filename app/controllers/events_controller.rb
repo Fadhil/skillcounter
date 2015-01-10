@@ -1,4 +1,7 @@
+require 'SkillCounterParams'
+
 class EventsController < ApplicationController
+  include SkillCounterParams
     
     
   def index
@@ -89,6 +92,71 @@ class EventsController < ApplicationController
     end
   end 
 
+  def purchase_points
+    @event = Event.find(params[:id])
+  end
+
+  def express_checkout
+
+    fee = Payment.find_by(description: "Event points fee")
+    payment_type = params[:payment_type]
+    event_id = params[:event_id]
+    organizer_id = params[:organizer_id]
+
+    fee.fee = fee.fee * Event.find_by(id: event_id).number_participants
+    fee.total_in_cents = fee.fee * 100
+
+    response = EXPRESS_GATEWAY.setup_purchase(fee.total_in_cents,
+      ip: request.remote_ip,
+      return_url: event_payment_new_url(payment_type: payment_type, event_id: event_id, organizer_id: organizer_id, fee: fee.total_in_cents), # Pass in the payment type, so that
+                                                                   # we know what to do at :create later
+      cancel_return_url: event_payment_cancel_url,
+      currency: "USD",
+      allow_guest_checkout: true,
+      items: [{name: "Fee", description: fee.description, quantity: "1", amount: fee.total_in_cents}]
+    )
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+  end
+
+  def event_payment_new
+      @transaction = Transaction.new(:express_token => params[:token])
+      @payment_type = params[:payment_type] # We'll pass this on to :create from the hidden fields in :new view
+      @payment_id = params[:payment_id]
+      @organizer = Organizer.find(params[:organizer_id])
+      @event = Event.find(params[:event_id])
+      @fee = params[:fee].to_i
+
+  end
+
+  def event_payment_create 
+
+      @transaction = Transaction.new(transaction_params)
+      @transaction.express_token = params[:transaction][:express_token]
+      @transaction.ip_address = request.remote_ip
+      #@transaction.ip_address = params[:transaction][:ip_address]
+      @transaction.payment_type = params[:transaction][:payment_type] # Save the payment type. 
+      @fee = params[:transaction][:fee].to_i
+      @event = Event.find_by(id: params[:transaction][:event_id])
+
+      if @transaction.save 
+        if @transaction.purchase(@fee)
+            @event.status = "Live"
+            @event.save
+            redirect_to events_path(@event), success: "Payment was successful. Your event is now live!"
+        else
+            redirect_to events_path(@event), error: "Payment failed. Please try again."
+        end
+      else
+          redirect_to events_path(@event), error: "Payment failed. Please try again."
+      end
+
+  end
+
+  def event_payment_cancel
+    @transaction = Transaction.new(:express_token => params[:token], status: :cancelled)
+    @transaction.save
+    redirect_to event_path(@event), error: "Your transaction was cancelled."
+  end
 
   def event_params
     params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker_bio, :schedule, :poster, :reason, :attendance_list, :number_participants)

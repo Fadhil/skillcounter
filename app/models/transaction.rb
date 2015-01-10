@@ -1,10 +1,10 @@
 class Transaction < ActiveRecord::Base
 
 
-  def purchase(payment)
+  def purchase(total)
 
 
-    response = EXPRESS_GATEWAY.purchase(payment.total_in_cents, express_purchase_options)
+    response = EXPRESS_GATEWAY.purchase(total, express_purchase_options)
 
 
     if response.success?
@@ -17,6 +17,7 @@ class Transaction < ActiveRecord::Base
       ##
       # Update status to :failure if purchase unsuccessful
       #
+      puts response.inspect
       self.update_attribute(:status, :failure)
     end
     response.success?

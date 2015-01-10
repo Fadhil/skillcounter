@@ -69,11 +69,17 @@ SkillCounter::Application.routes.draw do
   get 'organizers/new' => 'organizer#new' 
 
   get 'create_event' => 'events#new'
-
+  get 'event/purchase_points/:id'=> 'events#purchase_points', as: :purchase_points
+  post 'event/express_checkout' => 'events#express_checkout', as: :express_checkout_events
+  get 'event/event_payment_new' => 'events#event_payment_new', as: :event_payment_new
+  get 'event/event_payment_cancel' => 'events#event_payment_cancel', as: :event_payment_cancel
+  post 'event/event_payment_create' => 'events#event_payment_create', as: :event_payment_create
   
   
   root "static_pages#home"
   get 'about' => 'static_pages#holding'
+
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

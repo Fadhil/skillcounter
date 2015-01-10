@@ -123,16 +123,15 @@
                             <div class="form-group">
                                 <label for="Category" class="col-sm-3 control-label">Category</label>
                                 <div class="col-sm-6"> 
-                                <%= f.select :category, ["Seminar","Clinic","Training","Forum"] %>
+                                    <%= f.select :category, ["Seminar","Clinic","Training","Forum"] %>
                                 </div>
-                                <%= f.hidden_field :status, :value=>"Pending" %>
                             </div>
                         
                         <div class="col-md-offset-9 col-md-3">
                              
                             <%= f.submit "Create", class:"btn btn-default btn-success" %>
                         </div>
-                   
+
                
            
        

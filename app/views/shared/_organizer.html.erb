@@ -14,7 +14,24 @@
             <div class="col-md-10 col-sm-10">
             <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
             <h3 class="media-heading"><%= event.event_name%>
-            <span class="label label-warning"><%= event.status%></span>
+            
+                <% if event.status == "Pending"    %>
+                    <span class="label label-warning">
+                        <%= event.status%>                                           
+                        </span>
+                <% elsif event.status == "Rejected"    %>
+                    <span class="label label-danger">
+                        <%= event.status%>                                           
+                        </span>
+                <% elsif event.status == "Approved"    %>
+                    <span class="label label-info">
+                        <%= event.status%>                                           
+                        </span>
+                <% elsif event.status == "Live" %>
+                    <span class="label label-success">
+                        <%= event.status%> 
+                       </span>
+                <% end %>
             </h3>
             <p><%= event.description%></p>
             <h5>number of attendee: <%= event.attendees.count %></h5>

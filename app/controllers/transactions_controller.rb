@@ -29,7 +29,7 @@ class TransactionsController < ApplicationController
 	  @payment_type = params[:payment_type] # We'll pass this on to :create from the hidden fields in :new view
 	  @payment_id = params[:payment_id]
 	  @vet = Vet.find(params[:vet_id])
-	  @test2 = @test
+
 	end
 
 	def cancelled
@@ -52,16 +52,16 @@ class TransactionsController < ApplicationController
 		  @transaction.ip_address = request.remote_ip
 		  @transaction.payment_type = payment_type # Save the payment type. 
 		  if @transaction.save 
-		    if @transaction.purchase(fee) # this is where we purchase the transaction. refer to the model method below
+		    if @transaction.purchase(fee.total_in_cents) # this is where we purchase the transaction. refer to the model method below
 
 		    	if vet.claim                # Claim the vet (set password)
 		    		vet.add_role('Vet')
 		    	
-          	Mailer.send_welcome_email(vet, vet.generate_password).deliver
-		        redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
-		      else
-		      	redirect_to root_path, notice: 'Your payment was successful, but something went wrong with claiming your profile. Please contact the admins.'
-		      end
+          			Mailer.send_welcome_email(vet, vet.generate_password).deliver
+		        	redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details. "
+		      	else
+		      		redirect_to root_path, notice: 'Your payment was successful, but something went wrong with claiming your profile. Please contact the admins.'
+		      	end
 		    else
 		      redirect_to new_vet_path, notice: "Failed to complete your payment."
 		    end
