@@ -1,0 +1,16 @@
+<div class='container'>
+  <div class='jumbotron top10'>
+    <h2>Upload Vets</h2>
+    <div class="panel panel-default top10">
+      <div class="panel-body">
+        <%= form_tag admin_upload_vets_path, multipart: true do %>
+          <div class="input-group center-eight">
+
+            <%= file_field_tag :vet_list, style: 'display:block;', id: 'browse-files' %>
+            <%= submit_tag 'Upload Vets' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

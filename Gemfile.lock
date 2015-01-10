@@ -10,6 +10,17 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    active_utils (2.2.3)
+      activesupport (>= 2.3.11)
+      i18n
+    activemerchant (1.43.3)
+      active_utils (~> 2.0, >= 2.0.1)
+      activesupport (>= 2.3.14, < 5.0.0)
+      builder (>= 2.1.2, < 4.0.0)
+      i18n (~> 0.5)
+      json (~> 1.7)
+      money (< 7.0.0)
+      nokogiri (~> 1.4)
     activemodel (4.0.3)
       activesupport (= 4.0.3)
       builder (~> 3.1.0)
@@ -25,6 +36,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    addressable (2.3.6)
     arel (4.0.2)
     autoprefixer-rails (3.1.2.20141016)
       execjs
@@ -41,6 +53,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    chronic (0.10.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.4)
@@ -81,6 +94,10 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
+    launchy (2.4.2)
+      addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -90,6 +107,8 @@ GEM
     minitest (4.7.5)
     momentjs-rails (2.8.3)
       railties (>= 3.1)
+    money (6.5.0)
+      i18n (>= 0.6.4, <= 0.7.0)
     multi_json (1.10.1)
     nested_form (0.3.2)
     nokogiri (1.6.4.1)
@@ -129,6 +148,10 @@ GEM
     request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    roo (1.13.2)
+      nokogiri
+      rubyzip
+      spreadsheet (> 0.6.4)
     rspec-core (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.4)
@@ -145,6 +168,8 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.4)
+    ruby-ole (1.2.11.7)
+    rubyzip (1.1.6)
     sass (3.2.19)
     sass-rails (4.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -156,6 +181,8 @@ GEM
       rdoc (~> 4.0)
     sendgrid (1.2.0)
       json
+    spreadsheet (1.0.0)
+      ruby-ole (>= 1.0)
     sprockets (2.11.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -184,6 +211,9 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
+    will_paginate (3.0.7)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -191,6 +221,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemerchant (= 1.43.3)
   autoprefixer-rails
   bootstrap-sass
   bootstrap3-datetimepicker-rails (~> 3.1.3)
@@ -202,18 +233,24 @@ DEPENDENCIES
   gon
   jbuilder (~> 1.2)
   jquery-rails
+  letter_opener
   mini_magick
   momentjs-rails (>= 2.8.1)
+  money
   nested_form
   paperclip (~> 3.0)
   pg
   rails (= 4.0.3)
   rails_12factor
+  roo
   rspec-rails (~> 3.0.0)
   sass-rails (~> 4.0.0)
   sdoc
   sendgrid
+  spreadsheet
   sqlite3
   turbolinks
   twitter-typeahead-rails
   uglifier (>= 1.3.0)
+  whenever
+  will_paginate (~> 3.0.6)

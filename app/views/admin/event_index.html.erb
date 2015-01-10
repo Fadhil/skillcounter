@@ -34,10 +34,12 @@
             <div class="col-md-12">
                 <ul class="media-list">
                     <% @events.each do |event| %>
+                    <a href= "<%=validate_event_path(event)%>" >
+                        
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <span class="pull-left">
                             <img class="media-object" src="<%=event.poster%>" height="100" width="100">
-                        </a>
+                        </span>
                         <div class="media-body">
                             <div class="col-md-10 col-sm-10">
                                 <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
@@ -64,6 +66,7 @@
                         </div>
                          <%= link_to "Check", validate_event_path(event), class: "btn btn-default btn-success" %> 
                     </li>
+                    </a>
                     <% end %>
                 </ul>
             </div>

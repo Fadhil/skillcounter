@@ -1,0 +1,15 @@
+<table border="1">
+	<tr>
+		<th>attendee_id</th>
+		<th>present</th>
+	</tr>
+	<% @attendance = Attendance.where(attended_event_id: @event.id) %>
+	<% @attendance.each do |f| %>
+	<tr>
+		<th><%= f.attendee_id %> </th>
+		<% vet= Vet.find(f.attendee_id) %>
+		<th><%=vet.name%></th>
+		<th><%= f.present %> </th>
+	</tr>
+	<% end %>
+</table>

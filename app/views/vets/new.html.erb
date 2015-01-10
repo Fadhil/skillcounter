@@ -4,7 +4,7 @@
  <div class="site-wrapper-sign-in">
         <div class="container">
            
-            <%= form_for @vet, url: vets_path, method: "post" do |f| %>
+            <%= form_for @vet, url: vets_validate_claim_profile_path, method: "post" do |f| %>
             <div class="col-md-4 col-md-offset-4 col-xs-12">
             <form class="form-signin" role="form">
                 <h4 class="form-signin-heading">Claim your profile</h4>
@@ -22,6 +22,5 @@
             </div>
         </div>
   </div>
-  
 
     

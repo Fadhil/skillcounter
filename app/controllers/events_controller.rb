@@ -5,12 +5,15 @@ class EventsController < ApplicationController
     if params[:search]
       @events = Event.search(params[:search])
     else
-      @events = Event.all
+      # @events = Event.all
+    
+    
+
+    @events_upcoming = Event.upcoming.paginate(page: params[:upcoming]).per_page(12)
+
+    # @events_upcoming = Event.upcoming
+    # @events_past = Event.past
     end
-    
-    
-    @events_upcoming = Event.upcoming
-    @events_past = Event.past
 
   end
 
@@ -50,7 +53,7 @@ class EventsController < ApplicationController
       
     else
 
-      redirect_to static_pages_home_path, error: "Failed to create event"
+      redirect_to root_path, error: "Failed to create event"
       
       #redirent_to new
     end
@@ -84,11 +87,10 @@ class EventsController < ApplicationController
       redirect_to request.referrer, "Cannot destroy user"
       render :index
     end
-  end
-  
-  
-  
+  end 
+
+
   def event_params
-    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker_bio, :schedule, :poster, :reason)
+    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker_bio, :schedule, :poster, :reason, :attendance_list)
   end
 end

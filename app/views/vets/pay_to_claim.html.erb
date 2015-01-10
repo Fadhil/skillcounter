@@ -1,7 +1,44 @@
-<h3>Make Payment</h3>
-<h4>You will need to make a payment of RMXXX before you can claim your profile</h4>
 
-insert paypal thingy here
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title>codemalaysiaskillcounter</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-redirect if success / provide link to "Successfully claimed profile"
-else request resend log
+    <link rel="stylesheet" href="../styles/main.css">
+  </head>
+  <body>
+    <!--[if lt IE 10]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- MAIN -->
+    <div class="site-wrapper-sign-in">
+        <div class="container">
+            <h1><span class="glyphicon glyphicon-fire"></span> Skill Counter</h1>
+            <form class="form-signin" role="form">
+                <h4 class="form-signin-heading">Payment</h4>
+                <p>You will need to make a payment of
+                <span class="text-success"><% fee = Payment.find_by(description: "Profile claim fee"%><%=fee.fee%></span> before you can claim your profile</p>
+                <p>Click below to proceed with payment</p>
+                <br>
+<!--                 <input type="text" class="form-control input-lg" placeholder="Credit card no." required="" autofocus="">
+                <input type="text" class="form-control input-lg ic" placeholder="Valid thru, ex.: 2018-12-31" required="">
+                <input type="text" class="form-control input-lg license" placeholder="CVV#" required="">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm Payment</button> -->
+                <%= link_to(image_tag("https://www.paypalobjects.com/webstatic/en_MY/mktg/logos/AM_SbyPP_mc_vs_dc_ae.jpg"), express_checkout_transaction_path) %>
+            </form>
+        </div>
+    </div>
+    <!-- END of MAIN -->
+
+
+    <script src="scripts/vendor.js"></script>
+
+        <script src="scripts/main.js"></script>
+</body>
+</html>

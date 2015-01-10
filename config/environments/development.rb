@@ -26,4 +26,23 @@ SkillCounter::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+
+  #Use letter opener for local mailing test
+  config.action_mailer.delivery_method = :letter_opener
+
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+      login: ENV['PAYPALEXPRESS_LOGIN'],
+      password: ENV['PAYPALEXPRESS_PASSWORD'],
+      signature: ENV['PAYPALEXPRESS_SIGNATURE'] 
+    }
+
+    if ENV['PAYPALEXPRESS_LOGIN'].blank?  # In case you haven't set paypal envs, you can still run this app. Somewhat.
+      ::EXPRESS_GATEWAY = ActiveMerchant::Billing::BogusGateway
+    else
+      ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+    end
+  end
 end

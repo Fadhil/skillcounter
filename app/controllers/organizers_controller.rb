@@ -11,7 +11,8 @@ class OrganizersController < ApplicationController
     @organizer = Organizer.new(organizer_params)
     
     if @organizer.save
-      #UserMailer.welcome_email(@user).deliver
+      @organizer.add_role("Organizer")
+      Mailer.organizer_welcome_email(@organizer).deliver
      
       redirect_to organizer_path(id: @organizer.id), success: "Successfully register"
     else
@@ -43,6 +44,16 @@ class OrganizersController < ApplicationController
     else
       render :edit
     end
+  end
+  
+  def destroy
+    @organizer = Organizer.find(params[:id])
+    if @organizer.destroy
+      redirect_to users_path, notice: 'delete success'
+    else
+      redirect_to users_path, error: 'Fail'
+    end
+    
   end
   
   def organizer_params

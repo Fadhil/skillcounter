@@ -46,6 +46,12 @@
                 <h2>All events</h2>
                 <%= render 'shared/organizer', object: @organizer.events %>
                 <% end %>
+                
+        <div class="row">
+            <div class="col-md-offset-5 col-md-3">
+            <%= link_to "Create Event", new_event_path, class: "btn btn-default btn-success" %>
+            </div>
+        </div>
             
     </div>
 

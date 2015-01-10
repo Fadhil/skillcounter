@@ -49,6 +49,9 @@
                     </li>
                     <% end %>
                 </ul>
+                <% if can? :manage, :all %>
+                    <%= link_to 'Upload Vets', admin_upload_vets_path, class: 'btn btn-primary' %>
+                <% end %>
             </div>
         </div>
     </div>

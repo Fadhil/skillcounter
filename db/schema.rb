@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141212101244) do
+ActiveRecord::Schema.define(version: 20150109135213) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.string   "event_name"
     t.text     "description"
     t.string   "location"
-    t.date     "start_date_time",          limit: 255
-    t.date     "end_date_time",            limit: 255
+    t.date     "start_date_time",              limit: 255
+    t.date     "end_date_time",                limit: 255
     t.integer  "venue_capacity"
     t.integer  "ticket_quantity"
     t.string   "event_page_url"
@@ -70,9 +70,25 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.datetime "poster_updated_at"
     t.string   "reason"
     t.boolean  "finish"
+    t.string   "attendance_list_file_name"
+    t.string   "attendance_list_content_type"
+    t.integer  "attendance_list_file_size"
+    t.datetime "attendance_list_updated_at"
+    t.integer  "vet_id"
+    t.integer  "user_id"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
+  add_index "events", ["vet_id"], name: "index_events_on_vet_id"
+
+  create_table "payments", force: true do |t|
+    t.integer  "fee"
+    t.integer  "total_in_cents"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "description"
+  end
 
   create_table "roles", force: true do |t|
     t.datetime "created_at"
@@ -88,6 +104,17 @@ ActiveRecord::Schema.define(version: 20141212101244) do
   add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id"
   add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id"
 
+  create_table "transactions", force: true do |t|
+    t.string   "ip_address"
+    t.string   "express_token"
+    t.string   "express_payer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "purchased_at"
+    t.string   "status"
+    t.string   "payment_type"
+  end
+
   create_table "user_logins", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -102,9 +129,6 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "user_logins", ["email"], name: "index_user_logins_on_email", unique: true
-  add_index "user_logins", ["reset_password_token"], name: "index_user_logins_on_reset_password_token", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

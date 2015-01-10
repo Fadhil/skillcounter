@@ -6,10 +6,11 @@ class User < ActiveRecord::Base
          
     validates :name, presence: true, length: { maximum: 50 }, on: :update
     #validates :type, presence: true
-  
+   has_attached_file :avatar, :styles => {:thumb => "100x100"}
     
     has_and_belongs_to_many :roles
     has_many :events, :foreign_key => :organizer_id
+    has_many :events, :foreign_key => :vet_id
     has_many :attendances, :foreign_key => :attendee_id
     has_many :attended_events, :through => :attendances
      
@@ -57,7 +58,7 @@ class User < ActiveRecord::Base
   end
 
   def attend!(event)
-    self.attendances.create!(attended_event_id: event.id)
+    self.attendances.where(attended_event_id: event.id, attendee_id: self.id).first_or_create
   end
 
   def cancel!(event)
@@ -72,5 +73,48 @@ class User < ActiveRecord::Base
     self.attended_events.past
   end
   
+  def add_point!(points)
+   
+    self.current_points += points
+    self.save
+  end
+  
+  def minus_point!(points)
+   
+    self.current_points -= points
+    self.save
+  end
+  
+  def check_point!(points)
+  
+    expiring_date = "11/30/" + (Date.today.year).to_s
+    
+     today = Date.today().strftime("%m/%d/%Y")
+    
+    if today > expiring_date
+    
+    #self.current_points -= self.expiring_points
+    
+     self.expiring_points = 0
+    self.current_points = 0
+   
+    # #date.now(%y)
+     self.expiring_points = points
+    
+  
+     self.save
+     
+   end
+  end
+
+  def update_points
+    @user.all.each do |user|
+      user.current_points = points
+      user.current_points = 0
+      user.expiring_points = points
+      user.save
+    end
+
+  end
   
 end

@@ -17,6 +17,7 @@
 
 <%= form_tag(vets_path, :method => "get",  class:"form-horizontal", role:"form") do %>
 <div class="container">
+TEST
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header">
@@ -177,6 +178,9 @@
     
 <% end %>
     
+<%# if can? :manage, :all %>
+    <%=  link_to admin_upload_vets_path, class: 'btn btn-default' %>
+<%# end %>   
 
 
     <!-- END of MAIN -->

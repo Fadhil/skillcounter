@@ -1,27 +1,62 @@
 SkillCounter::Application.routes.draw do
 
+
+  resource :payments 
   #devise_for :user_logins, controllers: { registrations: "sessions" }
+
   devise_for :users
   resources :users
-  resources :events
+
+  
+  resources :events 
   resources :organizers
   resources :vets
-  resource :admin
+    
+  resources :admin, only: [:new]
+
+  resources :transactions, except: [:new] do
+    #
+    # Modify the new_transaction path to take a parameter 'payment_type', 
+    # which we'll use to determine what sort of payment we're doing. 
+    #
+    new do
+      get ':payment_type/:vet_id/:payment_id' => 'transactions#new', as: '' # this will give us 'new_transaction'
+    end
+    collection do
+      get 'pay_to_claim' => 'transactions#pay_to_claim'
+      post 'express_checkout' => 'transactions#express_checkout', as: :express_checkout
+      get 'successful' => 'transactions#successful'
+      get 'failed' => 'transactions#failed'
+      get 'cancelled' => 'transactions#cancelled'
+    end
+  end
+
   
   resources :attendances, only: [:create, :destroy] do
     collection do
+
+      patch 'events/:id' => 'attendances#import', as: :import
       put 'present' => 'attendances#present', as: :update
+      get 'events/:id' => 'attendances#download', as: :download
     end
   end
   #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
+   get 'users/:id/admin_event' => 'users#admin_event', as:'admin_event'
+  get 'users/:id/user_event' => 'users#user_event', as:'user_event'
+  get 'users/:id/check_event' => 'users#check_event', as:'check_event'
   get 'organizers/:id/manage_event' => 'organizers#manage_event', as:'manage_event'
+  get 'vets/:id/vet_event' => 'vets#vet_event', as:'vet_event'
   get 'vets/:id/my_events' => 'vets#my_events', as:'my_events'
-  
+  get 'vets/:id/redeem_licence' => 'vets#redeem_licence', as:'redeem_licence'
+  patch 'users/:id/event_validate/:event_id' => 'admin#check', as: :event_validate
 
-  get 'admin/event_index' => 'admin#event_index'
+
+  get 'admin/event_index' => 'admin#event_index' 
   get 'admin/vet_show/:id' => 'admin#vet_show'
   get 'admin/vet_show' => 'vets#index'
   get 'admin/validate_event/:id' => 'admin#validate_event'
+  get 'admin/upload_vets' => 'admin#upload_vets'
+  post 'admin/upload_vets' => 'admin#save_uploaded_vets'
   patch 'admin/validate_event/:id' => 'admin#update', as: :validate_event
 
   get 'vets/new' => 'vets#new'
@@ -34,9 +69,10 @@ SkillCounter::Application.routes.draw do
   get 'organizers/new' => 'organizer#new' 
 
   get 'create_event' => 'events#new'
+
   
-  root "static_pages#home"
-  get "static_pages/home"
+  root "static_pages#holding"
+  get 'about' => 'static_pages#about'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

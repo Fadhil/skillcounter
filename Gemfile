@@ -46,8 +46,24 @@ gem 'sendgrid'
 gem 'momentjs-rails', '>= 2.8.1'
 gem 'bootstrap3-datetimepicker-rails', '~> 3.1.3'
 
+# autocompelete event creation
 gem 'twitter-typeahead-rails'
 gem 'gon'
+
+# limits number of event listed
+gem 'will_paginate', '~> 3.0.6'
+
+# handles importing and exporting for excel files
+gem 'roo'
+gem "spreadsheet"
+
+# handles paypal and credit card payments
+gem 'activemerchant', '1.43.3'
+
+gem 'money'
+
+# schedules task 
+gem 'whenever', :require => false
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -67,6 +83,10 @@ group :development, :test do
 
   # magick handle images 
   gem "mini_magick"
+end
+
+group :development do
+  gem 'letter_opener'
 end
 
 group :test do
