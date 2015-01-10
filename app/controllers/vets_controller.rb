@@ -48,7 +48,9 @@ class VetsController < ApplicationController
     @vet = Vet.where(params[:vet]).first # Look for a Vet with the params given
 
     if @vet && @vet.encrypted_password.blank? # A valid unclaimed vet exists
-      flash.now[:notice] = "Found your profile. <br/>You will need to make a payment of RM XX before you can claim your profile.".html_safe
+      fee = Payment.where(description:"Profile claim fee").first
+
+      flash.now[:notice] = "Found your profile. <br/>You will need to make a payment of RM #{fee.fee} before you can claim your profile.".html_safe
       render 'transactions/pay_to_claim'
     else # No such Vet, or previously claimed
       redirect_to vets_new_path, error: "Failed to claim profile. Email or licence may have already been claimed, or is not valid"
