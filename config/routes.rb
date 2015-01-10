@@ -71,8 +71,9 @@ SkillCounter::Application.routes.draw do
   get 'create_event' => 'events#new'
 
   
-  root "static_pages#holding"
-  get 'about' => 'static_pages#about'
+  
+  root "static_pages#home"
+  get 'about' => 'static_pages#holding'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
