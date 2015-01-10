@@ -56,9 +56,6 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.string   "category"
     t.string   "bio_url"
     t.string   "speaker"
-<<<<<<< HEAD
-    t.string   "upload_file"
-=======
     t.string   "speaker_bio_file_name"
     t.string   "speaker_bio_content_type"
     t.integer  "speaker_bio_file_size"
@@ -73,20 +70,9 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.datetime "poster_updated_at"
     t.string   "reason"
     t.boolean  "finish"
->>>>>>> 3e7871ee2a0645b48698c3b3104aeba21d5ea6b2
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
-
-  create_table "organizers", force: true do |t|
-    t.string   "name"
-    t.string   "contact_number"
-    t.string   "email"
-    t.string   "address"
-    t.integer  "organizerID"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "roles", force: true do |t|
     t.datetime "created_at"
@@ -115,7 +101,6 @@ ActiveRecord::Schema.define(version: 20141212101244) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "role"
   end
 
   add_index "user_logins", ["email"], name: "index_user_logins_on_email", unique: true
