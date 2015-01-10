@@ -56,7 +56,7 @@ class AdminController < ApplicationController
 	#
 	# Vet CSV should look like this:
 	#
-	# Name | Email 						| License | IC Number 			| Contact Number
+	# Name | Email 				| License   | IC Number 		| Contact Number
 	# Hafiz| hafiz@gmail.com 	|	a12345	| 900928-12-2221	|	012-23242555
 	# Hafiq| hafiq@gmail.com 	|	a12346	| 900928-12-2223	|	012-23242556
 	#
