@@ -1,5 +1,8 @@
 class Event < ActiveRecord::Base
     
+    before_create do
+        status = "Pending"
+    end
 
     belongs_to :organizer
     belongs_to :vet
