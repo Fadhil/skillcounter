@@ -48,7 +48,7 @@ class Ability
         can [:index, :show], Vet
         can [:redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
         can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
-    end
+      end
   end
 
   #def initialize(user)

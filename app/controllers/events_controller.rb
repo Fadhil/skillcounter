@@ -1,6 +1,7 @@
 require 'SkillCounterParams'
 
 class EventsController < ApplicationController
+  load_and_authorize_resource
   include SkillCounterParams
     
     

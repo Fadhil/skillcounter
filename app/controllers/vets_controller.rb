@@ -1,7 +1,9 @@
 require 'SkillCounterParams'
 
 class VetsController < ApplicationController
-include SkillCounterParams
+
+  load_and_authorize_resource
+  include SkillCounterParams
   
   def index
     if params[:search]

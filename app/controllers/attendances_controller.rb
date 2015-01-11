@@ -5,6 +5,7 @@ require "spreadsheet"
 class AttendancesController < ApplicationController
   respond_to :html, :xls
     
+  load_and_authorize_resource  
   include SkillCounterParams
 
 

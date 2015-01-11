@@ -1,5 +1,7 @@
 class TransactionsController < ApplicationController
 
+  load_and_authorize_resource
+
 	def express_checkout
 		fee = nil
 		payment_type = params[:payment_type]
