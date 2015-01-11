@@ -20,11 +20,7 @@
 # Learn more: http://github.com/javan/whenever
 
 
-every '0 0 30 11 *' do
-  # runner "user.update_points"
-  rake "points:update"
-end
-
-every '1 * * * *' do
-	puts "test"
-end
+# every '0 0 30 11 *' do
+#   # runner "user.update_points"
+#   rake "points:update"
+# end
