@@ -20,7 +20,7 @@ include SkillCounterParams
       redirect_to vets_new_path
     end
     @previous_events = @vet.previous_events
-      @upcoming_events = @vet.upcoming_events
+    @upcoming_events = @vet.upcoming_events
     @vet.check_point!(@vet.current_points)
   
   end

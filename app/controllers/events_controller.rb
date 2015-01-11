@@ -9,10 +9,14 @@ class EventsController < ApplicationController
       @events = Event.search(params[:search])
     else
       # @events = Event.all
-    
+
     
 
-    @events_upcoming = Event.upcoming.paginate(page: params[:upcoming]).per_page(12)
+    if current_user.role == "Vet"
+      @events_upcoming = Event.upcoming_vet.paginate(page: params[:upcoming]).per_page(12)
+    else
+      @events_upcoming = Event.upcoming.paginate(page: params[:upcoming]).per_page(12)
+    end
 
     # @events_upcoming = Event.upcoming
     # @events_past = Event.past
@@ -46,6 +50,7 @@ class EventsController < ApplicationController
     #         event_page_url: event_page_url, category: category, speaker_bio: speaker_bio,
     #         schedule: schedule, poster: poster, status: "pending", point: point)
       @event = current_user.events.build(event_params)
+      @event.status = "Pending"
 
 
 

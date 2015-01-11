@@ -1,9 +1,5 @@
 class Event < ActiveRecord::Base
     
-    before_create do
-        status = "Pending"
-    end
-
     belongs_to :organizer
     belongs_to :vet
    
@@ -11,6 +7,7 @@ class Event < ActiveRecord::Base
     has_many :attendances, :foreign_key => "attended_event_id"
     has_many :attendees, :through => :attendances
     scope :upcoming, -> { where("start_date_time >= ?", Date.today).order('start_date_time ASC') }
+    scope :upcoming_vet, -> { where("start_date_time >= ? AND status = ?", Date.today, "Live").order('start_date_time ASC') }
     scope :past, -> { where("start_date_time < ?", Date.today).order('start_date_time DESC') }
 
     has_attached_file :speaker_bio
