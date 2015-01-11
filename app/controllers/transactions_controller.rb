@@ -62,6 +62,7 @@ class TransactionsController < ApplicationController
 		      	else
 		      		redirect_to root_path, notice: 'Your payment was successful, but something went wrong with claiming your profile. Please contact the admins.'
 		      	end
+
 		    else
 		      redirect_to new_vet_path, notice: "Failed to complete your payment."
 		    end

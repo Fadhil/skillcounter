@@ -30,12 +30,16 @@ class Vet < User
     def claim
         if encrypted_password.blank? # Vet hasn't been claimed before
             if generated_password = generate_password 
-                Rails.logger.info 'generating'
+                Rails.logger.info 'generating' + generated_password
                 self.password                = generated_password
                 self.password_confirmation   = generated_password
-
+                Rails.logger.info "The password: #{self.password}"
             end
-            save
+            if save
+                true
+            else
+                false
+            end
         end
     end
 
