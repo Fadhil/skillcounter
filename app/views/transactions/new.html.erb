@@ -1,16 +1,21 @@
-<%= form_for @transaction do |f| %>
-  <%= @transaction.errors.full_messages %>
-  <% if @transaction.express_token.blank? %>
- 		<p>Transaction failed</p>
-  <% else %>
-    <%= f.hidden_field :express_token %>
-    <%= f.hidden_field :payment_type, value: @payment_type %>
-    <%= hidden_field_tag :email, @vet.email %>
-    <%= hidden_field_tag :payment_id, @payment_id %>
-    <% fee = Payment.find_by(description:"Profile claim fee") %>
-    <p>Name: <%= fee.description%> </p>
-    <p>Total: RM <%= fee.fee %></p>
-    
+  <div class = "jumbotron" >
+  <%= form_for @transaction do |f| %>
+    <% for @transaction.errors.full_messages do |e| %>
+        <%= e %>
+    <% end %>
+    <% if @transaction.express_token.blank? %>
+   		<p>Transaction failed</p>
+    <% else %>
+      <%= f.hidden_field :express_token %>
+      <%= f.hidden_field :payment_type, value: @payment_type %>
+      <%= hidden_field_tag :email, @vet.email %>
+      <%= hidden_field_tag :payment_id, @payment_id %>
+      <% fee = Payment.find_by(description:"Profile claim fee") %>
+      <p>Name: <%= fee.description%> </p>
+      <p>Total: RM <%= fee.fee %></p>
+      
+    <% end %>
+    <p><%= f.submit "Complete Order" %></p>
   <% end %>
-  <p><%= f.submit "Complete Order" %></p>
-<% end %>
+
+  </div>

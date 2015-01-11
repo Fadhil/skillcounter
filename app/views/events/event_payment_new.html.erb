@@ -1,18 +1,24 @@
-<%= form_for @transaction, :url => url_for(:controller => 'events', :action => 'event_payment_create'), :method => 'post' do |f| %>
-  <%= @transaction.errors.full_messages %>
-  <% if @transaction.express_token.blank? %>
- 		<p>Transaction failed</p>
-  <% else %>
-    <p><%= @transaction.express_token %></p>
-    <%= f.hidden_field :express_token, value: @transaction.express_token %>
-    <%= f.hidden_field :payment_type, value: @payment_type %>
-    <%= f.hidden_field :fee, value: @fee %>
-    <%= f.hidden_field :event_id, value: @event.id %>
+  <div class = "jumbotron"  
 
-    <%#fee = Payment.find_by(description:"Event points fee") %>
-    <p>Name: Event points fee </p>
-    <p>Total: RM <%= @fee/100 %></p>
-    
-  <% end %>
-  <p><%= f.submit "Complete Payment" %></p>
-<% end %>
+    <%= form_for @transaction, :url => url_for(:controller => 'events', :action => 'event_payment_create'), :method => 'post' do |f| %>
+      <% for @transaction.errors.full_messages do |e| %>
+        <%= e %>
+      <% end %>
+      <% if @transaction.express_token.blank? %>
+     		<p>Transaction failed</p>
+      <% else %>
+        <p><%= @transaction.express_token %></p>
+        <%= f.hidden_field :express_token, value: @transaction.express_token %>
+        <%= f.hidden_field :payment_type, value: @payment_type %>
+        <%= f.hidden_field :fee, value: @fee %>
+        <%= f.hidden_field :event_id, value: @event.id %>
+
+        <%#fee = Payment.find_by(description:"Event points fee") %>
+        <p>Name: Event points fee </p>
+        <p>Total: RM <%= @fee/100 %></p>
+        
+      <% end %>
+      <p><%= f.submit "Complete Payment" %></p>
+    <% end %>
+
+  </div>
