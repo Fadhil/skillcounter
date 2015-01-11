@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150110042557) do
+ActiveRecord::Schema.define(version: 20150111034029) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -84,11 +84,22 @@ ActiveRecord::Schema.define(version: 20150110042557) do
   add_index "events", ["vet_id"], name: "index_events_on_vet_id"
 
   create_table "payments", force: true do |t|
-    t.integer  "fee"
+    t.float    "fee"
     t.integer  "total_in_cents"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+  end
+
+  create_table "records", force: true do |t|
+    t.string   "import"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.string   "record_type"
   end
 
   create_table "roles", force: true do |t|

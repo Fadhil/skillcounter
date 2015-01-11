@@ -1,0 +1,26 @@
+<div class = "jumbotron">
+
+  <%= form_for @transaction, :url => url_for(:controller => 'vets', :action => 'renew_licence_create'), :method => 'post' do |f| %>
+      <% @transaction.errors.full_messages.each do |e| %>
+        <%= e %>
+      <% end %>
+        <% if @transaction.express_token.blank? %>
+       		<p>Transaction failed</p>
+        <% else %>
+          <%= f.hidden_field :express_token, value: @transaction.express_token %>
+          <%= f.hidden_field :payment_type, value: @payment_type %>
+          <%= f.hidden_field :fee, value: @fee %>
+          <%= f.hidden_field :vet_id, value: @vet_id %>
+
+          <% fee = Payment.find_by(description:"Licence renewal fee") %>
+          <p>You are currently paying for:<p>
+          <ul>
+            <li style="font-size:17px"><%=fee.description %></li>
+          </ul>
+          <p>Your total due is RM <%= @fee/100.0 %></p>
+          
+        <% end %>
+      <p><%= f.submit "Complete Payment" %></p>
+  <% end %>
+
+</div>

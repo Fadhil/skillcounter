@@ -1,5 +1,7 @@
-class VetsController < ApplicationController
+require 'SkillCounterParams'
 
+class VetsController < ApplicationController
+include SkillCounterParams
   
   def index
     if params[:search]
@@ -80,28 +82,20 @@ class VetsController < ApplicationController
   def claimed_profile
     @vet = current_vet_login
   end
-  
+
   def redeem_licence
-   @vet = Vet.find(params[:id])
-    points = @vet.current_points
-    
-    if points > 80
-     
-       flash[:success] = "You had redeem your licence"
-     
-    else
-      
-      flash[:error] = "Not enough points, you can get points by sign up more events"
-       
-    end
-    
-    #redirect_to vet_path(current_user)
-    redirect_to :back
-    
+      @vet = Vet.find(params[:id])
+      @enough_points = false
+      points = @vet.current_points
+        
+      if points > 80
+        @enough_points = true
+      else
+        @enough_points = false
+        redirect_to :back, error: "Not enough points, you can get points by sign up more events"
+      end
   end
 
-  
-  
   def destroy
     @vet = Vet.find(params[:id])
     if @vet.destroy
@@ -111,6 +105,62 @@ class VetsController < ApplicationController
     end
     
   end
+
+  def express_checkout
+    fee = Payment.find_by(description: "Licence renewal fee")
+    payment_type = params[:payment_type]
+    vet_id = params[:vet_id]
+
+    response = EXPRESS_GATEWAY.setup_purchase(fee.total_in_cents,
+      ip: request.remote_ip,
+      return_url: renew_licence_new_url(payment_type: payment_type, vet_id: vet_id, fee: fee.total_in_cents), # Pass in the payment type, so that
+                                                                   # we know what to do at :create later
+      cancel_return_url: renew_licence_cancel_url,
+      currency: "USD",
+      allow_guest_checkout: true,
+      items: [{name: "Fee", description: fee.description, quantity: "1", amount: fee.total_in_cents}]
+    )
+    redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
+  end
+
+  def renew_licence_new
+
+      @transaction = Transaction.new(:express_token => params[:token])
+      @payment_type = params[:payment_type] # We'll pass this on to :create from the hidden fields in :new view
+      @payment_id = params[:payment_id]
+      @vet_id = params[:vet_id]
+      @fee = params[:fee].to_i
+
+  end
+
+  def renew_licence_create
+
+      @transaction = Transaction.new(transaction_params)
+      @transaction.express_token = params[:transaction][:express_token]
+      @transaction.ip_address = request.remote_ip
+      #@transaction.ip_address = params[:transaction][:ip_address]
+      @transaction.payment_type = params[:transaction][:payment_type] # Save the payment type. 
+      @fee = params[:transaction][:fee].to_i
+      @vet = Vet.find_by(id: params[:transaction][:vet_id])
+
+      if @transaction.save 
+        if @transaction.purchase(@fee)
+            @vet.current_points -= 80
+            @vet.save
+
+            redirect_to vet_path(@vet), success: "Payment was successful. Your licence has been renewed."
+        else
+            redirect_to vet_path(@vet), error: "Payment failed. Please try again."
+        end
+      else
+          redirect_to vet_path(@vet), error: "Payment failed. Please try again."
+      end
+  end
+
+  def renew_licence_cancel
+  end
+
+
   
   def vet_params
     params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points, :avatar, :ip_address, :express_token, :express_payer_id, :purchased_at)

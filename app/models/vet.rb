@@ -1,6 +1,6 @@
 class Vet < User
 
-    after_initialize :initialize_points
+    before_create :initialize_points
      has_attached_file :avatar, :styles => {:thumb => "100x100"}
     
     validates :licence_number, presence: true, uniqueness: true
@@ -42,5 +42,25 @@ class Vet < User
     def generate_password
         email[0..2] + ic_number[0..2] + licence_number[0..2] if !email.blank? && !ic_number.blank? && !licence_number.blank?
     end
+
+
+    # def redeem_licence
+    #    @vet = Vet.find(params[:id])
+    #     points = @vet.current_points
+        
+    #     if points > 80
+         
+    #        flash[:success] = "You had redeem your licence"
+         
+    #     else
+          
+    #       flash[:error] = "Not enough points, you can get points by sign up more events"
+           
+    #     end
+        
+    #     #redirect_to vet_path(current_user)
+    #     redirect_to :back
+        
+    # end
 
 end
