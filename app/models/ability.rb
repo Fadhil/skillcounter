@@ -24,15 +24,30 @@ class Ability
     # Define abilities for the passed in user here. For example:
     #
       user ||= User.new # guest user (not logged in)
+      cannot :manage, :all
+
       if user.is_admin?
         can :manage, :all
       elsif user.is_organizer?
-        can :manage, Event, :edit, :update, :delete
-      elsif user.vet?
-        can :manage, :all
-          
-      else
-        cannot :manage, :all
+        can [:index, :new, :create, :show, :edit, :update, :purchase_points, :express_checkout, :event_payment_new, :event_payment_create, :event_payment_cancel], Event
+        can [:index, :show, :manage_event], Organizer #make sure organizers can edit and update only their own profile
+        can [:edit, :update], Organizer, id: user.id
+        can :manage, Attendance
+        # can [:about, :home], StaticPages
+        #edit and update own profile only
+        can [:index, :show, :redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
+        can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
+      elsif user.is_vet?
+        can [:index, :show], Event
+        can [:show], Organizer
+        can [:create, :destroy], Attendance
+        # can [:about, :home], StaticPages
+        #edit and update own profile only
+      #elsif user.is_pending_vet?
+        #include validate claim profile action here
+        can [:index, :show], Vet
+        can [:redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
+        can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
     end
   end
 

@@ -40,6 +40,10 @@ include SkillCounterParams
     @vet = Vet.new
   end
 
+  def create
+
+  end
+
   ##
   # Claiming a profile comes here first. If a valid unclaimed vet exists,
   # We'll render the paypal checkout button, otherwise we redirect to 
@@ -59,12 +63,6 @@ include SkillCounterParams
     end
   end
 
-
-  def create
-
-
-  end
-
   def edit
     @vet = Vet.find(params[:id])
   end
@@ -79,6 +77,7 @@ include SkillCounterParams
     end
   end
 
+  # not sure what this does
   def claimed_profile
     @vet = current_vet_login
   end
