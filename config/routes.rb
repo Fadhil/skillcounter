@@ -1,10 +1,5 @@
 SkillCounter::Application.routes.draw do
 
-  # get 'home' => 'static_pages#home'
-  # get 'about' => 'static_pages#about'
-
-  root 'static_pages#home'
-
   resource :payments 
   #devise_for :user_logins, controllers: { registrations: "sessions" }
 
@@ -86,7 +81,9 @@ SkillCounter::Application.routes.draw do
   post 'vet/renew_licence_create' => 'vets#renew_licence_create', as: :renew_licence_create
   
 
-  
+  get 'about' => 'static_pages#about'
+
+  root 'static_pages#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
