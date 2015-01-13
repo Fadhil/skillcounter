@@ -54,8 +54,9 @@
                             <div class="col-md-offset-9 col-md-3">
                             
                             
-                           
+                           <% if @organizer == current_user %>
                             <%= link_to "Edit", edit_organizer_path(@organizer), class: "btn btn-default btn-success" %>
+                            <% end %>
                            
                             
                            </div>

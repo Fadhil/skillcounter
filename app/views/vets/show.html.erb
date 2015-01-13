@@ -47,7 +47,9 @@
                             </div>
                             </div>
                             <div class="col-md-offset-9 col-md-3">
-                            <%= link_to "Edit", edit_vet_path(@vet), class: "btn btn-default btn-success" %>
+                            <% if @vet == current_user %>
+                                <%= link_to "Edit", edit_vet_path(@vet), class: "btn btn-default btn-success" %>
+                            <% end %>
                            </div>
                         </form>
                     </div>
@@ -73,20 +75,21 @@
                 </h3>
                 <br>
    
-
-                <%= form_tag redeem_licence_path, :method => :get do %>
-                
-                    <%#= form_for @vet, :url => { :action => "redeem_licence" }, :html => { :method => "put" } do |f| %>
-                
-                 
-                    <%#= form_tag(redeem_licence_path, :method => "get",  class:"form-horizontal", role:"form") do %>
-                    <%#= hidden_field_tag :current_points, @vet.current_points %>
-                   <%#= f.submit "Redeem Licence",  class: "btn btn-default btn-success" %>
-                    <%= submit_tag "redeem licence", class: "btn btn-success"%>
-                <% end %>
-                    <span class="glyphicon glyphicon-tag"></span>
+                <% if @vet == current_user %>
+                    <%= form_tag redeem_licence_path, :method => :get do %>
                     
-                <small>requires 80 points</small>
+                        <%#= form_for @vet, :url => { :action => "redeem_licence" }, :html => { :method => "put" } do |f| %>
+                    
+                     
+                        <%#= form_tag(redeem_licence_path, :method => "get",  class:"form-horizontal", role:"form") do %>
+                        <%#= hidden_field_tag :current_points, @vet.current_points %>
+                       <%#= f.submit "Redeem Licence",  class: "btn btn-default btn-success" %>
+                        <%= submit_tag "redeem licence", class: "btn btn-success"%>
+                    <% end %>
+                        <span class="glyphicon glyphicon-tag"></span>
+                        
+                    <small>requires 80 points</small>
+                    <% end %>
                
             </div>
         </div>
