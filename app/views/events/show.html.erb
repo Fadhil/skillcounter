@@ -127,28 +127,39 @@
                                 <% if current_user.is_admin? %>
                                     <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     <%# attendance = render 'attendance_list' %>
-                                    
-                                    <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
-                                        <%= f.file_field :attendance_list %>
-                                        <%= f.submit "Upload attendance" %>
+                                    <% if @event.status == "Live" %>
+                                        <p>Please click to download 
+                                        <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+                                         to use as a template.
+                                        </p>
+                                    <% elsif @event.status == "Expired" %>
+                                        <p>Please click to download 
+                                        <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+                                         to use as a template.
+                                        </p>
+                                        <p> To mark attendance, click 
+                                        <%= link_to "here", upload_attendance_path(@event) %>
+                                        </p>
                                     <% end %>
-                                    
-                                    <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
                                     
             
                                 <% elsif  current_user.is_organizer? %>
 
                                     <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     <%#= attendance = render 'attendance_list' %>
-                                    
-                                    <p>Please download 
-                                    <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
-                                     to use as a template.
-                                    </p>
-            
-                                    <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
-                                        <%= f.file_field :attendance_list %>
-                                        <%= f.submit "Upload attendance" %>
+                                    <% if @event.status == "Live" %>
+                                        <p>Please click to download 
+                                        <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+                                         to use as a template.
+                                        </p>
+                                    <% elsif @event.status == "Expired" %>
+                                        <p>Please click to download 
+                                        <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls)  %>
+                                         to use as a template.
+                                        </p>
+                                        <p> To mark attendance, click 
+                                        <%= link_to "here", upload_attendance_path(@event) %>
+                                        </p>
                                     <% end %>
                                     <% if @event.status == "Approved" %>
                                         <%= link_to "Purchase points", purchase_points_path(@event), class:"btn btn-default btn-success" %>

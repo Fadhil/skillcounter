@@ -69,6 +69,7 @@ SkillCounter::Application.routes.draw do
 
   get 'create_event' => 'events#new'
   get 'event/purchase_points/:id'=> 'events#purchase_points', as: :purchase_points
+  get 'event/upload_attendance/:id' => 'events#upload_attendance', as: :upload_attendance
   
   post 'event/express_checkout' => 'events#express_checkout', as: :express_checkout_events
   get 'event/event_payment_new' => 'events#event_payment_new', as: :event_payment_new

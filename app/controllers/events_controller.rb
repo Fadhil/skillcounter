@@ -110,6 +110,9 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def upload_attendance
+  end
+
   def express_checkout
 
     fee = Payment.find_by(description: "Event points fee")

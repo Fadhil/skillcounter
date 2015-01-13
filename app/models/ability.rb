@@ -29,7 +29,7 @@ class Ability
       if user.is_admin?
         can :manage, :all
       elsif user.is_organizer?
-        can [:index, :new, :create, :show, :edit, :update, :purchase_points, :express_checkout, :event_payment_new, :event_payment_create, :event_payment_cancel], Event
+        can [:index, :new, :create, :show, :edit, :update, :purchase_points, :upload_attendance, :express_checkout, :event_payment_new, :event_payment_create, :event_payment_cancel], Event
         can [:index, :show, :manage_event], Organizer #make sure organizers can edit and update only their own profile
         can [:edit, :update], Organizer, id: user.id
         can :manage, Attendance
