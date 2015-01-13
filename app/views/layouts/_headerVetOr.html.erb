@@ -7,7 +7,8 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="../" class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Skill Counter</a>
+        <!-- <a href="../" class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Skill Counter</a> -->
+        <a href="/" class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Skill Counter</a> 
       </div>
       <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
         <ul class="nav navbar-nav navbar-right">
@@ -15,7 +16,7 @@
            <li><%= link_to "Events I've attended", user_event_path(current_user) %> </li>
             <li><%= link_to 'Upcoming Cources', events_path %> </li>
             <li><%= link_to 'My Profile', user_path(current_user) %> </li>
-            <li><a href="#">Dashboard</a></li>
+            <li><%= link_to 'Dashboard', vet_path(current_user) %></li>
        <%
          if user_signed_in?
              the_link = link_to destroy_user_session_path, method: :delete do
