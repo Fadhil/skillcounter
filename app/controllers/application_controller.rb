@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
       super
     end
   end
+
+  rescue_from CanCan::AccessDenied do |exception|  
+  flash[:error] = "Access denied! You do not have the access rights to the page. Contact the admin for more information."  
+  redirect_to root_url  
+  end  
  
 end
 
