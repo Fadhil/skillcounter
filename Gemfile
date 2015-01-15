@@ -38,6 +38,7 @@ gem 'cancancan'
 
 # manage file uploads
 gem 'paperclip', '~> 3.0'
+gem 'aws-sdk'
 
 # manage mailing 
 gem 'sendgrid'

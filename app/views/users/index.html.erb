@@ -51,7 +51,7 @@
                             </div>
                             
                     	  <%= link_to "Edit", edit_user_path(user), class: "btn btn-info" %>
-                    	   <%= link_to 'Delete', user, method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %>
+                    	   <%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %>
                     	  
                         </div>
                     </li>
