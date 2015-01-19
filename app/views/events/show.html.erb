@@ -160,9 +160,12 @@
                                         <p> To mark attendance, click 
                                         <%= link_to "here", upload_attendance_path(@event) %>
                                         </p>
-                                    <% end %>
-                                    <% if @event.status == "Approved" %>
+                                   
+                                    <% elsif @event.status == "Approved" %>
                                         <%= link_to "Purchase points", purchase_points_path(@event), class:"btn btn-default btn-success" %>
+                                    <% elsif @event.status == "Rejected" %>  
+                                    <% button = link_to "Resubmit", edit_event_path(@event), class: "btn btn-default btn-success" %>
+                                    
                                     <% end %>
 
                                 
