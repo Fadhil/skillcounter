@@ -29,9 +29,10 @@ class Event < ActiveRecord::Base
     validates :number_participants, pressence: true, :numericality => { :other_than => 0 }
     validates :point, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :category, presence: true
+    validates :speaker, presence: true
 
     validates_attachment :speaker_bio, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
-    validates_attachment :schedule, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+    validates_attachment :schedule, presence: true, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
     validates_attachment :attendance_list, :content_type => {:content_type => %w(application/zip application/msword application/vnd.ms-office application/vnd.ms-excel application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)}
 
     def self.search(search)
