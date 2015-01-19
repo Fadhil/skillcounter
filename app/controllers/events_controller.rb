@@ -63,7 +63,7 @@ class EventsController < ApplicationController
           
         else
 
-          redirect_to :back, error: "Failed to create event"
+          redirect_to :back, error: "Failed to create event. #{@event.errors.full_messages}"
           
           #redirent_to new
         end
@@ -176,6 +176,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker_bio, :schedule, :poster, :reason, :attendance_list, :number_participants)
+    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker, :speaker_bio, :bio_url, :schedule, :poster, :reason, :attendance_list, :number_participants)
   end
 end
