@@ -110,7 +110,11 @@
                            <div class="form-group">
                                 <label for="userPhone" class="col-sm-3 control-label">Speaker Biodata</label>
                                     <div class="col-sm-8">
-                                        <%= link_to "biodata.pdf", @event.speaker_bio.url(:original, false) %>
+                                        <% if @event.speaker_bio.url != nil %>
+                                            <%= link_to "biodata.pdf", @event.speaker_bio.url(:original, false) %>
+                                            <% else %>
+                                                N/A
+                                        <% end %>
                                     </div>
                             </div>
                             
