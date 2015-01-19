@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
   def is_vet?
     self.roles.include?(Role.find_by_name('Vet'))
   end
+
+  def is_pending_vet?
+    self.roles.include?(Role.find_by_name('Pending_vet'))
+  end
   
   def is_role?(role_name)
     self.roles.include?(Role.find_by_name(role_name))

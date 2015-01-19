@@ -31,7 +31,7 @@ class AdminController < ApplicationController
 		    if @event.update_attributes(event_params)
   				redirect_to admin_event_index_path, success: "Successfully Updated"
 			else
-	  			redirect_to admin_event_index_path, success: "Fail to update event status"
+	  			redirect_to admin_event_index_path, error: "Fail to update event status. #{@event.errors.full_messages}"
 			end
 		end
 
@@ -84,7 +84,7 @@ class AdminController < ApplicationController
 													ic_number: row[VetCsvFields::IC], 
 													contact_number: row[VetCsvFields::CONTACT]  
 													)
-
+						vet.add_role = "Pending_vet"
 						vet.save(validate: false)
 						vets_count += 1
 					end
