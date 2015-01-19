@@ -14,7 +14,12 @@
                     <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
                     
                         <div class="row">
-                            <div class="col-sm-8 col-xs-8">
+
+                            <div class="col-sm-4 col-md-4">
+                            <%= link_to "Create Event", new_event_path, class: "btn btn-default btn-success" %>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-4">
                                  <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here"%>
                                   
                             </div>
@@ -47,11 +52,7 @@
                 <%= render 'shared/organizer', object: @organizer.events %>
                 <% end %>
                 
-        <div class="row">
-            <div class="col-md-offset-5 col-md-3">
-            <%= link_to "Create Event", new_event_path, class: "btn btn-default btn-success" %>
-            </div>
-        </div>
+
             
     </div>
 
