@@ -25,6 +25,7 @@ class Ability
     #
       user ||= User.new # guest user (not logged in)
       cannot :manage, :all
+      can [:new, :create], Organizer
 
       if user.is_admin?
         can :manage, :all
@@ -47,7 +48,7 @@ class Ability
         can [:index, :show], Vet
         can [:redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
         can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
-      elsif user.is_pending_vet
+      elsif user.is_pending_vet?
        # can [:about, :home], StaticPages
         can [:validate_claim_profile], Vet
       end
