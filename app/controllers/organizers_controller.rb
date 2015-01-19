@@ -15,9 +15,10 @@ class OrganizersController < ApplicationController
     
     if @organizer.save
       @organizer.add_role("Organizer")
+      @organizer.member_since = Date.today
       Mailer.organizer_welcome_email(@organizer).deliver
      
-      redirect_to organizer_path(id: @organizer.id), success: "Successfully register"
+      redirect_to root_path), success: "Successfully registered."
     else
 
       render :new

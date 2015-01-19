@@ -7,6 +7,11 @@
                     <h1>Users <small>find users here</small></h1>
                     <form class="navbar-form" role="search">
                         <div class="row">
+                        <div class="col-sm-4 col-xs-4">
+                            <% if can? :manage, :all %>
+                            <%= link_to 'Upload Vets', admin_upload_vets_path, class: 'btn btn-primary' %>
+                            <% end %>
+                        </div>
                             <div class="col-sm-8 col-xs-8">
                                 <input type="text" class="form-control" placeholder="search here">
                             </div>
@@ -19,9 +24,7 @@
                 </div>
                 
                 
-                    <% if can? :manage, :all %>
-                    <%= link_to 'Upload Vets', admin_upload_vets_path, class: 'btn btn-primary' %>
-                    <% end %>
+
                    
                   
                 <ul class="media-list">

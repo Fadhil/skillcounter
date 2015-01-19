@@ -85,6 +85,7 @@ class AdminController < ApplicationController
 													contact_number: row[VetCsvFields::CONTACT]  
 													)
 						vet.add_role("Pending_vet")
+						vet.member_since = Date.today
 						vet.save(validate: false)
 						vets_count += 1
 					end
