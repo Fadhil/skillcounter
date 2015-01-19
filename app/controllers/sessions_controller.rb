@@ -6,7 +6,14 @@ class SessionsController < Devise::SessionsController
         yield resource if block_given?
         
         if current_user_login
-            redirect_to static_pages_home_path
+            if current_user.is_admin?
+                redirect_to static_pages_home_path
+            elsif current_user.is_organizer?
+                redirect_to manage_event_path
+            elsif current_user.is_vet?
+                redirect_to vet_event_path
+            elsif current_user.is_pending_vet?
+                redirect_to transactions_claim_profile_path
         else
             redirect_to new_user_login_session_path
         end
