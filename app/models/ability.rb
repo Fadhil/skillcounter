@@ -33,14 +33,14 @@ class Ability
         can [:index, :show, :manage_event], Organizer #make sure organizers can edit and update only their own profile
         can [:edit, :update], Organizer, id: user.id
         can :manage, Attendance
-        can [:about, :home], StaticPages
+        #can [:about, :home], StaticPages
         can [:index, :show, :redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
         can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
       elsif user.is_vet?
         can [:index, :show], Event
         can [:show], Organizer
         can [:create, :destroy], Attendance
-        can [:about, :home], StaticPages
+        #can [:about, :home], StaticPages
         #edit and update own profile only
       #elsif user.is_pending_vet?
         #include validate claim profile action here
@@ -48,7 +48,7 @@ class Ability
         can [:redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
         can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
       elsif user.is_pending_vet
-        can [:about, :home], StaticPages
+       # can [:about, :home], StaticPages
         can [:validate_claim_profile], Vet
       end
   end
