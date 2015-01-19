@@ -21,6 +21,10 @@ class AdminController < ApplicationController
 		end
 	end
 
+	def pending_index
+		@event = Event.where(status:"Pending")
+	end
+
 	def validate_event
 		@event = Event.find(params[:id])
 
