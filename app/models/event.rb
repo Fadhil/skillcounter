@@ -26,7 +26,7 @@ class Event < ActiveRecord::Base
     # validates :ticket_quantity, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :event_page_url, presence: true, format: {with: /\A((http)s?(:\/\/)|(www.))\D/}
     #validates :status, presence: true
-    validates :number_participants, pressence: true, :numericality => { :other_than => 0 }
+    validates :number_participants, presence: true, :numericality => { :other_than => 0 }
     validates :point, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :category, presence: true
     validates :speaker, presence: true
