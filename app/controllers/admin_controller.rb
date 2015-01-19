@@ -84,7 +84,7 @@ class AdminController < ApplicationController
 													ic_number: row[VetCsvFields::IC], 
 													contact_number: row[VetCsvFields::CONTACT]  
 													)
-						vet.add_role = "Pending_vet"
+						vet.add_role("Pending_vet")
 						vet.save(validate: false)
 						vets_count += 1
 					end
