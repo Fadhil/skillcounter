@@ -123,24 +123,29 @@
             <h4>Why was this application rejected?</h4>
             <div class="checkbox">
               <label>
-                    <%= t.check_box :reason, {checked: false, class: 'radio' }, "Incorrect points", false%>
+                    <%= t.radio_button :reason, "Incorrect points" %>
                     Incorrect points
               </label>
             </div>
             <div class="checkbox">
               <label>
-                    <%= t.check_box :reason, {checked: false, class: 'radio' }, "Innsufficient hours",false%>
-                    Innsufficient hours
+                    <%= t.radio_button :reason, "Insufficient hours" %>
+                    Insufficient hours
               </label>
             </div>
             <div class="checkbox">
               <label>
-                    <%= t.check_box :reason, {checked: false, class: 'radio' }, "Wrong type",false%>
+                    <%= t.radio_button :reason, "Wrong type" %>
                     Wrong type
               </label>
             </div>
-            <p>other:</p>
-            <input type="text" class="form-control" placeholder="Custom reason">
+            <div class="checkbox">
+              <label>
+                    <%= t.radio_button :reason, "Other" %>
+                    Other
+              </label>
+              <!-- <input type="text" class="form-control" placeholder="Custom reason"> -->
+            </div>
           </div>
           <div class="modal-footer">
                 <%= t.hidden_field :status, :value=>"Rejected"%>

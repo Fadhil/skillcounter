@@ -129,7 +129,7 @@
                               <% if current_user %>
                     
                                 <% if current_user.is_admin? %>
-                                    <% if event.status == "Pending" || event.status == "Rejected" %>
+                                    <% if @event.status == "Pending" || @event.status == "Rejected" %>
                                         <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     <% end %>
                                     <% if @event.status == "Live" %>
@@ -149,7 +149,7 @@
                                     
             
                                 <% elsif  current_user.is_organizer? %>
-                                    <% if event.status == "Pending" || event.status == "Rejected" %>
+                                    <% if @event.status == "Pending" || @event.status == "Rejected" %>
                                         <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     <% end %>
                                     <% if @event.status == "Live" %>
