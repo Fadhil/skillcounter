@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111034029) do
+ActiveRecord::Schema.define(version: 20150120135617) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150111034029) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "present",           limit: 255
+    t.string   "status"
   end
 
   add_index "attendances", ["attended_event_id"], name: "index_attendances_on_attended_event_id"
