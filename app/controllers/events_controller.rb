@@ -88,6 +88,8 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
     
     if @event.update_attributes(event_params)
+      @event.status = "Pending"
+      @event.save
       redirect_to event_path(id: @event.id), success: "Successfully Updated"
     else
       render :edit
