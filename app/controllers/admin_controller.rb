@@ -3,7 +3,8 @@ require 'roo'
 
 class AdminController < ApplicationController
 
-	load_and_authorize_resource
+	# load_and_authorize_resource 
+	authorize_resource
 	include SkillCounterParams
 
 
@@ -26,6 +27,7 @@ class AdminController < ApplicationController
 	end
 
 	def validate_event
+		# authorize! :validate_event, @event
 		@event = Event.find(params[:id])
 
 
@@ -41,15 +43,11 @@ class AdminController < ApplicationController
 
 	end
 
-
-
-
 	def vet_show
 		@vet = Vet.find(params[:id])
 	end
 
 	def upload_vets
-
 
 	end
 

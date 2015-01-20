@@ -5,7 +5,7 @@ require "spreadsheet"
 class AttendancesController < ApplicationController
   respond_to :html, :xls
     
-  load_and_authorize_resource  
+  authorize_resource  
   include SkillCounterParams
 
 
@@ -72,7 +72,7 @@ class AttendancesController < ApplicationController
             if row['present'] == 1
                 vet = Vet.find(vet_id)
                 vet.add_point!(@event.point)
-                vet.save
+                vet.save(validate:false)
             end
 
             

@@ -6,22 +6,22 @@ class ApplicationController < ActionController::Base
 
   
   
-  def after_sign_in_path_for(resource)
-    if resource.is_admin? 
-      root_path
-    elsif resource.is_vet? 
-      root_path
-    elsif resource.is_organizer? 
-      root_path
-    else
-      super
-    end
-  end
+  # def after_sign_in_path_for(resource)
+  #   if resource.is_admin?
+  #       redirect_to admin_pending_index_path
+  #   elsif resource.is_organizer?
+  #       redirect_to manage_event_path
+  #   elsif resource.is_vet?
+  #       redirect_to vet_event_path
+  #   elsif resource.is_pending_vet?
+  #       redirect_to transactions_claim_profile_path
+  #   end
+  # end
 
   rescue_from CanCan::AccessDenied do |exception|  
-  flash[:error] = "Access denied! You do not have the access rights to the page. Contact the admin for more information."  
-  redirect_to root_url  
-  end  
+    flash[:error] = "Access denied! You do not have the access rights to the page. Contact the admin for more information."  
+    redirect_to root_url  
+  end
  
 end
 

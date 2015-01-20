@@ -9,8 +9,9 @@ class User < ActiveRecord::Base
    has_attached_file :avatar, :styles => {:thumb => "100x100"}
     
     has_and_belongs_to_many :roles
-    has_many :events, :foreign_key => :organizer_id
-    has_many :events, :foreign_key => :vet_id
+    # has_many :events, :foreign_key => :organizer_id
+    # has_many :events, :foreign_key => :vet_id
+    has_many :events, :foreign_key => :user_id
     has_many :attendances, :foreign_key => :attendee_id
     has_many :attended_events, :through => :attendances
      

@@ -1,7 +1,6 @@
-<%= form_for(current_user.attendances.build(attended_event_id: @event.id)) do |f| %>
+<#%= form_for(current_user.attendances.build(attended_event_id: @event.id)) do |f| %>
+<%= formfor(current_user.attend!(@event)) do |f| %>
   <div><%= f.hidden_field :attended_event_id %></div>
- 
-
   
   <%= f.submit "Sign Up", :onclick => "window.open('http://#{@event.event_page_url}')" , class: "btn btn-large btn-primary", disabled: (@event.event_page_url == nil)%>
 

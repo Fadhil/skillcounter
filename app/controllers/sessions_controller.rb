@@ -7,7 +7,7 @@ class SessionsController < Devise::SessionsController
         
         if current_user_login
             if current_user.is_admin?
-                redirect_to static_pages_home_path
+                redirect_to admin_pending_index_path
             elsif current_user.is_organizer?
                 redirect_to manage_event_path
             elsif current_user.is_vet?

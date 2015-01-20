@@ -31,16 +31,16 @@ SkillCounter::Application.routes.draw do
   end
 
   
-  resources :attendances, only: [:create, :destroy] do
+  resources :attendances, only: [:create, :destroy, :import, :update, :download] do
     collection do
 
       patch 'events/:id' => 'attendances#import', as: :import
       put 'present' => 'attendances#present', as: :update
-      get 'events/:id' => 'attendances#download', as: :download
+      get '/events/:id' => 'attendances#download', as: :download
     end
   end
   #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
-   get 'users/:id/admin_event' => 'users#admin_event', as:'admin_event'
+  get 'users/:id/admin_event' => 'users#admin_event', as:'admin_event'
   get 'users/:id/user_event' => 'users#user_event', as:'user_event'
   get 'users/:id/check_event' => 'users#check_event', as:'check_event'
   get 'organizers/:id/manage_event' => 'organizers#manage_event', as:'manage_event'
