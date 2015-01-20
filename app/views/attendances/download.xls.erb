@@ -1,6 +1,7 @@
 <table border="1">
 	<tr>
 		<th>attendee_id</th>
+		<th>vet name</th>
 		<th>present</th>
 	</tr>
 	<% @attendance = Attendance.where(attended_event_id: @event.id) %>

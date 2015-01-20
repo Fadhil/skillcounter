@@ -4,7 +4,7 @@ require "spreadsheet"
 
 class AttendancesController < ApplicationController
   respond_to :html, :xls
-    
+  
   authorize_resource  
   include SkillCounterParams
 
@@ -20,10 +20,13 @@ class AttendancesController < ApplicationController
   end
   
   def destroy
-    @event = Attendance.find(params[:id]).attended_event
-    current_user.minus_point!(@event.point)
-    current_user.cancel!(@event)
-    redirect_to @event
+    event = Event.find(params[:id])
+    attendance = Attendance.find_by(attendee_id: current_user.id, attended_event_id: event.id)
+    if attendance.destroy
+      redirect_to event_path(event), notice: "You have been removed from the participant list."
+    else
+      redirect_to event_path(event), error: "Something went wrong. Please try again."
+    end
   end
   
   # def present
@@ -112,6 +115,25 @@ class AttendancesController < ApplicationController
     end
   end
 
+  def event_sign_up
+    current_user.attendances.build(attended_event_id: params[:id])
+    event = Event.find(params[:id])
+    event_attendance = Attendance.where(attended_event_id: params[:id])
+    if event_attendance.size < event.number_participants
+      event_attendance.each do |e|
+        if e.attendee_id == current_user.id
+          redirect_to event_path(event), error: "You have already been signed up for this event."
+          return
+        end
+      end
+      current_user.attend!(event)
+      #redirect_to event.event_page_url, :target => "_blank"
+      redirect_to event_path(event), notice: "You have been signed up for the event."
+
+    else
+      redirect_to event_path(event), error: "The maximum number of participants has been reached."
+    end
+  end
 
 
 end

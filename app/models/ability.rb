@@ -40,7 +40,7 @@ class Ability
       elsif user.is_vet?
         can [:index, :show], Event
         can [:show], Organizer
-        can [:create, :destroy], Attendance
+        can [:create, :destroy, :event_sign_up], Attendance
         #can [:about, :home], StaticPages
         #edit and update own profile only
       #elsif user.is_pending_vet?

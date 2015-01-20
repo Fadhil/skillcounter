@@ -162,7 +162,7 @@
                                          to use as a template.
                                         </p>
                                         <p> To mark attendance, click 
-                                        <%= link_to "here", upload_attendance_path(@event) %>
+                                        <%= link_to "here", upload_attendance_path(@event.id) %>
                                         </p>
                                    
                                     <% elsif @event.status == "Approved" %>

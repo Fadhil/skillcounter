@@ -1,7 +1,7 @@
 require 'SkillCounterParams'
 class UsersController < ApplicationController
 
-  load_and_authorize_resource
+  authorize_resource
   
   include SkillCounterParams
   

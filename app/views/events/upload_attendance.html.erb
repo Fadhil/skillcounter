@@ -7,7 +7,7 @@
             <p>To upload the attendance list, please upload the same file provided. To download the template for attendance marking , please refer back to the <%= link_to "event page.", event_path(@event) %></p>
 	        <p>It is important that the file headers must not be altered, only the attendance marked.</p>
 	        <br>
-	        <p>Upon uploading the attendance, points will be awarded to the vets/ participants of the events accordingly..</p>
+	        <p>Upon uploading the attendance, points will be awarded to the vets/ participants of the events accordingly.</p>
           <br>
           <br>
         	<%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>

@@ -1,4 +1,1 @@
-<%= form_for(current_user.attendances.find_by(attended_event_id: @event.id),
-             html: { method: :delete }) do |f| %>
-  <%= f.submit "Cancel", class: "btn btn-large" %>
-<% end %>
+<%= link_to "Cancel", cancel_sign_up_attendances_path(@event.id), class: "btn btn-large btn-primary", disabled: (@event.event_page_url == nil), method: "delete" %>

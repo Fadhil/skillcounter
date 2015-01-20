@@ -1,7 +1,7 @@
 require 'SkillCounterParams'
 
 class EventsController < ApplicationController
-  load_and_authorize_resource
+  authorize_resource
   include SkillCounterParams
     
     
@@ -111,6 +111,7 @@ class EventsController < ApplicationController
   end
 
   def upload_attendance
+    @event = Event.find(params[:id])
   end
 
   def express_checkout

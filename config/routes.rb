@@ -37,6 +37,8 @@ SkillCounter::Application.routes.draw do
       patch 'events/:id' => 'attendances#import', as: :import
       put 'present' => 'attendances#present', as: :update
       get '/events/:id' => 'attendances#download', as: :download
+      post 'events/:id/event_sign_up' => 'attendances#event_sign_up', as: :event_sign_up
+      delete 'events/:id/cancel_sign_up' => 'attendances#destroy', as: :cancel_sign_up
     end
   end
   #get 'organizers/:id/organizerEvent', to: 'organizers#organizerEvent', as:'OrganizerEvent'
