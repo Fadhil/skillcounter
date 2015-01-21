@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  authorize_resource
+  #authorize_resource
 
   def new
     @payment = Payment.new

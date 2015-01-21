@@ -3,8 +3,8 @@
        <ul class="media-list">
           
  
-
-                      <% object.each do |event| %>
+                <% if object %>
+                    <% object.each do |event| %>
                     <a href="<%= event_path(event) %>">  
                     <li class="media">
                        
@@ -47,5 +47,5 @@
                        <% end %>
                     </li>
                     </a>
-                   
+                <% end %>
                 </ul>

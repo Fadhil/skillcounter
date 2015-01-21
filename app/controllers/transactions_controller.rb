@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-	authorize_resource
+	#authorize_resource
 
 	def express_checkout
 		fee = nil

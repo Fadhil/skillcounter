@@ -1,5 +1,5 @@
 class OrganizersController < ApplicationController
-  load_and_authorize_resource
+  #authorize_resource
 
   def index
     @organizer = Organizer.all
