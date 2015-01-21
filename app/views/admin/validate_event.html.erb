@@ -5,7 +5,7 @@
         <title>codemalaysiaskillcounter</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-        <link rel="shortcut icon" href="/favicon.ico"> -->
+        <link rel="shortcut icon" href="/favicon.ico">
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <link rel="stylesheet" href="../styles/main.css">
     </head>
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="license" class="col-sm-3 control-label">Speaker</label>
-                                    <div class="col-sm-8"><a href="<%= @event.speaker.url(:original, false) %>">speaker.pdf</a></div>
+                                    <div class="col-sm-8"><a href="@event.speaker.url(:original, false)">speaker.pdf</a></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="license" class="col-sm-3 control-label">Schedule</label>
@@ -75,13 +75,14 @@
                     </div>
                     <div class="col-md-offset-9 col-md-3">
                         <% if @event.status == "Pending" %>
-                            <%= form_for @event do %>
-                            <% end %> <!-- redundant form to make approving work -->
-                            <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
-                                <%= t.hidden_field :status, :value=>"Approved"%>
-                                <%= t.hidden_field :reason, :value=>"" %>
-                                <%= t.submit "Approve", class:"btn btn-default btn-success"%>
-                            <% end %>
+                            <%#= form_for @event do %>
+                            <%# end %> <!-- redundant form to make approving work -->
+                            <%#= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
+                                <%#= t.hidden_field :status, :value=>"Approved"%>
+                                <%#= t.hidden_field :reason, :value=>"" %>
+                                <%#= t.submit "Approve", class:"btn btn-default btn-success"%>
+                            <%# end %>
+                            <%= link_to "Approve", approve_event_path(@event), method: :post, class:"btn btn-default btn-success" %>
                             <button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#adminRejectEvent">Reject</button>
                         <% end %>
                     </div>

@@ -82,6 +82,7 @@ SkillCounter::Application.routes.draw do
   get 'event/event_payment_new' => 'events#event_payment_new', as: :event_payment_new
   get 'event/event_payment_cancel' => 'events#event_payment_cancel', as: :event_payment_cancel
   post 'event/event_payment_create' => 'events#event_payment_create', as: :event_payment_create
+  post 'event/:id/approve_event' => 'events#approve_event', as: :approve_event
 
   post 'vet/express_checkout' => 'vets#express_checkout', as: :express_checkout_vets
   get 'vet/renew_licence_new' => 'vets#renew_licence_new', as: :renew_licence_new

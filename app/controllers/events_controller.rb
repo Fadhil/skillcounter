@@ -97,6 +97,17 @@ class EventsController < ApplicationController
   end
   
   
+  def approve_event
+    event = Event.find(params[:id])
+    event.status = "Approved"
+    if event.save
+      redirect_to event, success: "The event has been approved."
+    else
+      redirect_to event, error: "Something went wrong. The event was not approved."
+    end
+  end
+  
+  
   def destroy
     @event = Event.find(params[:id])
     

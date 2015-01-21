@@ -149,7 +149,7 @@
                                     
             
                                 <% elsif  current_user.is_organizer? %>
-                                    <% if @event.status == "Pending" || @event.status == "Rejected" %>
+                                    <% if (@event.status == "Pending" || @event.status == "Rejected") && current_user.id == @event.user_id %>
                                         <% button = link_to "Edit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     <% end %>
                                     <% if @event.status == "Live" %>
@@ -166,9 +166,9 @@
                                         <%= link_to "here", upload_attendance_path(@event.id) %>
                                         </p>
                                    
-                                    <% elsif @event.status == "Approved" %>
+                                    <% elsif @event.status == "Approved" && current_user.id == @event.user_id %>
                                         <%= link_to "Purchase points", purchase_points_path(@event), class:"btn btn-default btn-success" %>
-                                    <% elsif @event.status == "Rejected" %>  
+                                    <% elsif @event.status == "Rejected" && current_user.id == @event.user_id %>  
                                     <% button = link_to "Resubmit", edit_event_path(@event), class: "btn btn-default btn-success" %>
                                     
                                     <% end %>
