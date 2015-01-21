@@ -43,10 +43,9 @@ class EventsController < ApplicationController
     #         location: location, start_date_time: start_date_time, end_date_time: end_date_time,
     #         event_page_url: event_page_url, category: category, speaker_bio: speaker_bio,
     #         schedule: schedule, poster: poster, status: "pending", point: point)
-      @event = current_user.events.build(event_params)
-      @event.status = "Pending"
+    @event = current_user.events.build(event_params)
+    @event.status = "Pending"
 
-   
     if @event.save
       #UserMailer.welcome_email(@event).deliver
       redirect_to event_path(id: @event.id), success: "Successfully created event"

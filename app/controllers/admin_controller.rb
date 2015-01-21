@@ -10,6 +10,18 @@ class AdminController < ApplicationController
 	end
 
 
+	def create
+		@admin = Admin.new(admin_create_params)
+		
+		if @admin.save(validate: false)
+			@admin.add_role("Admin")
+			redirect_to new_admin_path, success: "An Administrator account has been successfully created."
+		else
+			redirect_to :back, error: "Something went wrong. Nothing was committed."
+		end
+	end
+
+
 	def event_index
 		if params[:search]
 			@events = Event.search(params[:search])
@@ -90,6 +102,11 @@ class AdminController < ApplicationController
 		else
 			redirect_to admin_upload_vets_path, notice: "You must upload a CSV file."
 		end
+	end
+	
+	
+	def admin_create_params
+		params.require(:admin).permit(:name, :email, :password, :password_confirmation)
 	end
 	
 end

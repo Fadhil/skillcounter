@@ -15,7 +15,7 @@ SkillCounter::Application.routes.draw do
   resources :organizers
   resources :vets
     
-  resources :admin, only: [:new]
+  resources :admin, only: [:new, :create]
 
   resources :transactions, except: [:new] do
     #
