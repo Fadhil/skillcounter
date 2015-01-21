@@ -12,7 +12,7 @@ class OrganizersController < ApplicationController
 
 
   def create
-    @organizer = Organizer.new(organizer_params)
+    @organizer = Organizer.new
     @organizer.add_role("Organizer")
     @organizer.member_since = Date.today
 

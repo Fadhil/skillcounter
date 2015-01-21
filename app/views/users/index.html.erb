@@ -1,43 +1,28 @@
-
-    	
- <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="page-header custom-with_input">
-                    <h1>Users <small>find users here</small></h1>
-                    <form class="navbar-form" role="search">
-                        <div class="row">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header custom-with_input">
+                <h1>Users <small>find users here</small></h1>
+                <form class="navbar-form" role="search">
+                    <div class="row">
                         <div class="col-sm-4 col-xs-4">
-                            <% if can? :manage, :all %>
-                            <%= link_to 'Upload Vets', admin_upload_vets_path, class: 'btn btn-primary' %>
+                            <% if current_user.is_admin? %>
+                                <%= link_to 'Upload Vets', admin_upload_vets_path, class:'btn btn-primary' %>
                             <% end %>
                         </div>
-                            <div class="col-sm-4 col-xs-4">
-                                <input type="text" class="form-control" placeholder="search here">
-                            </div>
-                            <div class="col-sm-4 col-xs-4">
-                                <button type="button" class="btn btn-default">filter</button>
-                            </div>
-                        </div>
-                    </form>
-                    
-                </div>
-                
-                
-
-                   
-                  
-                <ul class="media-list">
-                 <% @users.each do |user| %>
+                        <div class="col-sm-4 col-xs-4"><input type="text" class="form-control" placeholder="search here"></div>
+                        <div class="col-sm-4 col-xs-4"><button type="button" class="btn btn-default">filter</button></div>
+                    </div>
+                </form>
+            </div>
+            <ul class="media-list">
+                <% @users.each do |user| %>
                     <li class="media">
-                        <a class="pull-left" href="#">
-                            
-                            <%= image_tag user.avatar.url(:thumb), class:"img-thumbnail"  %>
-                        </a>
+                        <a class="pull-left" href="#"><%= image_tag user.avatar.url(:thumb), class:"img-thumbnail" %></a>
                         <div class="media-body">
                             <div class="col-md-9 col-sm-9">
-                                <h3 class="media-heading"><%=user.name%></h3>
-                                <span>Member since: <span class="member-since"><%=user.member_since%></span></span>
+                                <h3 class="media-heading"><%= user.name %></h3>
+                                <span>Member since: <span class="member-since"><%= user.member_since %></span></span>
                                 <p>License status: <b class="isactive text-success">Active</b></p>
                             </div>
                             <div class="col-md-3 col-sm-3">
@@ -48,19 +33,16 @@
                                     <hr>
                                     <span class="text-warning"><%= user.expiring_points %>
                                         <span class="glyphicon glyphicon-fire"></span>
-                                        <small>expiring on 31st Sep 2015</small>
+                                        <small>expiring on 31st Sep <%= Date.today.year + 1 %></small>
                                     </span>
                                 </span>
                             </div>
-                            
-                    	  <%= link_to "Edit", edit_user_path(user), class: "btn btn-info" %>
-                    	   <%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %>
-                    	  
+                    	    <%#= link_to "Edit", edit_user_path(user), class: "btn btn-info" %>
+                    	    <div class="pull-right" style="padding-top:5px"><%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %></div>
                         </div>
                     </li>
-                     <% end %>  
-                </ul>
-                
-            </div>
+                <% end %>  
+            </ul>
         </div>
     </div>
+</div>

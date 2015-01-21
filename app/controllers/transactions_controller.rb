@@ -27,16 +27,16 @@ class TransactionsController < ApplicationController
 
 
 	def new
-	  @transaction = Transaction.new(:express_token => params[:token])
-	  @payment_type = params[:payment_type] # We'll pass this on to :create from the hidden fields in :new view
-	  @payment_id = params[:payment_id]
-	  @vet = Vet.find(params[:vet_id])
+		@transaction = Transaction.new(:express_token => params[:token])
+		@payment_type = params[:payment_type] # We'll pass this on to :create from the hidden fields in :new view
+		@payment_id = params[:payment_id]
+		@vet = Vet.find(params[:vet_id])
 	end
 
 
 	def cancelled
-	  @transaction = Transaction.new(:express_token => params[:token], status: :cancelled)
-	  @transaction.save
+		@transaction = Transaction.new(:express_token => params[:token], status: :cancelled)
+		@transaction.save
 		redirect_to new_vet_path, error: "Your transaction was cancelled."
 	end
 
@@ -47,26 +47,26 @@ class TransactionsController < ApplicationController
 		fee = Payment.find(params[:payment_id])
 
 		if fee && !vet.nil? # Only continue if we find a valid fee and vet
-		  @transaction = Transaction.new(transaction_params)
-		  @transaction.ip_address = request.remote_ip
-		  @transaction.payment_type = payment_type # Save the payment type. 
-		  if @transaction.save
-		    if @transaction.purchase(fee.total_in_cents) # this is where we purchase the transaction. refer to the model method below
-		    	if vet.claim                # Claim the vet (set password)
-		    		vet.add_role('Vet')
-          	Mailer.send_welcome_email(vet, vet.generate_password).deliver
-		        redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details."
-		      else
-		      	redirect_to root_path, notice: 'Your payment was successful, but something went wrong with claiming your profile. Please contact the admins.'
-		      end
-		    else
-		      redirect_to new_vet_path, notice: "Failed to complete transaction."
-		    end
-		  else
-		  	flash.now[:error] = "We were unable to complete your transaction. Please contact the administrator."
-		    render :new
-		  end
-		 end
+			@transaction = Transaction.new(transaction_params)
+			@transaction.ip_address = request.remote_ip
+			@transaction.payment_type = payment_type # Save the payment type. 
+			if @transaction.save
+		    	if @transaction.purchase(fee.total_in_cents) # this is where we purchase the transaction. refer to the model method below
+		    		if vet.claim                # Claim the vet (set password)
+		    			vet.add_role('Vet')
+          				Mailer.send_welcome_email(vet, vet.generate_password).deliver
+		        		redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details."
+		      		else
+		      			redirect_to root_path, notice: 'Your payment was successful, but something went wrong with claiming your profile. Please contact the admins.'
+		      		end
+		    	else
+		      		redirect_to new_vet_path, notice: "Failed to complete transaction."
+		    	end
+		  	else
+		  		flash.now[:error] = "We were unable to complete your transaction. Please contact the administrator."
+		    	render :new
+		  	end
+		end
 	end
 
 
