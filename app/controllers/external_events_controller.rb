@@ -1,4 +1,6 @@
 class ExternalEventsController < ApplicationController
+  authorize_resource
+  
   def new
     @event = ExternalEvent.new
     render '/events/new'

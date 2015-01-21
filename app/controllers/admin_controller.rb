@@ -2,7 +2,7 @@ require 'SkillCounterParams'
 require 'roo'
 
 class AdminController < ApplicationController
-	#authorize_resource
+	authorize_resource
 	include SkillCounterParams
 
 	def new

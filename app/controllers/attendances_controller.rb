@@ -3,11 +3,9 @@ require 'roo'
 require 'spreadsheet'
 
 class AttendancesController < ApplicationController
-  respond_to :html, :xls
-  
-  #authorize_resource  
+  authorize_resource  
   include SkillCounterParams
-
+  respond_to :html, :xls
 
   def create
     @event = Event.find(params[:attendance][:attended_event_id])

@@ -1,7 +1,7 @@
 require 'SkillCounterParams'
 
 class UsersController < ApplicationController
-  #authorize_resource
+  authorize_resource
   include SkillCounterParams
   
   def index

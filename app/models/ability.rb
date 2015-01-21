@@ -20,40 +20,39 @@ class Ability
       
     # end
     
-    def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-      user ||= User.new # guest user (not logged in)
-      cannot :manage, :all
-      can [:new, :create], Organizer
+  def initialize(user)
+  # Define abilities for the passed in user here. For example:
+  #
+    user ||= User.new # guest user (not logged in)
+    cannot :manage, :all
+    can [:new, :create], Organizer
+    can 
 
-      if user.is_admin?
-        can :manage, :all
-        can [:edit, :update], Admin, id: user.id 
-        cannot [:edit, :update], Organizer
-        cannot [:edit, :update], Vet 
-      elsif user.is_organizer?
-        can [:index, :new, :create, :show, :edit, :update, :purchase_points, :upload_attendance, :express_checkout, :event_payment_new, :event_payment_create, :event_payment_cancel], Event
-        can [:index, :show, :manage_event], Organizer
-        can [:edit, :update], Organizer, id: user.id
-        can :manage, Attendance
-        #can [:about, :home], StaticPages
-        can [:index, :show, :redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
-        can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
-      elsif user.is_vet?
-        can [:index, :show], Event
-        can [:show], Organizer
-        can [:create, :destroy, :event_sign_up], Attendance
-        #can [:about, :home], StaticPages
-      #elsif user.is_pending_vet?
-        #include validate claim profile action here
-        can [:index, :show], Vet
-        can [:redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
-        can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
-      elsif user.is_pending_vet?
-       # can [:about, :home], StaticPages
-        can [:validate_claim_profile], Vet
-      end
+    if user.is_admin?
+      can :manage, :all
+      can [:edit, :update], Admin, id: user.id 
+      cannot [:edit, :update], Organizer
+      cannot [:edit, :update], Vet
+    elsif user.is_organizer?
+      can [:index, :new, :create, :show, :edit, :update, :purchase_points, :upload_attendance, :express_checkout, :event_payment_new, :event_payment_create, :event_payment_cancel], Event
+      can [:index, :show, :manage_event], Organizer
+      can [:edit, :update], Organizer, id: user.id
+      can :manage, Attendance
+      can :manage, ExternalEvent
+      can [:index, :show, :redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
+      can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
+    elsif user.is_vet?
+      can [:index, :show], Event
+      can [:show], Organizer
+      can [:create, :destroy, :event_sign_up], Attendance
+      can :manage, ExternalEvent
+      can [:index, :show], Vet
+      can [:redeem_licence, :express_checkout, :renew_licence_new, :renew_licence_create, :renew_licence_cancel], Vet
+      can [:vet_event, :my_events, :edit, :update], Vet, id: user.id
+    elsif user.is_pending_vet?
+      can [:validate_claim_profile], Vet
+      can :manage, Transaction
+    end
   end
 
   #def initialize(user)
