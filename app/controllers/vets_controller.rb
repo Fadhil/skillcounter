@@ -15,7 +15,7 @@ class VetsController < ApplicationController
   
   def show
     begin
-      @vet = Vet.find(params[:id])
+      @vet = User.find(params[:id])
     rescue ActiveRecord::RecordNotFound
       redirect_to vets_new_path
     end
@@ -26,12 +26,12 @@ class VetsController < ApplicationController
   
   
   def vet_event
-      @vet = Vet.find(params[:id])
+      @vet = User.find(params[:id])
   end
   
   
   def my_events
-    @vet = Vet.find(params[:id])
+    @vet = User.find(params[:id])
     @previous_events = @vet.previous_events.where('type <> ?', 'ExternalEvent')
     @custom_events = @vet.previous_events.where('type = ?', 'ExternalEvent')
     @upcoming_events = @vet.upcoming_events

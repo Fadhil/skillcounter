@@ -53,6 +53,9 @@ class TransactionsController < ApplicationController
 			if @transaction.save
 		    	if @transaction.purchase(fee.total_in_cents) # this is where we purchase the transaction. refer to the model method below
 		    		if vet.claim                # Claim the vet (set password)
+		    			vet.current_points = 0
+		    			vet.expiring_points = 0
+		    			vet.save
 		    			vet.add_role('Vet')
           				Mailer.send_welcome_email(vet, vet.generate_password).deliver
 		        		redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details."
