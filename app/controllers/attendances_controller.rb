@@ -66,7 +66,7 @@ class AttendancesController < ApplicationController
         row = Hash[[header, spreadsheet.row(i)].transpose]
         vet_id = row['attendee_id']
             
-        if row['present'] == 1
+        if row['present'] == "P" || row['present'] == "p"
           attendance = Attendance.find_by(attendee_id: vet_id, attended_event_id: @event.id)
           if(attendance.status == "pending")
             vet = Vet.find(vet_id)

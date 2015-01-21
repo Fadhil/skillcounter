@@ -60,7 +60,7 @@
         <label for="Poster" class="col-sm-3 control-label">Poster</label>
         <div class="col-sm-6"><%= f.file_field :poster, class: "form-control"%></div>
     </div>
-    <% unless f.object.type == 'ExternalEvent' %> # We don't expect Vets to know about number of participants for an external event
+    <% unless f.object.type == 'ExternalEvent' %> <!--We don't expect Vets to know about number of participants for an external event-->
         <div class="form-group">
             <label for="Points" class="col-sm-3 control-label">Number of Participants</label>
             <div class="col-sm-6"><%= f.text_field :number_participants, class: "form-control" %></div>

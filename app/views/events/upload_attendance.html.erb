@@ -3,20 +3,19 @@
     <h2>Upload attendance</h2>
     <div class="panel panel-default top10">
       <div class="panel-body">
-          <br>
-            <p>To upload the attendance list, please upload the same file provided. To download the template for attendance marking , please refer back to the <%= link_to "event page.", event_path(@event) %></p>
-	        <p>It is important that the file headers must not be altered, only the attendance marked.</p>
-	        <br>
-	        <p>Upon uploading the attendance, points will be awarded to the vets/ participants of the events accordingly.</p>
-          <br>
-          <br>
-        	<%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
+        <br>
+        <p>To upload the attendance list, please upload the file that was provided on the previous page. If you do not yet have the file, please head back to the <%= link_to "event page.", event_path(@event) %> to download it.</p>
+	      <p>IMPORTANT: The file headers must not be altered, only the attendance marked by .</p>
+	      <p>To denote the presence of the individual at the event, fill up the corresponding "present" column with P for present and A for absent.</p>
+	      <br>
+	      <p>Upon uploading the attendance, points will be awarded to the vets/ participants of the events accordingly.</p>
+        <br><br>
+        <%= form_for @event, :url => {:controller => "attendances", :action => "import"} do |f| %>
           <div class="input-group center-eight">
-
-                <%= f.file_field :attendance_list %>
-                <%= f.submit "Upload attendance" %>
-            <% end %>
+            <%= f.file_field :attendance_list %>
+            <%= f.submit "Upload attendance" %>
           </div>
+        <% end %>
       </div>
     </div>
   </div>

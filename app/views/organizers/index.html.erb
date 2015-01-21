@@ -1,30 +1,23 @@
 <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="page-header custom-with_input">
-                    <h1>Organizers</h1>
-                    <%= form_tag(organizers_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
-                    
-                        <div class="row">
-                            <div class="col-sm-8 col-xs-8">
-                                 <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here" %>
-                                  
-                            </div>
-                            <div class="col-sm-4 col-xs-4">
-                                 <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
-                                
-                            </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header custom-with_input">
+                <h1>Organizers</h1>
+                <%= form_tag(organizers_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
+                    <div class="row">
+                        <div class="col-sm-8 col-xs-8">
+                            <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here" %>
                         </div>
-                    
-                    <% end %>
-                </div>
-                <ul class="media-list">
-                     <% @organizer.each do |organizer| %>
+                        <div class="col-sm-4 col-xs-4">
+                            <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <ul class="media-list">
+                <% @organizer.each do |organizer| %>
                     <li class="media">
-                        <a class="pull-left" href="#">
-                            
-                            <%= image_tag organizer.avatar.url(:thumb), class:"img-thumbnail"  %>
-                        </a>
+                        <a class="pull-left" href="#"><%= image_tag organizer.avatar.url(:thumb), class:"img-thumbnail"  %></a>
                         <div class="media-body">
                             <div class="col-md-16 col-sm-16">
                                 <h3 class="media-heading"><%= organizer.name%></h3>
@@ -33,9 +26,8 @@
                                 <span>Address: <span class="member-since"><%= organizer.address %></span></span>
                         </div>
                     </li>
-                    <% end %>
-                </ul>
-            </div>
+                <% end %>
+            </ul>
         </div>
     </div>
-
+</div>
