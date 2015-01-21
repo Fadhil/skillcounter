@@ -1,13 +1,1 @@
- <!-- <#%= form_for Attendance.new, :url => 'event_sign_up_attendances(@event)' do |f| %> -->
-
-
-<!-- <#%= formfor(current_user.attend!(@event)) do |f| %> -->
-  <!-- <div><#%= f.hidden_field :attended_event_id %></div> -->
-  <%# button = link_to "Sign up", vet_sign_up_path, id: @event.id %>
-  
-  <%#= f.submit "Sign Up", class: "btn btn-large btn-primary", disabled: (@event.event_page_url == nil) %>
-<!-- 
-<#% end %> -->
-	<%= link_to "Sign Up", event_sign_up_attendances_path(@event.id), class: "btn btn-large btn-primary", disabled: (@event.event_page_url == nil), method: "post", onclick: "window.open('http://#{@event.event_page_url}')" %>
-
-   <!-- :onclick => "window.open('http://#{@event.event_page_url}')" ,  -->
+<%= link_to "Sign Up", event_sign_up_attendances_path(@event.id), class: "btn btn-large btn-primary", disabled: (@event.event_page_url == nil), method: "post", onclick: "window.open('http://#{@event.event_page_url}')" %>
