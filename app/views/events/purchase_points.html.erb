@@ -23,7 +23,7 @@
             <form class="form-signin" role="form">
                 <h4 class="form-signin-heading">Payment</h4>
                 <p>You will need to make a payment of RM
-                <span class="text-success"><% total = (Payment.find_by(description: "Event points fee").fee * @event.number_participants) %><%=total%></span> before the event goes live.</p>
+                <span class="text-success"><% total = (Payment.find_by(description: "Event points fee").fee * @event.point * @event.number_participants) %><%=total%></span> before the event goes live.</p>
                 <p>Click below to proceed with payment</p>
                 <br>
 <!--                 <input type="text" class="form-control input-lg" placeholder="Credit card no." required="" autofocus="">
