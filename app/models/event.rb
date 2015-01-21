@@ -21,12 +21,12 @@ class Event < ActiveRecord::Base
     
     validates :start_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
     validates :end_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
-    validates_with TimelinessValidator
+    validates_with TimelinessValidator, unless: :is_external_event?
     # validates :venue_capacity, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     # validates :ticket_quantity, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :event_page_url, presence: true, format: {with: /\A((http)s?(:\/\/)|(www.))\D/}
     #validates :status, presence: true
-    validates :number_participants, presence: true, :numericality => { :other_than => 0 }
+    validates :number_participants, presence: true, :numericality => { :other_than => 0 }, unless: :is_external_event?
     validates :point, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :category, presence: true
     validates :speaker, presence: true
@@ -41,6 +41,10 @@ class Event < ActiveRecord::Base
         else
         find(:all)
         end
+    end
+
+    def is_external_event?
+        type == 'ExternalEvent'
     end
 
 end
