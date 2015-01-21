@@ -43,6 +43,7 @@ class OrganizersController < ApplicationController
 
 
   def update
+<<<<<<< HEAD
      organizer = Organizer.find(params[:id])
 
 
@@ -81,9 +82,9 @@ class OrganizersController < ApplicationController
     @organizer = Organizer.find(params[:id])
     
     if @organizer.destroy
-      redirect_to users_path, notice: 'delete success'
+      redirect_to users_path, notice: 'The organizer profile has been deleted.'
     else
-      redirect_to users_path, error: 'Fail'
+      redirect_to users_path, error: 'Something went wrong.'
     end
   end
   

@@ -25,5 +25,4 @@ class ApplicationController < ActionController::Base
       flash[:error] = "Something went wong. Please contact the admin for more details."
       redirect_to root_url
     end
-
 end
