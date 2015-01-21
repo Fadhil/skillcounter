@@ -1,4 +1,4 @@
-  <div class = "jumbotron" >
+<div class = "jumbotron" >
   <%= form_for @transaction do |f| %>
     <% for @transaction.errors.full_messages do |e| %>
         <%= e %>
@@ -13,9 +13,7 @@
       <% fee = Payment.find_by(description:"Profile claim fee") %>
       <p>Name: <%= fee.description%> </p>
       <p>Total: RM <%= fee.fee %></p>
-      
     <% end %>
     <p><%= f.submit "Complete Order" %></p>
   <% end %>
-
-  </div>
+</div>

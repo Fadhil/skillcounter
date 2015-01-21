@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html class="no-js">
   <head>
@@ -8,9 +7,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
+  
   <body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -18,27 +17,24 @@
 
     <!-- MAIN -->
     <div class="site-wrapper-sign-in">
-        <div class="container">
-            <h1><span class="glyphicon glyphicon-fire"></span> Skill Counter</h1>
-            <form class="form-signin" role="form">
-                <h4 class="form-signin-heading">Payment</h4>
-                <p>You will need to make a payment of RM
-                <span class="text-success"><% fee = Payment.find_by(description: "Profile claim fee")%><%=fee.fee%></span> before you can claim your profile</p>
-                <p>Click below to proceed with payment</p>
-                <br>
-<!--                 <input type="text" class="form-control input-lg" placeholder="Credit card no." required="" autofocus="">
-                <input type="text" class="form-control input-lg ic" placeholder="Valid thru, ex.: 2018-12-31" required="">
-                <input type="text" class="form-control input-lg license" placeholder="CVV#" required="">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm Payment</button> -->
-                <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_checkout_transactions_path(payment_type: :claim_profile, vet_id: @vet.id), method: :post) %>
-            </form>
-        </div>
+      <div class="container">
+        <h1><span class="glyphicon glyphicon-fire"></span> Skill Counter</h1>
+        <form class="form-signin" role="form">
+          <h4 class="form-signin-heading">Payment</h4>
+          <p>You will need to make a payment of RM <span class="text-success"><% fee = Payment.find_by(description: "Profile claim fee") %><%= fee.fee %></span> before you can claim your profile</p>
+          <p>Click below to proceed with payment</p>
+          <br>
+<!--      <input type="text" class="form-control input-lg" placeholder="Credit card no." required="" autofocus="">
+          <input type="text" class="form-control input-lg ic" placeholder="Valid thru, ex.: 2018-12-31" required="">
+          <input type="text" class="form-control input-lg license" placeholder="CVV#" required="">
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Confirm Payment</button> -->
+          <%= link_to(image_tag("https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"), express_checkout_transactions_path(payment_type: :claim_profile, vet_id: @vet.id), method: :post) %>
+        </form>
+      </div>
     </div>
     <!-- END of MAIN -->
-
-
+    
     <script src="scripts/vendor.js"></script>
-
-        <script src="scripts/main.js"></script>
-</body>
+    <script src="scripts/main.js"></script>
+  </body>
 </html>
