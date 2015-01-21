@@ -4,7 +4,11 @@ SkillCounter::Application.routes.draw do
   #devise_for :user_logins, controllers: { registrations: "sessions" }
 
   devise_for :users
-  resources :users
+  resources :users do
+    member do 
+      resources :external_events, except: [:index], path: :custom_events
+    end
+  end
 
   
   resources :events 
