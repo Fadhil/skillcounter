@@ -46,8 +46,9 @@ class OrganizersController < ApplicationController
      @organizer = Organizer.find(params[:id])
     
     if  @organizer.update_attributes(organizer_params)
-      redirect_to organizer_path(id:  @organizer.id), success: "Successfully Updated"
+      redirect_to organizer_path(id:  @organizer.id), success: "Your details have been successfully updated."
     else
+      flash[:error] = "Something went wrong. Your details have not been updated."
       render :edit
     end
   end
@@ -57,9 +58,9 @@ class OrganizersController < ApplicationController
     @organizer = Organizer.find(params[:id])
     
     if @organizer.destroy
-      redirect_to users_path, notice: 'delete success'
+      redirect_to users_path, notice: 'The organizer profile has been deleted.'
     else
-      redirect_to users_path, error: 'Fail'
+      redirect_to users_path, error: 'Something went wrong.'
     end
   end
   

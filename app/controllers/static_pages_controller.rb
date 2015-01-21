@@ -10,8 +10,6 @@ class StaticPagesController < ApplicationController
       elsif current_user.is_pending_vet?
         redirect_to transactions_claim_profile_path
       end
-    else
-      redirect_to new_user_session_path
     end
   end
   

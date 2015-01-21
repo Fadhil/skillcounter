@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
         redirect_to root_url  
     end
 
+    rescue_from ActiveRecord::RecordNotFound do |exception|
+        flash[:error] = "Something went wrong! Jim is DEAD! I repeat, JIM IS DEAD!"
+        redirect_to root_url
+    end
 end

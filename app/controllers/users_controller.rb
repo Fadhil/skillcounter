@@ -1,20 +1,22 @@
 require 'SkillCounterParams'
-class UsersController < ApplicationController
 
+class UsersController < ApplicationController
   authorize_resource
-  
   include SkillCounterParams
   
   def index
     @users = User.all
   end
   
+  
   def show
     @user = User.find(params[:id])
   end
 
+
   def new
   end
+
 
   # def validate_claim_profile
   #   $params = params
@@ -24,6 +26,7 @@ class UsersController < ApplicationController
   #   else
   #     redirect_to new_user_path
   # end
+
 
   def create
     #if paypal returns success message
@@ -45,27 +48,25 @@ class UsersController < ApplicationController
       #   # some error message then redirect
       # end
     @user = User.new(user_params)
-    
       if @user.save
-      #UserMailer.welcome_email(@user).deliver
-      # UserMailer.welcome_email(@user).deliver
-      redirect_to user_path(id: @user.id), notice: "Successfully Signed Up"
+        # UserMailer.welcome_email(@user).deliver
+        redirect_to user_path(id: @user.id), notice: "Successfully Signed Up"
       else
-    
-      render :new
-      #redirent_to new
+        render :new
       end
   end
+
 
   def edit
     @user = User.find(params[:id])
   end
 
+
   def update
-     @user = User.find(params[:id])
+    @user = User.find(params[:id])
     
     if @user.update_attributes(user_params)
-      redirect_to user_path(id: @user.id), notice: "Successfully Updated"
+      redirect_to user_path(id: @user.id), notice: "You have successfully updated your profile."
     else
       render :edit
     end
@@ -73,13 +74,12 @@ class UsersController < ApplicationController
   
   
   def destroy
-    @user = User.find(params[:id])
-    if @user.destroy
-      redirect_to users_path, notice: 'delete success'
-    else
-      redirect_to users_path, error: 'Fail'
-    end
-    
+    # @user = User.find(params[:id])
+    # if @user.destroy
+    #   redirect_to users_path, notice: 'delete success'
+    # else
+    #   redirect_to users_path, error: 'Fail'
+    # end
   end
   
 
@@ -87,11 +87,13 @@ class UsersController < ApplicationController
     @user = current_user_login
   end
   
+  
   def check_event
       @user = User.find(params[:id])
       @previous_events = @user.previous_events
       @upcoming_events = @user.upcoming_events
   end
+  
   
   def user_event
       @user = User.find(params[:id])
@@ -99,21 +101,20 @@ class UsersController < ApplicationController
       @upcoming_events = @user.upcoming_events
   end
   
-  	def validate_event
+  
+  def validate_event
 		@event = Event.find(params[:event_id])
-
 
 		def check
 			@event = Event.find(params[:event_id])
-
-		    if @event.update_attributes(event_params)
-  				redirect_to admin_event_path, success: "Successfully Updated"
+	    if @event.update_attributes(event_params)
+  				redirect_to admin_event_path, success: "The event is now live!"
 			else
-	  			redirect_to admin_event_path, success: "Fail to update event status"
-			end
+	  			redirect_to admin_event_path, success: "Fail to update event status."
+      end
 		end
-
-	end
+  end
+	
 	
 	def admin_event
 		if params[:search]
@@ -124,7 +125,9 @@ class UsersController < ApplicationController
 		  @user = User.find(params[:id])
 	end
   
+  
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
+  
 end
