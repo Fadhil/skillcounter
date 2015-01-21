@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
       elsif current_user.is_organizer?
         redirect_to manage_event_path(current_user)
       elsif current_user.is_vet?
-        redirect_to vet_event_path
+        redirect_to vet_event_path(current_user)
       elsif current_user.is_pending_vet?
         redirect_to transactions_claim_profile_path
       end
