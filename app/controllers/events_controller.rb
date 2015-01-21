@@ -69,16 +69,30 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+
+    event.event_name = params[:event][:event_name]
+    event.description = params[:event][:description]
+    event.location = params[:event][:location]
+    event.start_date_time = params[:event][:start_date_time]
+    event.end_date_time = params[:event][:end_date_time]
+    event.event_page_url = params[:event][:event_page_url]
+    event.category = params[:event][:category]
+    event.poster = params[:event][:poster]
+    event.point = params[:event][:point]
+    event.status = "Pending"
     
-    if @event.update_attributes(event_params)
-      @event.status = "Pending"
-      if @event.save
-        redirect_to event_path(id: @event.id), success: "The event details have been successfully updated."
-      else
-        redirect_to event_path(id: @event.id), error: "Something went wrong. The event details have not been updated."
-      end
+    if (speaker_bio = params[:event][:speaker_bio]) != nil
+      event.speaker_bio = speaker_bio
+    end
+
+    if (schedule = params[:event][:schedule]) != nil
+      event.schedule = schedule
+    end
+    
+    if @event.save
+      redirect_to event_path(id: @event.id), success: "The event details have been successfully updated."
     else
-      render :edit
+      redirect_to event_path(id: @event.id), error: "Something went wrong. The event details have not been updated."
     end
   end
   
