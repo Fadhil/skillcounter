@@ -21,6 +21,7 @@ class Event < ActiveRecord::Base
     
     validates :start_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
     validates :end_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
+    validates_with TimelinessValidator
     # validates :venue_capacity, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     # validates :ticket_quantity, presence: true, format: {with: /\A[\d]+\Z/ }, numericality: true
     validates :event_page_url, presence: true, format: {with: /\A((http)s?(:\/\/)|(www.))\D/}
@@ -41,6 +42,5 @@ class Event < ActiveRecord::Base
         find(:all)
         end
     end
-
 
 end
