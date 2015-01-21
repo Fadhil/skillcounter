@@ -1,5 +1,5 @@
 class OrganizersController < ApplicationController
-  authorize_resource
+  load_and_authorize_resource
 
   def index
     @organizer = Organizer.all
@@ -13,10 +13,10 @@ class OrganizersController < ApplicationController
 
   def create
     @organizer = Organizer.new(organizer_params)
-    
+    @organizer.add_role("Organizer")
+    @organizer.member_since = Date.today
+
     if @organizer.save
-      @organizer.add_role("Organizer")
-      @organizer.member_since = Date.today
       Mailer.organizer_welcome_email(@organizer).deliver
       redirect_to root_path, success: "Successfully registered."
     else
@@ -43,37 +43,36 @@ class OrganizersController < ApplicationController
 
 
   def update
-<<<<<<< HEAD
-     organizer = Organizer.find(params[:id])
+    @organizer = Organizer.find(params[:id])
 
 
-    organizer.name = params[:organizer][:name]
-    organizer.email = params[:organizer][:email]
-    organizer.address = params[:organizer][:address]
-    organizer.contact_number = params[:organizer][:contact_number]
+    @organizer.name = params[:organizer][:name]
+    @organizer.email = params[:organizer][:email]
+    @organizer.address = params[:organizer][:address]
+    @organizer.contact_number = params[:organizer][:contact_number]
 
 
     if (avatar = params[:organizer][:avatar]) != nil
-      organizer.avatar = avatar
+      @organizer.avatar = avatar
     end
     if (biodata = params[:organizer][:biodata]) != nil
-      organizer.biodata = biodata
+      @organizer.biodata = biodata
     end
-    if (password = params[:organizer][:password]) != nil
-      organizer.password = password 
-    else
-      organizer.password = organizer.password
-    end
-    if (password_confirmation = params[:organizer][:password_confirmation]) != nil
-      organizer.password_confirmation = password_confirmation
-    else
-      organizer.password_confirmation = organizer.password_confirmation 
-    end
+    # if (password = params[:organizer][:password]) != nil
+    #   @organizer.password = password 
+    # else
+    #   @organizer.password = @organizer.password
+    # end
+    # if (password_confirmation = params[:organizer][:password_confirmation]) != nil
+    #   @organizer.password_confirmation = password_confirmation
+    # else
+    #   @organizer.password_confirmation = @organizer.password_confirmation 
+    # end
   
-    if  organizer.save
-      redirect_to organizer_path(organizer.id), success: "Successfully Updated"
+    if  @organizer.save
+      redirect_to organizer_path(@organizer.id), success: "Successfully Updated"
     else
-      redirect_to edit_organizer_path(organizer.id), error: "Failed to update. Please try again."
+      redirect_to edit_organizer_path(@organizer.id), error: "Failed to update. Please try again."
     end
   end
   
