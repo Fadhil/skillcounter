@@ -1,6 +1,4 @@
 class Organizer < User
-    
-
     has_attached_file :avatar, :styles => {:thumb => "100x100"}
     has_attached_file :biodata
 

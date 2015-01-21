@@ -59,17 +59,17 @@ class OrganizersController < ApplicationController
     if (password = params[:organizer][:password]) != nil && (password_confirmation = params[:organizer][:password_confirmation]) != nil
       organizer.password = password
       organizer.password_confirmation = password_confirmation
-      password_changed? = true
+      password_changed = true
     end
   
     if organizer.save
-      if password_changed?
+      if password_changed
         redirect_to new_user_login_session_path, success: "Your password has been updated. Please sign in again."
       else
-        redirect_to organizer_path(organizer.id), success: "Successfully Updated"
+        redirect_to organizer_path(organizer.id), success: "Your details have been successfully updated."
       end
     else
-      redirect_to edit_organizer_path(organizer.id), error: "Failed to update. Please try again."
+      redirect_to edit_organizer_path(organizer.id), error: "Something went wrong. Your details have not been updated."
     end
   end
   

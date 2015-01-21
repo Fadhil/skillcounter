@@ -1,3 +1,2 @@
 class ExternalEvent < Event
-  
 end

@@ -1,8 +1,7 @@
 require 'SkillCounterParams'
 
 class VetsController < ApplicationController
-
-  load_and_authorize_resource
+  authorize_resource
   include SkillCounterParams
   
   def index
@@ -10,10 +9,9 @@ class VetsController < ApplicationController
       @vets = Vet.search(params[:search])
     else
       @vets = Vet.all
-      
     end
-
   end
+  
   
   def show
     begin
@@ -24,13 +22,13 @@ class VetsController < ApplicationController
     @previous_events = @vet.previous_events
     @upcoming_events = @vet.upcoming_events
     @vet.check_point!(@vet.current_points)
-  
   end
+  
   
   def vet_event
       @vet = Vet.find(params[:id])
-     
   end
+  
   
   def my_events
       @vet = Vet.find(params[:id])
@@ -39,13 +37,15 @@ class VetsController < ApplicationController
       @upcoming_events = @vet.upcoming_events
   end
 
+
   def new
     @vet = Vet.new
   end
 
-  def create
 
+  def create
   end
+
 
   ##
   # Claiming a profile comes here first. If a valid unclaimed vet exists,
@@ -53,12 +53,10 @@ class VetsController < ApplicationController
   # the claim page with a notification
   #
   def validate_claim_profile
-
     @vet = Vet.where(params[:vet]).first # Look for a Vet with the params given
 
     if @vet && @vet.encrypted_password.blank? # A valid unclaimed vet exists
       fee = Payment.where(description:"Profile claim fee").first
-
       flash.now[:notice] = "Found your profile. <br/>You will need to make a payment of RM #{fee.fee} before you can claim your profile.".html_safe
       render 'transactions/pay_to_claim'
     else # No such Vet, or previously claimed
@@ -66,12 +64,14 @@ class VetsController < ApplicationController
     end
   end
 
+
   def edit
     @vet = Vet.find(params[:id])
   end
 
+
   def update
-     @vet = Vet.find(params[:id])
+    @vet = Vet.find(params[:id])
     
     if @vet.update_attributes(vet_params)
       redirect_to vet_path(id: @vet.id), success: "Successfully Updated"
@@ -80,10 +80,12 @@ class VetsController < ApplicationController
     end
   end
 
+
   # not sure what this does
   def claimed_profile
     @vet = current_vet_login
   end
+
 
   def redeem_licence
       @vet = Vet.find(params[:id])
@@ -94,19 +96,20 @@ class VetsController < ApplicationController
         @enough_points = true
       else
         @enough_points = false
-        redirect_to :back, error: "Not enough points, you can get points by sign up more events"
+        redirect_to :back, error: "You do not have enough points. Try joining a few more events before trying to renew your licence again."
       end
   end
+
 
   def destroy
     @vet = Vet.find(params[:id])
     if @vet.destroy
-      redirect_to users_path, notice: 'delete success'
+      redirect_to users_path, notice: 'The vet profile has been successfully deleted.'
     else
-      redirect_to users_path, error: 'Fail'
+      redirect_to users_path, error: 'Something went wrong. The vet profile was not deleted.'
     end
-    
   end
+
 
   def express_checkout
     fee = Payment.find_by(description: "Licence renewal fee")
@@ -125,18 +128,17 @@ class VetsController < ApplicationController
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
-  def renew_licence_new
 
+  def renew_licence_new
       @transaction = Transaction.new(:express_token => params[:token])
       @payment_type = params[:payment_type] # We'll pass this on to :create from the hidden fields in :new view
       @payment_id = params[:payment_id]
       @vet_id = params[:vet_id]
       @fee = params[:fee].to_i
-
   end
 
-  def renew_licence_create
 
+  def renew_licence_create
       @transaction = Transaction.new(transaction_params)
       @transaction.express_token = params[:transaction][:express_token]
       @transaction.ip_address = request.remote_ip
@@ -149,7 +151,6 @@ class VetsController < ApplicationController
         if @transaction.purchase(@fee)
             @vet.current_points -= 80
             @vet.save
-
             redirect_to vet_path(@vet), success: "Payment was successful. Your licence has been renewed."
         else
             redirect_to vet_path(@vet), error: "Payment failed. Please try again."
@@ -159,12 +160,13 @@ class VetsController < ApplicationController
       end
   end
 
+
   def renew_licence_cancel
   end
 
 
-  
   def vet_params
     params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points, :avatar, :ip_address, :express_token, :express_payer_id, :purchased_at)
   end
+  
 end
