@@ -1,9 +1,15 @@
   <div class = "jumbotron"  
 
     <%= form_for @transaction, :url => url_for(:controller => 'events', :action => 'event_payment_create'), :method => 'post' do |f| %>
-      <% for @transaction.errors.full_messages do |e| %>
-        <%= e %>
-      <% end %>
+      <% if @transaction.errors.any? %>
+       <div id="error_explanation">
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <% flash[:error] = msg %>
+        <% end %>
+       
+      </div>
+    <% end %>
+     
       <% if @transaction.express_token.blank? %>
      		<p>Transaction failed</p>
       <% else %>

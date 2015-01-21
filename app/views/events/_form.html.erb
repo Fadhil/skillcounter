@@ -5,7 +5,7 @@
 <% if @event.errors.any? %>
        <div id="error_explanation">
         <% @event.errors.full_messages.each do |msg| %>
-          <%flash[:error] = msg %>
+          <% flash[:error] = msg %>
         <% end %>
        
       </div>
