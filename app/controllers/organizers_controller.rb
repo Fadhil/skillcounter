@@ -46,9 +46,9 @@ class OrganizersController < ApplicationController
      @organizer = Organizer.find(params[:id])
     
     if  @organizer.update_attributes(organizer_params)
-      redirect_to organizer_path(id:  @organizer.id), success: "Successfully Updated"
+      redirect_to organizer_path(@organizer.id), success: "Successfully Updated"
     else
-      render :edit
+      redirect_to edit_organizer_path(@organizer.id), error: "Failed to update. Please try again."
     end
   end
   
