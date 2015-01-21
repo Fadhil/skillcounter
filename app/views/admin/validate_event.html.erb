@@ -1,171 +1,126 @@
-<!-- <!doctype html>
-
+<!doctype html>
 <html class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <title>codemalaysiaskillcounter</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link rel="shortcut icon" href="/favicon.ico"> -->
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory
-
-    <link rel="stylesheet" href="../styles/main.css">
-  </head>
-  <body>
- -->
-    <!-- MAIN -->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="page-header">
-                    <h1><%= @event.event_name %></h1>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-3">
-                <%= image_tag @event.poster.url(:thumb), class:"img-thumbnail"  %>
-            </div>
-            <div class="col-md-9 col-sm-9">
-                <div class="row">
-                    <div class="col-md-offset-9 col-md-3">
-                        <span class="label label-points">
-                            <%= @event.point %>
-                            <span class="glyphicon glyphicon-fire"></span>
-                        </span>
+    <head>
+        <meta charset="utf-8">
+        <title>codemalaysiaskillcounter</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <link rel="shortcut icon" href="/favicon.ico"> -->
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="stylesheet" href="../styles/main.css">
+    </head>
+    
+    <body>
+        <!-- MAIN -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1><%= @event.event_name %></h1>
                     </div>
                 </div>
-                <div class="row">
-                    <form class="form-horizontal" role="form">
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label for="nextEvent" class="col-sm-3 control-label">Start Date:</label>
-                                <div class="col-sm-8  class:form-control">
-                                    <%= @event.start_date_time%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="lastEvent" class="col-sm-3 control-label">End Date</label>
-                                <div class="col-sm-8  class:form-control">
-                                    <%= @event.end_date_time%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="nextEvent" class="col-sm-3 control-label">Description:</label>
-                                <div class="col-sm-8">
-                                    <%= @event.description%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                            <label for="location" class="col-sm-3 control-label">Location</label>
-                                <div class="col-sm-8">
-                                    <%= @event.location%>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                            <label for="license" class="col-sm-3 control-label">Speaker</label>
-                                <div class="col-sm-8">
-                                    <a href="@event.speaker.url(:original, false)">speaker.pdf </a>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                            <label for="license" class="col-sm-3 control-label">Schedule</label>
-                                <div class="col-sm-8">
-                                    <a href="@event.schedule.url(:original, false)">schedule.pdf </a>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                            <label for="organizer" class="col-sm-3 control-label">Organizer</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" value="<%= @organizer.name %>" id="nextEvent" disabled>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                            <label for="license" class="col-sm-3 control-label">License</label>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control" placeholder="XXX-123-ABC" id="license">
-                                </div>
-                            </div>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-3">
+                    <%= image_tag @event.poster.url(:thumb), class:"img-thumbnail" %>
                 </div>
-
+                <div class="col-md-9 col-sm-9">
+                    <div class="row">
                         <div class="col-md-offset-9 col-md-3">
+                            <span class="label label-points">
+                                <%= @event.point %>
+                                <span class="glyphicon glyphicon-fire"></span>
+                            </span>
                         </div>
-                        <div class="col-md-offset-9 col-md-3">
-                            <% if @event.status == "Pending" %>
-                                <%= form_for @event do %>
-                                <% end %> <!-- redundant form to make approving work -->
-                                <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
-                                    <%= t.hidden_field :status, :value=>"Approved"%>
-                                    <%= t.hidden_field :reason, :value=>"" %>
-                                    <%= t.submit "Approve", class:"btn btn-default btn-success"%>
-                                <% end %>
-                                <button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#adminRejectEvent">Reject</button>
+                    </div>
+                    <div class="row">
+                        <form class="form-horizontal" role="form">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label for="nextEvent" class="col-sm-3 control-label">Start Date:</label>
+                                    <div class="col-sm-8  class:form-control"><%= @event.start_date_time %></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastEvent" class="col-sm-3 control-label">End Date</label>
+                                    <div class="col-sm-8  class:form-control"><%= @event.end_date_time %></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nextEvent" class="col-sm-3 control-label">Description:</label>
+                                    <div class="col-sm-8"><%= @event.description %></div>
+                                </div>
+                                <div class="form-group">
+                                <label for="location" class="col-sm-3 control-label">Location</label>
+                                    <div class="col-sm-8"><%= @event.location %></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="license" class="col-sm-3 control-label">Speaker</label>
+                                    <div class="col-sm-8"><a href="<%= @event.speaker.url(:original, false) %>">speaker.pdf</a></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="license" class="col-sm-3 control-label">Schedule</label>
+                                    <div class="col-sm-8"><a href="@event.schedule.url(:original, false)">schedule.pdf</a></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="organizer" class="col-sm-3 control-label">Organizer</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" value="<%= @organizer.name %>" id="nextEvent" disabled></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="license" class="col-sm-3 control-label">License</label>
+                                    <div class="col-sm-8"><input type="text" class="form-control" placeholder="XXX-123-ABC" id="license"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-offset-9 col-md-3">
+                    </div>
+                    <div class="col-md-offset-9 col-md-3">
+                        <% if @event.status == "Pending" %>
+                            <%= form_for @event do %>
+                            <% end %> <!-- redundant form to make approving work -->
+                            <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
+                                <%= t.hidden_field :status, :value=>"Approved"%>
+                                <%= t.hidden_field :reason, :value=>"" %>
+                                <%= t.submit "Approve", class:"btn btn-default btn-success"%>
                             <% end %>
-                        </div>
-                    </form>
+                            <button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#adminRejectEvent">Reject</button>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <!-- modal  -->
-    <div class="modal fade" id="adminRejectEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  data-backdrop="false">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h3 class="modal-title" id="myModalLabel">Event rejected! <small><a href="http://" target="_blank">Undo here</a></small></h3>
-          </div>
-            <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
-          <div class="modal-body">
-            <h4>Why was this application rejected?</h4>
-            <div class="checkbox">
-              <label>
-                    <%= t.radio_button :reason, "Incorrect points" %>
-                    Incorrect points
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                    <%= t.radio_button :reason, "Insufficient hours" %>
-                    Insufficient hours
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                    <%= t.radio_button :reason, "Wrong type" %>
-                    Wrong type
-              </label>
-            </div>
-            <div class="checkbox">
-              <label>
-                    <%= t.radio_button :reason, "Other" %>
-                    Other
-              </label>
-              <!-- <input type="text" class="form-control" placeholder="Custom reason"> -->
-            </div>
-          </div>
-          <div class="modal-footer">
-                <%= t.hidden_field :status, :value=>"Rejected"%>
-                <%= t.submit "OK", class:"btn btn-default btn-success" %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- END of modal -->
     
-    <!-- END of MAIN -->
-
-    <script src="../scripts/vendor.js"></script>
-
+        <!-- modal  -->
+        <div class="modal fade" id="adminRejectEvent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  data-backdrop="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h3 class="modal-title" id="myModalLabel">Event rejected! <small><a href="http://" target="_blank">Undo here</a></small></h3>
+                    </div>
+                    <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
+                        <div class="modal-body">
+                            <h4>Why was this application rejected?</h4>
+                            <div class="checkbox"><label><%= t.radio_button :reason, "Incorrect points" %>Incorrect points</label></div>
+                            <div class="checkbox"><label><%= t.radio_button :reason, "Insufficient hours" %>Insufficient hours</label></div>
+                            <div class="checkbox"><label><%= t.radio_button :reason, "Wrong type" %>Wrong type</label></div>
+                            <div class="checkbox"><label><%= t.radio_button :reason, "Other" %>Other</label><!-- <input type="text" class="form-control" placeholder="Custom reason"> --></div>
+                        </div>
+                        <div class="modal-footer">
+                            <%= t.hidden_field :status, :value=>"Rejected"%>
+                            <%= t.submit "OK", class:"btn btn-default btn-success" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <!-- END of modal -->
+        
+        <!-- END of MAIN -->
+    
+        <script src="../scripts/vendor.js"></script>
         <script src="../scripts/main.js"></script>
-
-</body>
+    
+    </body>
 </html>
 
 
