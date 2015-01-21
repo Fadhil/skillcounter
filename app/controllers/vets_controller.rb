@@ -1,7 +1,7 @@
 require 'SkillCounterParams'
 
 class VetsController < ApplicationController
-  authorize_resource
+  #authorize_resource
   include SkillCounterParams
   
   def index

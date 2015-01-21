@@ -2,7 +2,7 @@ require 'SkillCounterParams'
 require 'roo'
 
 class AdminController < ApplicationController
-	authorize_resource
+	#authorize_resource
 	include SkillCounterParams
 
 	def new
@@ -44,8 +44,10 @@ class AdminController < ApplicationController
 		@vet = Vet.find(params[:id])
 	end
 
+
 	def upload_vets
 	end
+
 
 	##
 	# Receives uploaded file in params[:vet_list]
@@ -64,32 +66,30 @@ class AdminController < ApplicationController
 	#
 	def save_uploaded_vets
 		uploaded_file = params[:vet_list]
-
-			if uploaded_file && uploaded_file.original_filename =~ /\.csv$/
-				sheet = Roo::CSV.new(uploaded_file.path)
-				vets_count = 0
-				# We're assuming the first row is a header
-				( (sheet.first_row + 1) .. sheet.last_row ).each do |rownum|
-					row = sheet.row(rownum)
-					# Only create vet if that email hasn't been used yet
-					if Vet.where(email: row[VetCsvFields::EMAIL]).blank?
-						vet = Vet.new(name: row[VetCsvFields::NAME], 
-													email: row[VetCsvFields::EMAIL],
-													licence_number: row[VetCsvFields::LICENSE],
-													ic_number: row[VetCsvFields::IC], 
-													contact_number: row[VetCsvFields::CONTACT]  
-													)
-						vet.add_role("Pending_vet")
-						vet.member_since = Date.today
-						vet.save(validate: false)
-						vets_count += 1
-					end
+		if uploaded_file && uploaded_file.original_filename =~ /\.csv$/
+			sheet = Roo::CSV.new(uploaded_file.path)
+			vets_count = 0
+			# We're assuming the first row is a header
+			( (sheet.first_row + 1) .. sheet.last_row ).each do |rownum|
+				row = sheet.row(rownum)
+				# Only create vet if that email hasn't been used yet
+				if Vet.where(email: row[VetCsvFields::EMAIL]).blank?
+					vet = Vet.new(name: row[VetCsvFields::NAME], 
+												email: row[VetCsvFields::EMAIL],
+												licence_number: row[VetCsvFields::LICENSE],
+												ic_number: row[VetCsvFields::IC], 
+												contact_number: row[VetCsvFields::CONTACT]  
+												)
+					vet.add_role("Pending_vet")
+					vet.member_since = Date.today
+					vet.save(validate: false)
+					vets_count += 1
 				end
-				redirect_to admin_upload_vets_path, notice: "Uploaded and created #{vets_count} vets"
-			else
-				redirect_to admin_upload_vets_path, notice: "You must upload a CSV file."
 			end
+			redirect_to admin_upload_vets_path, notice: "Uploaded and created #{vets_count} vets"
+		else
+			redirect_to admin_upload_vets_path, notice: "You must upload a CSV file."
+		end
 	end
 	
-
 end

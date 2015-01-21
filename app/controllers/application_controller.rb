@@ -5,15 +5,15 @@ class ApplicationController < ActionController::Base
     add_flash_types :success, :notice, :alert, :error
     
     def after_sign_in_path_for(resource)
-      # if resource.is_admin?
-      #     redirect_to admin_pending_index_path
-      # elsif resource.is_organizer?
-      #     redirect_to manage_event_path(current_user)
-      # elsif resource.is_vet?
-      #     redirect_to vet_event_path
-      # elsif resource.is_pending_vet?
-      #     redirect_to transactions_claim_profile_path
-      # end
+      if resource.is_admin?
+          admin_pending_index_path
+      elsif resource.is_organizer?
+          manage_event_path(current_user)
+      elsif resource.is_vet?
+          vet_event_path
+      elsif resource.is_pending_vet?
+          transactions_claim_profile_path
+      end
     end
     
     rescue_from CanCan::AccessDenied do |exception|  
