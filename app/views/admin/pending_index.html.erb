@@ -62,8 +62,12 @@
                                            </span>
                                     <% end %>
                                 </h3>
-                                <p><%=event.reason%></p>
-                                <p><%=event.description%></p>
+                                <% if event.status == "Rejected" %>
+                                    <% if event.reason != nil %>
+                                        <p>Rejected reason: <%=event.reason%></p>
+                                    <% end %>
+                                <% end %>
+                                <p>Description: <%=event.description%></p>
                             </div>
                             <div class="col-md-2 col-sm-2">
                                 <span class="label label-points">

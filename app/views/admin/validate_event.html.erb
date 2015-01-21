@@ -78,7 +78,7 @@
                             <div class="form-group">
                             <label for="organizer" class="col-sm-3 control-label">Organizer</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" value="<%= @event.organizer_id %>" id="nextEvent" disabled>
+                                    <input type="text" class="form-control" value="<%= @organizer.name %>" id="nextEvent" disabled>
                                 </div>
                             </div>
 
@@ -94,6 +94,7 @@
                         <div class="col-md-offset-9 col-md-3">
                         </div>
                         <div class="col-md-offset-9 col-md-3">
+                            <% if @event.status == "Pending" %>
                                 <%= form_for @event do %>
                                 <% end %> <!-- redundant form to make approving work -->
                                 <%= form_for @event, :url => url_for(:controller => 'admin', :action => 'validate_event') do |t| %>
@@ -102,6 +103,7 @@
                                     <%= t.submit "Approve", class:"btn btn-default btn-success"%>
                                 <% end %>
                                 <button type="button" class="btn btn-default btn-danger" data-toggle="modal" data-target="#adminRejectEvent">Reject</button>
+                            <% end %>
                         </div>
                     </form>
                 </div>

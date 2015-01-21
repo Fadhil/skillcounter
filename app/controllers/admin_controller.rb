@@ -2,16 +2,12 @@ require 'SkillCounterParams'
 require 'roo'
 
 class AdminController < ApplicationController
-
-	# load_and_authorize_resource 
 	authorize_resource
 	include SkillCounterParams
 
-
-  def new
-    @admin = Admin.new
-  end
-
+	def new
+		@admin = Admin.new
+	end
 
 
 	def event_index
@@ -22,33 +18,33 @@ class AdminController < ApplicationController
 		end
 	end
 
+
 	def pending_index
 		@event = Event.where(status:"Pending")
 	end
 
+
 	def validate_event
 		# authorize! :validate_event, @event
 		@event = Event.find(params[:id])
-
-
+		@organizer = Organizer.find(@event.user_id)
+		
 		def update
 			@event = Event.find(params[:id])
-
 		    if @event.update_attributes(event_params)
-  				redirect_to admin_event_index_path, success: "Successfully Updated"
+  				redirect_to admin_event_index_path, success: "The event has been approved."
 			else
-	  			redirect_to admin_event_index_path, error: "Fail to update event status. #{@event.errors.full_messages}"
+	  			redirect_to admin_event_index_path, error: "Something went wrong. #{@event.errors.full_messages}"
 			end
 		end
-
 	end
+
 
 	def vet_show
 		@vet = Vet.find(params[:id])
 	end
 
 	def upload_vets
-
 	end
 
 	##
@@ -67,13 +63,10 @@ class AdminController < ApplicationController
 	# Check this out at some point
 	#
 	def save_uploaded_vets
-
 		uploaded_file = params[:vet_list]
 
 			if uploaded_file && uploaded_file.original_filename =~ /\.csv$/
-
 				sheet = Roo::CSV.new(uploaded_file.path)
-				
 				vets_count = 0
 				# We're assuming the first row is a header
 				( (sheet.first_row + 1) .. sheet.last_row ).each do |rownum|
@@ -92,22 +85,11 @@ class AdminController < ApplicationController
 						vets_count += 1
 					end
 				end
-
 				redirect_to admin_upload_vets_path, notice: "Uploaded and created #{vets_count} vets"
-
 			else
 				redirect_to admin_upload_vets_path, notice: "You must upload a CSV file."
 			end
-
 	end
-
-
-	# def event.search(search)
- #   	if search
- #   		find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
- #   	else
-    		
- #   	end
- #   end
+	
 
 end
