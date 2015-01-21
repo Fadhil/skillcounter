@@ -41,7 +41,7 @@ class Event < ActiveRecord::Base
     end
 
     def is_external_event?
-        type = 'ExternalEvent'
+        type == 'ExternalEvent'
     end
 
 end

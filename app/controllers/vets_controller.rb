@@ -33,7 +33,7 @@ class VetsController < ApplicationController
   def my_events
       @vet = Vet.find(params[:id])
       @previous_events = @vet.previous_events.where('type <> ?', 'ExternalEvent')
-      @custom_events = @vet.previous_events.where('type == ?', 'ExternalEvent')
+      @custom_events = @vet.previous_events.where('type = ?', 'ExternalEvent')
       @upcoming_events = @vet.upcoming_events
   end
 
