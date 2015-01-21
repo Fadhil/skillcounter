@@ -5,11 +5,11 @@ class SessionsController < Devise::SessionsController
         sign_in(resource_name, resource)
         yield resource if block_given?
         
-        if current_user_login
+       if current_user_login
             if current_user.is_admin?
                 redirect_to admin_pending_index_path
             elsif current_user.is_organizer?
-                redirect_to manage_event_path(current_user)
+                redirect_to manage_event_path
             elsif current_user.is_vet?
                 redirect_to vet_event_path
             elsif current_user.is_pending_vet?
