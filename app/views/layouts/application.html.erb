@@ -23,8 +23,10 @@
             else
                 navbar = render 'layouts/header'
             end
+          else
+            navbar = render 'layouts/header'
         end %>
-        
+    
         <%= navbar %>
         <%= flash_messages %>
         <%= yield %>
