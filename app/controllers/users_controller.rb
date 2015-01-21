@@ -74,12 +74,12 @@ class UsersController < ApplicationController
   
   
   def destroy
-    # @user = User.find(params[:id])
-    # if @user.destroy
-    #   redirect_to users_path, notice: 'delete success'
-    # else
-    #   redirect_to users_path, error: 'Fail'
-    # end
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to users_path, notice: 'delete success'
+    else
+      redirect_to users_path, error: 'Fail'
+    end
   end
   
 
