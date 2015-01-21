@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header custom-with_input">
+                <h1>Payments</h1>
+            </div>
+            <ul class="media-list">
+                <% @payments.each do |payment| %>
+                    <a href="<%= payment_path(payment) %>">
+                        <li class="media">
+                            <div class="media-body">
+                                <div class="col-md-16 col-sm-16">
+                                    <h3 class="media-heading"><%= payment.description %></h3>
+                                </div>
+                                    <span>Fee: RM <span class="member-since"><%= number_with_precision(payment.fee, precision: 2) %></span></span>
+                            </div>
+                        </li>
+                    </a>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+</div>

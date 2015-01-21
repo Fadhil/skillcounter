@@ -1,0 +1,37 @@
+<%= form_tag(payments_path, :method => "get", class:"form-horizontal", role:"form") do %>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>Payment</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <div class="row">
+                    <div class="col-md-5">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="userEmail" class="col-sm-3 control-label">Description</label>
+                                <div class="col-sm-8">
+                                     <%= text_field_tag :description, @payment.description, class:"form-control", disabled: true %>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="userPhone" class="col-sm-3 control-label">Fee</label>
+                                <div class="col-sm-8">
+                                    <p><%= text_field_tag :fee, "RM#{number_with_precision(@payment.fee, precision: 2)}", class:"form-control", disabled: true %></p>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-9 col-md-3">
+                                <%= link_to "Edit", edit_payment_path(@payment), class: "btn btn-default btn-success" %>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+

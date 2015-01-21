@@ -1,0 +1,21 @@
+<%= form_for @payment, :html => {class: "form-horizontal" } do |f| %>
+    <% if @payment.errors.any? %>
+        <div id="error_explanation">
+            <% @payment.errors.full_messages.each do |msg| %>
+                <%flash[:error] = msg %>
+            <% end %>
+        </div>
+    <% end %>
+    
+    <div class="form-group">
+        <label for="inputName" class="col-sm-2 control-label">Description</label>
+        <div class="col-sm-6 "><%= f.text_field :description, class: "form-control", disabled: true %></div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Fee</label>
+        <div class="col-sm-6 "><%= f.text_field :fee, class: "form-control" %></div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-9 col-sm-10"><%= f.submit "Save",  class: "btn btn-default btn-success" %></div>
+    </div>
+<% end %>

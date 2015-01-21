@@ -7,18 +7,35 @@ class PaymentsController < ApplicationController
 
 
   def create
-    fee = [:params][:fee]
-    total_in_cents = fee * 100
-    payment = Payment.create(fee: fee, total_in_cents: total_in_cents)
-    payment.save
+  end
+  
+
+  def index
+    @payments = Payment.all
+  end
+
+
+  def show
+    @payment = Payment.find(params[:id])
   end
 
 
   def edit
+    @payment = Payment.find(params[:id])
   end
 
 
   def update
+    @payment = Payment.find(params[:id])
+    
+    @payment.fee = params[:payment][:fee]
+    @payment.total_in_cents = @payment.fee * 100
+    
+    if @payment.save
+      redirect_to @payment, success: "The fee has been updated."
+    else
+      redirect_to @payment, error: "Something went wrong. The fee was not updated."
+    end
   end
 
 

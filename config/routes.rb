@@ -1,6 +1,6 @@
 SkillCounter::Application.routes.draw do
 
-  resource :payments 
+  resources :payments 
   #devise_for :user_logins, controllers: { registrations: "sessions" }
 
   devise_for :users
