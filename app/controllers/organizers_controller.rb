@@ -43,15 +43,12 @@ class OrganizersController < ApplicationController
 
 
   def update
-<<<<<<< HEAD
-     organizer = Organizer.find(params[:id])
-
+    organizer = Organizer.find(params[:id])
 
     organizer.name = params[:organizer][:name]
     organizer.email = params[:organizer][:email]
     organizer.address = params[:organizer][:address]
     organizer.contact_number = params[:organizer][:contact_number]
-
 
     if (avatar = params[:organizer][:avatar]) != nil
       organizer.avatar = avatar
@@ -59,19 +56,18 @@ class OrganizersController < ApplicationController
     if (biodata = params[:organizer][:biodata]) != nil
       organizer.biodata = biodata
     end
-    if (password = params[:organizer][:password]) != nil
-      organizer.password = password 
-    else
-      organizer.password = organizer.password
-    end
-    if (password_confirmation = params[:organizer][:password_confirmation]) != nil
+    if (password = params[:organizer][:password]) != nil && (password_confirmation = params[:organizer][:password_confirmation]) != nil
+      organizer.password = password
       organizer.password_confirmation = password_confirmation
-    else
-      organizer.password_confirmation = organizer.password_confirmation 
+      password_changed? = true
     end
   
-    if  organizer.save
-      redirect_to organizer_path(organizer.id), success: "Successfully Updated"
+    if organizer.save
+      if password_changed?
+        redirect_to new_user_login_session_path, success: "Your password has been updated. Please sign in again."
+      else
+        redirect_to organizer_path(organizer.id), success: "Successfully Updated"
+      end
     else
       redirect_to edit_organizer_path(organizer.id), error: "Failed to update. Please try again."
     end
