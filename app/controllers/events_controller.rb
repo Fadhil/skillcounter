@@ -46,19 +46,13 @@ class EventsController < ApplicationController
       @event = current_user.events.build(event_params)
       @event.status = "Pending"
 
-    if Date.today < @event.start_date_time && Date.today < @event.end_date_time
-      if @event.end_date_time > @event.start_date_time
-        if @event.save
-          #UserMailer.welcome_email(@event).deliver
-          redirect_to event_path(id: @event.id), success: "Successfully created event"
-        else
-          redirect_to :back, error: "Something went wrong. #{@event.errors.full_messages}"
-        end
-      else
-        redirect_to :back, error: "Failed to create event. End date must not be before start date."
-      end
+   
+    if @event.save
+      #UserMailer.welcome_email(@event).deliver
+      redirect_to event_path(id: @event.id), success: "Successfully created event"
     else
-      redirect_to :back, error: "Failed to create event. The start and end dates must be at least 1 day from today."
+      flash.now[:error] =  "Something went wrong. #{@event.errors.full_messages}"
+      render :new
     end
   end
 

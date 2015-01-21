@@ -5,7 +5,7 @@
 <% if @event.errors.any? %>
        <div id="error_explanation">
         <% @event.errors.full_messages.each do |msg| %>
-          <%flash[:error] = msg %>
+          <% flash[:error] = msg %>
         <% end %>
        
       </div>
@@ -108,12 +108,14 @@
                                     <%= f.file_field :poster, class: "form-control"%>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="Points" class="col-sm-3 control-label">Number of Participants</label>
-                                <div class="col-sm-6">     
-                                     <%= f.text_field :number_participants, class: "form-control" %>
+                            <% unless f.object.type == 'ExternalEvent'  # We don't expect Vets to know about number of participants for an external event%>
+                                <div class="form-group">
+                                    <label for="Points" class="col-sm-3 control-label">Number of Participants</label>
+                                    <div class="col-sm-6">     
+                                         <%= f.text_field :number_participants, class: "form-control" %>
+                                    </div>
                                 </div>
-                            </div>
+                            <% end %>
                             <div class="form-group">
                                 <label for="Points" class="col-sm-3 control-label">Points</label>
                                 <div class="col-sm-6">     

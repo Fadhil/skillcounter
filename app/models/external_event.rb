@@ -1,0 +1,3 @@
+class ExternalEvent < Event
+  
+end

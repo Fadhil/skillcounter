@@ -35,6 +35,11 @@
                 <%= render 'shared/event', object: @previous_events %>
                 
                 <% end %>
+
+                <% if @custom_events.any? %>
+                    <h2>Custom events</h2>
+                    <%= render 'shared/event', object: @custom_events %>
+                <% end %>
             </div>
         </div>
     </div>
