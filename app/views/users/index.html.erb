@@ -29,8 +29,9 @@
                   
                 <ul class="media-list">
                  <% @users.each do |user| %>
+                  <a href= "<%= user_path(user) %>">
                     <li class="media">
-                        <a class="pull-left" href="#">
+                        <a class="pull-left"  >
                             
                             <%= image_tag user.avatar.url(:thumb), class:"img-thumbnail"  %>
                         </a>
@@ -52,12 +53,13 @@
                                     </span>
                                 </span>
                             </div>
-                            
-                    	  <%= link_to "Edit", edit_user_path(user), class: "btn btn-info" %>
+
+                           <div >
                     	   <%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %>
-                    	  
+                    	  </div>
                         </div>
                     </li>
+                    </a>
                      <% end %>  
                 </ul>
                 
