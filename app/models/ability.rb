@@ -29,6 +29,9 @@ class Ability
 
       if user.is_admin?
         can :manage, :all
+        can [:edit, :update], Admin, id: user.id 
+        cannot [:edit, :update], Organizer
+        cannot [:edit, :update], Vet 
       elsif user.is_organizer?
         can [:index, :new, :create, :show, :edit, :update, :purchase_points, :upload_attendance, :express_checkout, :event_payment_new, :event_payment_create, :event_payment_cancel], Event
         can [:index, :show, :manage_event], Organizer

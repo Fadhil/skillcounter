@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       elsif resource.is_organizer?
           manage_event_path(current_user)
       elsif resource.is_vet?
-          vet_event_path
+          events_path
       elsif resource.is_pending_vet?
           transactions_claim_profile_path
       end
