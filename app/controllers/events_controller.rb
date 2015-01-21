@@ -9,10 +9,10 @@ class EventsController < ApplicationController
     if params[:search]
       @events = Event.search(params[:search])
     else
-      if current_user.role == "Vet"
-        @events_upcoming = Event.upcoming_vet.paginate(page: params[:upcoming]).per_page(12)
+      if current_user.is_vet?
+        @events = Event.upcoming_vet.paginate(page: params[:upcoming]).per_page(12)
       else
-        @events_upcoming = Event.upcoming.paginate(page: params[:upcoming]).per_page(12)
+        @events = Event.upcoming.paginate(page: params[:upcoming]).per_page(12)
       end
     # @events_upcoming = Event.upcoming
     # @events_past = Event.past
