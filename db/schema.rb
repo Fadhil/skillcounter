@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121104429) do
+ActiveRecord::Schema.define(version: 20150121111258) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 20150121104429) do
     t.integer  "vet_id"
     t.integer  "user_id"
     t.integer  "number_participants"
+    t.string   "type"
   end
 
   add_index "events", ["organizer_id"], name: "index_events_on_organizer_id"
