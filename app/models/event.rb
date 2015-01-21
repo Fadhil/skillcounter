@@ -1,5 +1,4 @@
 class Event < ActiveRecord::Base
-    
     # belongs_to :organizer
     # belongs_to :vet
     belongs_to :creator, :class_name => "User"
@@ -17,8 +16,6 @@ class Event < ActiveRecord::Base
     validates :event_name, presence: true
     validates :description, presence: true, length: { maximum: 2500 }
     validates :location, presence: true, length: { maximum: 255 }
-    
-    
     validates :start_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
     validates :end_date_time, presence: true #, format: {with: "%FT%R", message: 'invalid format' }
     validates_with TimelinessValidator, unless: :is_external_event?
@@ -37,9 +34,9 @@ class Event < ActiveRecord::Base
 
     def self.search(search)
         if search
-        find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
+            find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
         else
-        find(:all)
+            find(:all)
         end
     end
 

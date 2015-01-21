@@ -45,11 +45,10 @@ class OrganizersController < ApplicationController
   def update
      @organizer = Organizer.find(params[:id])
     
-    if  @organizer.update_attributes(organizer_params)
-      redirect_to organizer_path(id:  @organizer.id), success: "Your details have been successfully updated."
+    if @organizer.update_attributes(organizer_params)
+      redirect_to organizer_path(@organizer), success: "Your details have been successfully updated."
     else
-      flash[:error] = "Something went wrong. Your details have not been updated."
-      render :edit
+      redirect_to organizer_path(@organizer), error: "Something went wrong. Your details have not been updated."
     end
   end
   
