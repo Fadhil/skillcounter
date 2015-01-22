@@ -1,7 +1,7 @@
 <div class = "jumbotron" >
   <%= form_for @transaction do |f| %>
     <% if @transaction.errors.any? %>
-      <% for @transaction.errors.full_messages do |e| %>
+      <% for @transaction.errors.full_messages.each do |e| %>
           <%= e %>
       <% end %>
     <% end %>
