@@ -27,7 +27,8 @@ class Ability
     cannot :manage, :all
     can [:new, :create], Organizer
     can [:new, :create], Vet
-
+    can [:validate_claim_profile], Vet
+    can :manage, Transaction
     if user.is_admin?
       can :manage, :all
       can [:edit, :update], Admin, id: user.id 
