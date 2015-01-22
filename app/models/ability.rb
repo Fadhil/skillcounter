@@ -26,7 +26,7 @@ class Ability
     user ||= User.new # guest user (not logged in)
     cannot :manage, :all
     can [:new, :create], Organizer
-    can 
+    
 
     if user.is_admin?
       can :manage, :all
