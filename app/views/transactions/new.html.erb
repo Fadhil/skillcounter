@@ -1,7 +1,9 @@
 <div class = "jumbotron" >
   <%= form_for @transaction do |f| %>
-    <% for @transaction.errors.full_messages do |e| %>
-        <%= e %>
+    <% if @transaction.errors.any? %>
+      <% for @transaction.errors.full_messages do |e| %>
+          <%= e %>
+      <% end %>
     <% end %>
     <% if @transaction.express_token.blank? %>
    		<p>Transaction failed</p>
