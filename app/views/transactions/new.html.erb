@@ -1,9 +1,11 @@
 <div class = "jumbotron" >
   <%= form_for @transaction do |f| %>
     <% if @transaction.errors.any? %>
-      <% for @transaction.errors.full_messages.each do |e| %>
-          <%= e %>
-      <% end %>
+      <div id="error_explanation">
+        <% @transaction.errors.full_messages.each do |msg| %>
+          <% flash[:error] = msg %>
+        <% end %>
+      </div>
     <% end %>
     <% if @transaction.express_token.blank? %>
    		<p>Transaction failed</p>
