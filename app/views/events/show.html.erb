@@ -82,7 +82,7 @@
                             <p>To submit attendance, click <%= link_to "here", upload_attendance_path(@event) %>.</p>
                         <% end %>
                     <% elsif current_user.is_organizer? %>
-                        <% if (@event.status == "Pending" || @event.status == "Rejected") && current_user.id == @event.user_id %>
+                        <% if (@event.status == "Pending") && current_user.id == @event.user_id %>
                             <% button = link_to "Edit", edit_event_path(@event), class:"btn btn-default btn-success" %>
                         <% elsif @event.status == "Live" %>
                             <p>Please click to download <%= link_to "attendance_list.xls", download_attendances_path(:format => :xls) %> to use as a template.</p>
@@ -91,13 +91,13 @@
                             <p>To submit attendance, click <%= link_to "here", upload_attendance_path(@event.id) %>.</p>
                         <% elsif @event.status == "Approved" && current_user.id == @event.user_id %>
                             <% button = link_to "Purchase points", purchase_points_path(@event), class:"btn btn-default btn-success" %>
-                        <% elsif @event.status == "Rejected" && current_user.id == @event.user_id %>  
+                        <% elsif (@event.status == "Rejected") && (current_user.id == @event.user_id) %>  
                             <% button = link_to "Resubmit", edit_event_path(@event), class:"btn btn-default btn-success" %>
                         <% end %>
                     <% elsif current_user.is_vet? %>
                         <% button = render 'attend_form' %>
                     <% else %>
-                        <% button = "" %>
+                        <%= button = "" %>
                     <% end %>
                 <% end %>
             </div>
