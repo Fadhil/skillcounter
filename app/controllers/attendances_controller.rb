@@ -65,9 +65,9 @@ class AttendancesController < ApplicationController
         vet_id = row['attendee_id']
         present = row['present']
             
-        if  (present == "P") || (present == "p")
+        if (present == "P") || (present == "p")
           attendance = Attendance.find_by(attendee_id: vet_id, attended_event_id: @event.id)
-          if(attendance.status == "pending")
+          if(attendance.status == nil)
             vet = Vet.find(vet_id)
             vet.add_point!(@event.point)
             vet.save(validate:false)
