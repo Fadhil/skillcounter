@@ -56,7 +56,7 @@ class AttendancesController < ApplicationController
     @event = Event.find(params[:id])
       
     if @event.update_attributes(event_params)
-      file = @event.attendance_list
+      file = @event.attendance_list         
       spreadsheet = open_spreadsheet(file)
       header = spreadsheet.row(1)
       
@@ -96,8 +96,8 @@ class AttendancesController < ApplicationController
 
   def open_spreadsheet(file)
     case File.extname(file.original_filename)
-      when '.xls' then Roo::Excel.new(file.path, nil, :ignore)
-      when '.xlsx' then Roo::Excelx.new(file.path, nil, :ignore)
+      when '.xls' then Roo::Excel.new(file.url, nil, :ignore)
+      when '.xlsx' then Roo::Excelx.new(file.url, nil, :ignore)
       else raise "Unknown file type: #{file.original_filename}"
     end
   end
