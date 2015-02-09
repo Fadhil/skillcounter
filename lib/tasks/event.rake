@@ -4,7 +4,7 @@ namespace :event do
   	Event.where("end_date_time < ?", Date.today).each do |e|
   		Rails.logger.info("Event status updated")
   		e.status = "Expired"
-  		e.save
+  		e.save(validate: false)
   	end
 
   end
