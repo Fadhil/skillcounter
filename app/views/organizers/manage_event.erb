@@ -24,7 +24,7 @@
         <%= render 'shared/organizer', object: @upcoming_events %>
     <% end %>
     <% if @previous_events.any? %>
-        <h2>Pass events</h2>
+        <h2>Past events</h2>
         <%= render 'shared/organizer', object: @previous_events %>
     <% end %>
     <% if @organizer.events.any? %>

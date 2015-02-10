@@ -7,6 +7,7 @@ class Event < ActiveRecord::Base
     scope :upcoming, -> { where("start_date_time >= ?", Date.today).order('start_date_time ASC') }
     scope :upcoming_vet, -> { where("start_date_time >= ? AND status = ?", Date.today, "Live").order('start_date_time ASC') }
     scope :past, -> { where("start_date_time < ?", Date.today).order('start_date_time DESC') }
+    scope :pending, -> { where("status = ?", "Pending") }
 
     has_attached_file :speaker_bio
     has_attached_file :schedule
@@ -34,9 +35,9 @@ class Event < ActiveRecord::Base
 
     def self.search(search)
         if search
-            find(:all, :conditions => ['event_name LIKE ?', "%#{search}%"])
+            where('event_name LIKE ?', "%#{search}%")
         else
-            find(:all)
+            all
         end
     end
 

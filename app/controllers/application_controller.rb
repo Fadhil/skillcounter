@@ -4,6 +4,9 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
     add_flash_types :success, :notice, :alert, :error
     
+    # number of entries per page
+    WillPaginate.per_page = 12
+    
     def after_sign_in_path_for(resource)
       if resource.is_admin?
           admin_pending_index_path

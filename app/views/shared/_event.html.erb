@@ -1,7 +1,7 @@
 <ul class="media-list">
     <% if object %>
         <% object.each do |event| %>
-            <a href="<%= event_path(event) %>">  
+            <a href="<%= event_path(event) %>">
                 <li class="media">
                     <span class="pull-left"><%= image_tag event.poster.url(:thumb), class:"img-thumbnail" %></span>
                     <div class="media-body" >
@@ -29,3 +29,4 @@
         <% end %>
     <% end %>
 </ul>
+<%= will_paginate object %>

@@ -24,15 +24,15 @@ class AdminController < ApplicationController
 
 	def event_index
 		if params[:search]
-			@events = Event.search(params[:search])
+			@events = Event.search(params[:search]).paginate(page: params[:page])
 		else
-	      	@events = Event.all
+	      	@events = Event.all.paginate(page: params[:page])
 		end
 	end
 
 
 	def pending_index
-		@event = Event.where(status:"Pending")
+		@event = Event.pending.paginate(page: params[:page])
 	end
 
 

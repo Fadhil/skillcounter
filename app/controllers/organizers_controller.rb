@@ -32,8 +32,8 @@ class OrganizersController < ApplicationController
   
   def manage_event
       @organizer = Organizer.find(params[:id])
-      @previous_events = @organizer.previous_events
-      @upcoming_events = @organizer.upcoming_events
+      @previous_events = @organizer.previous_events.paginate(page: params[:page])
+      @upcoming_events = @organizer.upcoming_events.paginate(page: params[:page])
   end
 
 
