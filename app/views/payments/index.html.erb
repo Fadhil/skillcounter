@@ -9,10 +9,19 @@
                     <a href="<%= payment_path(payment) %>">
                         <li class="media">
                             <div class="media-body">
-                                <div class="col-md-16 col-sm-16">
-                                    <h3 class="media-heading"><%= payment.description %></h3>
+                                <div class="col-md-12 col-sm-12">
+                                    <table>
+                                        <tr>
+                                            <td style="padding-right:10px"><h3><span class="glyphicon glyphicon-usd"></span></h3></td>
+                                            <td>
+                                                <table>
+                                                    <tr><td><h3 class="media-heading"><%= payment.description %></h3></td></tr>
+                                                    <tr><td><span>Fee: RM <%= number_with_precision(payment.fee, precision: 2) %></span></td></tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
-                                    <span>Fee: RM <span class="member-since"><%= number_with_precision(payment.fee, precision: 2) %></span></span>
                             </div>
                         </li>
                     </a>
