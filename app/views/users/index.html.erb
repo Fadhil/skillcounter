@@ -15,32 +15,39 @@
             </div>
             <ul class="media-list">
                 <% @users.each do |user| %>
-                    <% if !user.is_admin? %>
-                        <li class="media">
-                            <a class="pull-left" href="#"><%= image_tag user.avatar.url(:thumb), class:"img-thumbnail" %></a>
-                            <div class="media-body">
-                                <div class="col-md-9 col-sm-9">
-                                    <h3 class="media-heading"><%= user.name %></h3>
-                                    <span>Member since: <span class="member-since"><%= user.member_since %></span></span>
-                                    <p>License status: <b class="isactive text-success">Active</b></p>
-                                </div>
-                                <div class="col-md-3 col-sm-3">
-                                    <span class="label label-points">
-                                        <span class="text-success"><%= user.current_points %>
-                                            <span class="glyphicon glyphicon-fire"></span>
-                                        </span>
-                                        <hr>
-                                        <span class="text-warning"><%= user.expiring_points %>
-                                            <span class="glyphicon glyphicon-fire"></span>
-                                            <small>expiring on 31st Sep <%= Date.today.year + 1 %></small>
-                                        </span>
-                                    </span>
-                                </div>
-                        	    <%#= link_to "Edit", edit_user_path(user), class: "btn btn-info" %>
-                        	    <div class="pull-right" style="padding-top:5px"><%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %></div>
-                            </div>
-                        </li>
+                    <% if user.is_vet? %>
+                        <a href= "<%= vet_path(user) %>" >
+                    <% elsif user.is_organizer? %>
+                        <a href= "<%= organizer_path(user) %>" >
                     <% end %>
+                        <% if !user.is_admin? %>
+                                <li class="media">
+                                    <span class="pull-left"><%= image_tag user.avatar.url(:thumb), class:"img-thumbnail" %></span>
+                                    <div class="media-body">
+                                        <div class="col-md-7 col-sm-7">
+                                            <h3 class="media-heading"><%= user.name %></h3>
+                                            <span>Member since: <span class="member-since"><%= user.member_since %></span></span>
+                                            <p>License status: <b class="isactive text-success">Active</b></p>
+                                        </div>
+                                        <div class="col-md-5 col-sm-5">
+                                            <span class="label label-points">
+                                                <span class="text-success"><%= user.current_points %>
+                                                    <span class="glyphicon glyphicon-fire"></span>
+                                                </span>
+                                                <hr>
+                                                <span class="text-warning"><%= user.expiring_points %>
+                                                    <span class="glyphicon glyphicon-fire"></span>
+                                                    <small>expiring on 31st Sep <%= Date.today.year + 1 %></small>
+                                                </span>
+                                            </span>
+                                        
+                                	    <%#= link_to "Edit", edit_user_path(user), class: "btn btn-info" %>
+                                	       <div class="pull-right" style="padding-top:5px"><%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %></div>
+                                        </div>
+                                    </div>
+                                </li>
+                        <% end %>
+                    </a>
                 <% end %>  
             </ul>
         </div>
