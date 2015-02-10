@@ -63,12 +63,11 @@ class OrganizersController < ApplicationController
     end
   
     if organizer.save
-      # if password_changed
-      #   redirect_to new_user_login_session_path, success: "Your password has been updated. Please sign in again."
-      # else
-      #   redirect_to organizer_path(organizer.id), success: "Your details have been successfully updated."
-      # end
-      redirect_to organizer_path(organizer.id), success: "Your details have been successfully updated."
+      if password_changed
+        redirect_to new_user_session_path, success: "Your password has been updated. Please sign in again."
+      else
+        redirect_to organizer_path(organizer.id), success: "Your details have been successfully updated."
+      end
     else
       redirect_to edit_organizer_path(organizer.id), error: "Something went wrong. Your details have not been updated."
     end
