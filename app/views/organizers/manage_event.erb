@@ -21,15 +21,15 @@
     </div>
     <% if @upcoming_events.any? %>
         <h2>Upcoming events</h2>
-        <%= render 'shared/organizer', object: @upcoming_events %>
+        <%= render 'shared/organizer', object: @upcoming_events.paginate(page: params[:page]) %>
     <% end %>
     <% if @previous_events.any? %>
         <h2>Past events</h2>
-        <%= render 'shared/organizer', object: @previous_events %>
+        <%= render 'shared/organizer', object: @previous_events.paginate(page: params[:page]) %>
     <% end %>
     <% if @organizer.events.any? %>
         <h2>All events</h2>
-        <%= render 'shared/organizer', object: @organizer.events %>
+        <%= render 'shared/organizer', object: @organizer.events.paginate(page: params[:page]) %>
     <% end %>
 </div>
 

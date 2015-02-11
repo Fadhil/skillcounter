@@ -2,7 +2,7 @@ class OrganizersController < ApplicationController
   authorize_resource
 
   def index
-    @organizer = Organizer.all
+    @organizer = Organizer.all.paginate(page: params[:page])
   end
 
 
