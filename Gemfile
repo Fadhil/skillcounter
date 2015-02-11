@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
 
+# Use Audited to keep track of changes in models
+gem "audited-activerecord", "~> 4.0"
 
 # Use Bootstrap-Sass + Autoprefixer
 gem 'bootstrap-sass'
