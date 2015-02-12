@@ -45,13 +45,19 @@ class EventsController < ApplicationController
     #         schedule: schedule, poster: poster, status: "pending", point: point)
     @event = current_user.events.build(event_params)
     @event.status = "Pending"
-
-    if @event.save
-      #UserMailer.welcome_email(@event).deliver
-      redirect_to event_path(id: @event.id), success: "Successfully created event"
+    
+    if @event.start_date_time > @event.end_date_time
+      redirect_to :back, error: "The start date must be before the end date."
+    elsif @event.start_date_time < (Date.today + 7)
+      redirect_to :back, error: "The start date of the event must be a minimum of 7 days from today."
     else
-      flash.now[:error] =  "Something went wrong. #{@event.errors.full_messages}"
-      render :new
+      if @event.save
+        #UserMailer.welcome_email(@event).deliver
+        redirect_to event_path(id: @event.id), success: "Successfully created event"
+      else
+        flash.now[:error] =  "Something went wrong. #{@event.errors.full_messages}"
+        render :new
+      end
     end
   end
 
