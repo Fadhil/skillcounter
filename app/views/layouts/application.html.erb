@@ -30,5 +30,37 @@
         <%= navbar %>
         <%= flash_messages %>
         <%= yield %>
+
+        <div class='customfooter well-inverse'>
+          <div class='container'>
+            <div class='row'>
+              <div class='col-md-4 col-sm-4 col-xs-12'>
+                <h4>Who We Are</h4>
+                <p><i>SkillCounter</i> is a way to keep track of your Continuous Professional Development. </p>
+                <p><a href='<%= about_path %>'>More About Us  <i class ='glyphicon glyphicon-arrow-right'></i></a></p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-xs-12">
+                <h4>Find us at</h4>
+                <p>Malaysia Veterinary Council (MVC)</br>
+                Department of Veterinary Services</br>
+                Podium Block 4G1, Wisma Tani</br>
+                Ministry of Agriculture and Agro-based Industries</br>
+                Federal Administrative Centre</br>
+                62630 Putrajaya, MALAYSIA.</p>
+              </div>
+              <div class='col-md-3 col-md-offset-1 col-sm-4 col-xs-12'>
+                <h4>Contact Us</h4>
+                <ul class ='list-unstyled'>
+                  <li><i class ='glyphicon glyphicon-globe'></i> <a href="#" onclick="window.open('http://www.mvc.org.my')">Website</a></li>
+                  <li><i class ='glyphicon glyphicon-phone-alt'></i> +603-8870 2000</li>
+                  <li><i class ='glyphicon glyphicon-print'></i> +603-8888 8685</li>
+                  <li><i class ='glyphicon glyphicon-envelope'></i><a href='mailto:skillcounter@email.com'> skillcounter@email.com</a></li>
+                </ul>
+                <p>SkillCounter &copy;2015.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+         
     </body>
 </html>
