@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+    audited
     # belongs_to :organizer
     # belongs_to :vet
     belongs_to :creator, :class_name => "User"

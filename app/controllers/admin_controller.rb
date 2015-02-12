@@ -105,6 +105,41 @@ class AdminController < ApplicationController
 	end
 	
 	
+	def dashboard
+		@vets = []
+		Vet.all.each do |vet|
+			if vet.audits[0].created_at
+				@vets << vet
+			end
+		end
+		@vets.sort! { |a,b| a.audits[0].created_at <=> b.audits[0].created_at }
+		@vets = @vets.take(10)
+		
+		@pending_events = []
+		@approved_events = []
+		@live_events = []
+		Event.all.each do |event|
+			if event.audits[0].created_at
+				if event.status == "Pending"
+					@pending_events << event
+				elsif event.status == "Approved"
+					@approved_events << event
+				elsif event.status == "Live"
+					@live_events << event
+				end
+			end
+		end
+		
+		@pending_events.sort! { |a,b| a.audits[0].created_at <=> b.audits[0].created_at }
+		@pending_events = @pending_events.take(10)
+		@approved_events.sort! { |a,b| a.audits[a.audits.size - 1].created_at <=> b.audits[b.audits.size - 1].created_at }
+		@approved_events = @approved_events.take(10)
+		@live_events.sort! { |a,b| a.audits[a.audits.size - 1].created_at <=> b.audits[b.audits.size - 1].created_at }
+		@live_events = @live_events.take(10)
+		
+	end
+	
+	
 	def admin_create_params
 		params.require(:admin).permit(:name, :email, :password, :password_confirmation)
 	end

@@ -16,65 +16,112 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header custom-with_input">
-                        <h1>Pending events index</h1>
-                        <form class="navbar-form" role="search">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8">
-                                    <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here" %>
-                                </div>
-                                <div class="col-sm-4 col-xs-4">
-                                    <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
-                                </div>
-                            </div>
-                        </form>
+                        <h1>Recently claimed profiles</h1>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <ul class="media-list">
-                        <% @event.each do |event| %>
-                            <a href= "<%= validate_event_path(event) %> " >
-                            <li class="media">
-                                <span class="pull-left">
-                                    <img class="media-object" src="<%=event.poster%>" height="100" width="100">
-                                </span>
-                                <div class="media-body">
-                                    <div class="col-md-9 col-sm-9">
-                                        <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span><%=event.start_date_time %></span>
-                                        <h3 class="media-heading"><%= event.event_name %>
-                                            <% if event.status == "Pending" %>
-                                                <span class="label label-warning"><%= event.status %></span>
-                                            <% elsif event.status == "Rejected" %>
-                                                <span class="label label-danger"><%= event.status %></span>
-                                            <% elsif event.status == "Approved" %>
-                                                <span class="label label-info"><%= event.status %></span>
-                                            <% elsif event.status == "Live" %>
-                                                <span class="label label-success"><%= event.status %></span>
-                                            <% end %>
-                                        </h3>
-                                        <% if event.status == "Rejected" %>
-                                            <% if event.reason != nil %>
-                                                <p>Rejected reason: <%= event.reason %></p>
-                                            <% end %>
-                                        <% end %>
-                                        <p>Description: <%= event.description %></p>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3">
-                                        <span class="label label-points">
-                                            <%= event.point %>
-                                            <span class="glyphicon glyphicon-fire"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-                            </a>
+                        <% @vets.each do |vet| %>
+                            <span class="col-md-9"><span class="col-md-2"><%= vet.audits[0].created_at.to_formatted_s(:short) %></span><a href="<%= vet_path(vet) %>"><%= vet.name %></a> has just claimed their profile.</span>
                         <% end %>
                     </ul>
-                    <%= will_paginate @event %>
+                </div>
+            </div>
+            <button class="button button-default">hooha</button>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header custom-with_input">
+                        <h1>Licence renewal applications</h1>
+                    </div>
+                </div>
+            </div>
+            <!--insert here later-->
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header custom-with_input">
+                        <h1>Recently created events</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <% @pending_events.each do |event| %>
+                            <% organizer = Organizer.find(event.organizer_id) %>
+                            <span class="col-md-9"><span class="col-md-2"><%= event.audits[0].created_at.to_formatted_s(:short) %></span><a href="<%= event_path(event) %>"><%= event.event_name %></a> has just been created by <a href="<%= organizer_path(organizer) %>"><%= organizer.name %></a>.</span>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+            <button class="button button-default">hooha</button>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header custom-with_input">
+                        <h1>Recently approved events</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <% @approved_events.each do |event| %>
+                            <span class="col-md-9"><span class="col-md-2"><%= event.audits[event.audits.size - 1].created_at.to_formatted_s(:short) %></span><a href="<%= event_path(event) %>"><%= event.event_name %></a> has just been approved by a fellow administrator.</span>
+                        <% end %>
+                    </ul>
                 </div>
             </div>
         </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header custom-with_input">
+                        <h1>Currently live events</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <% @approved_events.each do |event| %>
+                            <% organizer = Organizer.find(event.organizer_id) %>
+                            <span class="col-md-9"><span class="col-md-2"><%= event.audits[event.audits.size - 1].created_at.to_formatted_s(:short) %></span><a href="<%= organizer_path(organizer) %>"><%= organizer.name %></a>'s event - <a href="<%= event_path(event) %>"><%= event.event_name %></a> - is currently live.</span>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header custom-with_input">
+                        <h1>Ongoing events</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <% @live_events.each do |event| %>
+                            <span class="col-md-9"><span class="col-md-5">FROM <%= event.start_date_time.strftime(format='%A, %b %d') %> UNTIL <%= event.end_date_time.strftime(format='%A, %b %d') %></span><a href="<%= event_path(event) %>"><%= event.event_name %></a></span>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row"></br></div>
         <!-- END of MAIN -->
         
         <script src="scripts/vendor.js"></script>
