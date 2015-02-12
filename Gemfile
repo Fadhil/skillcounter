@@ -52,7 +52,7 @@ gem 'twitter-typeahead-rails'
 gem 'gon'
 
 # limits number of event listed
-gem 'will_paginate', '~> 3.0.6'
+gem 'will_paginate-bootstrap'
 
 # handles importing and exporting for excel files
 gem 'roo'
