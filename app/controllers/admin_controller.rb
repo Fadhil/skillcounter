@@ -65,7 +65,7 @@ class AdminController < ApplicationController
 		
 		def update
 			@event = Event.find(params[:id])
-		    if @event.update_attributes(event_params)
+			if @event.update_attributes(event_params)
   				redirect_to admin_event_index_path, success: "The event has been approved."
 			else
 	  			redirect_to admin_event_index_path, error: "Something went wrong. #{@event.errors.full_messages}"
@@ -130,7 +130,7 @@ class AdminController < ApplicationController
 	def dashboard
 		@vets = []
 		Vet.all.each do |vet|
-			if vet.audits[0].created_at
+			if vet.audits[0].created_at && vet.is_vet? && !vet.is_pending_vet?
 				@vets << vet
 			end
 		end
