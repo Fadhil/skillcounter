@@ -8,7 +8,9 @@ class Event < ActiveRecord::Base
     scope :upcoming, -> { where("start_date_time >= ?", Date.today).order('start_date_time ASC') }
     scope :upcoming_vet, -> { where("start_date_time >= ? AND status = ?", Date.today, "Live").order('start_date_time ASC') }
     scope :past, -> { where("start_date_time < ?", Date.today).order('start_date_time DESC') }
-    scope :pending, -> { where("status = ?", "Pending") }
+    scope :pending, -> { where("status = ?", "Pending").order('start_date_time ASC') }
+    scope :approved, -> { where("status = ?", "Approved").order('start_date_time ASC') }
+    scope :live, -> { where("status = ?", "Live").order('start_date_time ASC') }
 
     has_attached_file :speaker_bio
     has_attached_file :schedule

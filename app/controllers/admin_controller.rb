@@ -32,9 +32,31 @@ class AdminController < ApplicationController
 
 
 	def pending_index
-		@event = Event.pending.paginate(page: params[:page])
+		if params[:search]
+			@events = Event.search(params[:search]).paginate(page: params[:page])
+		else
+	      	@events = Event.pending.paginate(page: params[:page])
+		end
 	end
-
+	
+	
+	def approved_index
+		if params[:search]
+			@events = Event.search(params[:search]).paginate(page: params[:page])
+		else
+	      	@events = Event.approved.paginate(page: params[:page])
+		end
+	end
+	
+	
+	def live_index
+		if params[:search]
+			@events = Event.search(params[:search]).paginate(page: params[:page])
+		else
+	      	@events = Event.live.paginate(page: params[:page])
+		end
+	end
+	
 
 	def validate_event
 		# authorize! :validate_event, @event
@@ -136,9 +158,11 @@ class AdminController < ApplicationController
 		@approved_events = @approved_events.take(10)
 		@live_events.sort! { |a,b| a.audits[a.audits.size - 1].created_at <=> b.audits[b.audits.size - 1].created_at }
 		@live_events = @live_events.take(10)
-		
 	end
 	
+	def recently_claimed_profiles
+		
+	end
 	
 	def admin_create_params
 		params.require(:admin).permit(:name, :email, :password, :password_confirmation)
