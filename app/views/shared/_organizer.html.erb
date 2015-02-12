@@ -37,7 +37,7 @@
                 <% end %>
             <% end %>
         </ul>
-        <%= will_paginate @posts %>
+        <%= will_paginate object, renderer: BootstrapPagination::Rails %>
     </div>
 </div>
    

@@ -1,18 +1,22 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="page-header custom-with_input">
-                <h1>Upcoming Events<small></small></h1>
-                <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
-                    <div class="row">
-                        <div class="col-sm-8 col-xs-8">
-                            <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here"%>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <h1>Upcoming Events<small></small></h1>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">   
+                    <%= form_tag(events_path, :method => "get", id: "search-form", class:"navbar-form", role:"search") do %>
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here"%>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
+                            </div>
                         </div>
-                        <div class="col-sm-4 col-xs-4">
-                            <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
-                        </div>
-                    </div>
-                <% end %>
+                    <% end %>
+                </div>
             </div>
             <%= render 'shared/event', object: @events %>
         </div>

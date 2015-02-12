@@ -1,17 +1,19 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class="page-header custom-with_input">
-                <h1>Users <small>find users here</small></h1>
-                <form class="navbar-form" role="search">
-                    <div class="row">
-                        <% if current_user.is_admin? %>
-                            <div class="col-sm-3 col-xs-3"><%= link_to 'Create Admin', new_admin_path, class:'btn btn-primary' %></div>
-                            <div class="col-sm-3 col-xs-3"><%= link_to 'Upload Vets', admin_upload_vets_path, class:'btn btn-primary' %></div>
-                        <% end %>
-                        <div class="col-sm-4 col-xs-4"><input type="text" class="form-control" placeholder="search here"></div>
+            <div class="page-header custom-with_input">    
+                <div class="row col-xs-12">
+                    <div class="col-md-3 col-xs-12">
+                        <h1>Users</h1>
                     </div>
-                </form>
+                    <form class="navbar-form" role="search">
+                        <% if current_user.is_admin? %>
+                            <div class="col-md-3 col-sm-3 col-xs-3"><%= link_to 'Create Admin', new_admin_path, class:'btn btn-primary' %></div>
+                            <div class="col-md-3 col-sm-3 col-xs-3"><%= link_to 'Upload Vets', admin_upload_vets_path, class:'btn btn-primary' %></div>
+                        <% end %>
+                        <div class="col-md-3 col-sm-4 col-xs-6"><input type="text" class="form-control" placeholder="find users here">   </div>                    
+                    </form>
+                </div>
             </div>
             <ul class="media-list">
                 <% @users.each do |user| %>

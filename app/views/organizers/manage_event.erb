@@ -29,7 +29,7 @@
     <% end %>
     <% if @organizer.events.any? %>
         <h2>All events</h2>
-        <%= render 'shared/organizer', object: @organizer.events %>
+        <%= render 'shared/organizer', object: @organizer.events.paginate(page: params[:page]) %>
     <% end %>
 </div>
 
