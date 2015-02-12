@@ -1,83 +1,69 @@
-<!doctype html>
-<html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <title>codemalaysiaskillcounter</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-        <link rel="shortcut icon" href="/favicon.ico">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" href="../styles/main.css">
-    </head>
-  
-    <body>
-        <!-- MAIN -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page-header custom-with_input">
-                        <h1>Pending events index</h1>
-                        <form class="navbar-form" role="search">
-                            <div class="row">
-                                <div class="col-sm-8 col-xs-8">
-                                    <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here" %>
-                                </div>
-                                <div class="col-sm-4 col-xs-4">
-                                    <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
-                                </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header custom-with_input">
+                    <h1>Pending events index</h1>
+                    <form class="navbar-form" role="search">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-8 col-xs-8">
+                                <%= text_field_tag :search, params[:search], class:"form-control", placeholder: "Search here" %>
                             </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="media-list">
-                        <% @event.each do |event| %>
-                            <a href= "<%= validate_event_path(event) %> " >
-                            <li class="media">
-                                <span class="pull-left">
-                                    <img class="media-object" src="<%=event.poster%>" height="100" width="100">
-                                </span>
-                                <div class="media-body">
-                                    <div class="col-md-9 col-sm-9">
-                                        <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span><%=event.start_date_time %></span>
-                                        <h3 class="media-heading"><%= event.event_name %>
-                                            <% if event.status == "Pending" %>
-                                                <span class="label label-warning"><%= event.status %></span>
-                                            <% elsif event.status == "Rejected" %>
-                                                <span class="label label-danger"><%= event.status %></span>
-                                            <% elsif event.status == "Approved" %>
-                                                <span class="label label-info"><%= event.status %></span>
-                                            <% elsif event.status == "Live" %>
-                                                <span class="label label-success"><%= event.status %></span>
-                                            <% end %>
-                                        </h3>
-                                        <% if event.status == "Rejected" %>
-                                            <% if event.reason != nil %>
-                                                <p>Rejected reason: <%= event.reason %></p>
-                                            <% end %>
-                                        <% end %>
-                                        <p>Description: <%= event.description %></p>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3">
-                                        <span class="label label-points">
-                                            <%= event.point %>
-                                            <span class="glyphicon glyphicon-fire"></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-                            </a>
-                        <% end %>
-                    </ul>
-                    <%= will_paginate @event %>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                                <%= submit_tag "Filter",  :name => nil, class:"btn btn-default" %>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- END of MAIN -->
-        
-        <script src="scripts/vendor.js"></script>
-        <script src="scripts/main.js"></script>
-    </body>
-    </html>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="media-list">
+                    <% @event.each do |event| %>
+                        <a href= "<%= validate_event_path(event) %> " >
+                        <li class="media">
+                            <span class="pull-left">
+                                <img class="media-object" src="<%=event.poster%>" height="100" width="100">
+                            </span>
+                            <div class="media-body">
+                                <div class="col-md-9 col-sm-9">
+                                    <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span><%=event.start_date_time %></span>
+                                    <h3 class="media-heading"><%= event.event_name %>
+                                        <% if event.status == "Pending" %>
+                                            <span class="label label-warning"><%= event.status %></span>
+                                        <% elsif event.status == "Rejected" %>
+                                            <span class="label label-danger"><%= event.status %></span>
+                                        <% elsif event.status == "Approved" %>
+                                            <span class="label label-info"><%= event.status %></span>
+                                        <% elsif event.status == "Live" %>
+                                            <span class="label label-success"><%= event.status %></span>
+                                        <% end %>
+                                    </h3>
+                                    <% if event.status == "Rejected" %>
+                                        <% if event.reason != nil %>
+                                            <p>Rejected reason: <%= event.reason %></p>
+                                        <% end %>
+                                    <% end %>
+                                    <p>Description: <%= event.description %></p>
+                                </div>
+                                <div class="col-md-3 col-sm-3">
+                                    <span class="label label-points">
+                                        <%= event.point %>
+                                        <span class="glyphicon glyphicon-fire"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                        </a>
+                    <% end %>
+                </ul>
+                <%= will_paginate @event %>
+            </div>
+        </div>
+    </div>
+
+    <!-- END of MAIN -->
+    
+    <script src="scripts/vendor.js"></script>
+    <script src="scripts/main.js"></script>
