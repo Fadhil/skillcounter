@@ -58,7 +58,7 @@
                         </a>
                     <% end %>
                 </ul>
-                <%= will_paginate @event %>
+                <%= will_paginate @event, renderer: BootstrapPagination::Rails  %>
             </div>
         </div>
     </div>
