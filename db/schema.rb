@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121111258) do
+ActiveRecord::Schema.define(version: 20150211064116) do
 
   create_table "admins", force: true do |t|
     t.string   "name"
@@ -31,6 +31,29 @@ ActiveRecord::Schema.define(version: 20150121111258) do
   add_index "attendances", ["attended_event_id"], name: "index_attendances_on_attended_event_id"
   add_index "attendances", ["attendee_id", "attended_event_id"], name: "index_attendances_on_attendee_id_and_attended_event_id", unique: true
   add_index "attendances", ["attendee_id"], name: "index_attendances_on_attendee_id"
+
+  create_table "audits", force: true do |t|
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.integer  "associated_id"
+    t.string   "associated_type"
+    t.integer  "user_id"
+    t.string   "user_type"
+    t.string   "username"
+    t.string   "action"
+    t.text     "audited_changes"
+    t.integer  "version",         default: 0
+    t.string   "comment"
+    t.string   "remote_address"
+    t.string   "request_uuid"
+    t.datetime "created_at"
+  end
+
+  add_index "audits", ["associated_id", "associated_type"], name: "associated_index"
+  add_index "audits", ["auditable_id", "auditable_type"], name: "auditable_index"
+  add_index "audits", ["created_at"], name: "index_audits_on_created_at"
+  add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid"
+  add_index "audits", ["user_id", "user_type"], name: "user_index"
 
   create_table "contact_numbers", force: true do |t|
     t.datetime "created_at"

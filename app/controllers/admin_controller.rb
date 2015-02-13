@@ -33,12 +33,30 @@ class AdminController < ApplicationController
 
 	def pending_index
 		if params[:search]
-			@event = Event.search(params[:search]).paginate(page: params[:page])
+			@events = Event.search(params[:search]).paginate(page: params[:page])
 		else
-	      	@event = Event.pending.paginate(page: params[:page])
+	      	@events = Event.pending.paginate(page: params[:page])
 		end
 	end
-
+	
+	
+	def approved_index
+		if params[:search]
+			@events = Event.search(params[:search]).paginate(page: params[:page])
+		else
+	      	@events = Event.approved.paginate(page: params[:page])
+		end
+	end
+	
+	
+	def live_index
+		if params[:search]
+			@events = Event.search(params[:search]).paginate(page: params[:page])
+		else
+	      	@events = Event.live.paginate(page: params[:page])
+		end
+	end
+	
 
 	def validate_event
 		# authorize! :validate_event, @event
@@ -47,7 +65,7 @@ class AdminController < ApplicationController
 		
 		def update
 			@event = Event.find(params[:id])
-		    if @event.update_attributes(event_params)
+			if @event.update_attributes(event_params)
   				redirect_to admin_event_index_path, success: "The event has been approved."
 			else
 	  			redirect_to admin_event_index_path, error: "Something went wrong. #{@event.errors.full_messages}"
@@ -108,6 +126,47 @@ class AdminController < ApplicationController
 		end
 	end
 	
+	
+	def dashboard
+		@vets = []
+		Vet.all.each do |vet|
+			if vet.audits == nil
+				if vet.audits[0].created_at && vet.is_vet? && !vet.is_pending_vet?
+					@vets << vet
+				end
+			end
+		end
+		@vets.sort! { |a,b| a.audits[0].created_at <=> b.audits[0].created_at }
+		@vets = @vets.take(10)
+		
+		@pending_events = []
+		@approved_events = []
+		@live_events = []
+		Event.all.each do |event|
+			if event.audits == nil
+				if event.audits[0].created_at
+					if event.status == "Pending"
+						@pending_events << event
+					elsif event.status == "Approved"
+						@approved_events << event
+					elsif event.status == "Live"
+						@live_events << event
+					end
+				end
+			end
+		end
+		
+		@pending_events.sort! { |a,b| a.audits[0].created_at <=> b.audits[0].created_at }
+		@pending_events = @pending_events.take(10)
+		@approved_events.sort! { |a,b| a.audits[a.audits.size - 1].created_at <=> b.audits[b.audits.size - 1].created_at }
+		@approved_events = @approved_events.take(10)
+		@live_events.sort! { |a,b| a.audits[a.audits.size - 1].created_at <=> b.audits[b.audits.size - 1].created_at }
+		@live_events = @live_events.take(10)
+	end
+	
+	def recently_claimed_profiles
+		
+	end
 	
 	def admin_create_params
 		params.require(:admin).permit(:name, :email, :password, :password_confirmation)
