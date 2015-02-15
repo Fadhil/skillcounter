@@ -63,7 +63,9 @@ SkillCounter::Application.routes.draw do
   get 'admin/upload_vets' => 'admin#upload_vets'
   post 'admin/upload_vets' => 'admin#save_uploaded_vets'
   patch 'admin/validate_event/:id' => 'admin#update'
-  get 'admin/pending_index' => 'admin#pending_index'
+  get 'admin/pending_index' => 'admin#pending_index', as: :admin_pending_index
+  get 'admin/approved_index' => 'admin#approved_index', as: :admin_approved_index
+  get 'admin/live_index' => 'admin#live_index', as: :admin_live_index
   get 'admin/dashboard' => 'admin#dashboard', as: :dashboard
 
   get 'vets/new' => 'vets#new'

@@ -149,7 +149,12 @@ class VetsController < ApplicationController
 
       if @transaction.save 
         if @transaction.purchase(@fee)
-            @vet.current_points -= 80
+            @vet.audits.each do |audit|
+              if audit.comment == "licence renewal"
+                audit.destroy
+              end
+            end
+            @vet.update_attributes!(current_points:(@vet.current_points -= 80), audit_comment:"licence renewal")
             @vet.save
             redirect_to vet_path(@vet), success: "Payment was successful. Your licence has been renewed."
         else

@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header custom-with_input">
-                        <h1>Recently claimed profiles</h1>
+                        <h1>Recently claimed profiles&emsp;&emsp;<small><a href="<%=  %>">See all</a></small></h1>
                     </div>
                 </div>
             </div>
@@ -29,25 +29,32 @@
                     </ul>
                 </div>
             </div>
-            <button class="button button-default">hooha</button>
         </div>
         
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header custom-with_input">
-                        <h1>Licence renewal applications</h1>
+                        <h1>Licence renewal applications&emsp;&emsp;<small><a href="<%=  %>">See all</a></small></h1>
                     </div>
                 </div>
             </div>
-            <!--insert here later-->
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="media-list">
+                        <% @licence_renewal.each do |vet| %>
+                            <span class="col-md-9"><span class="col-md-2"><%= vet.audits.select{|x| x.comment == "licence renewal"}[0].created_at.to_formatted_s(:short) %></span><a href="<%= vet_path(vet) %>"><%= vet.name %></a> has just applied for a licence renewal.</span>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
         </div>
         
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header custom-with_input">
-                        <h1>Recently created events</h1>
+                        <h1>Recently created events&emsp;&emsp;<small><a href="<%= admin_pending_index_path %>">See all</a></small></h1>
                     </div>
                 </div>
             </div>
@@ -68,7 +75,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header custom-with_input">
-                        <h1>Recently approved events</h1>
+                        <h1>Recently approved events&emsp;&emsp;<small><a href="<%= admin_approved_index_path %>">See all</a></small></h1>
                     </div>
                 </div>
             </div>
@@ -87,7 +94,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header custom-with_input">
-                        <h1>Currently live events</h1>
+                        <h1>Currently live events&emsp;&emsp;<small><a href="<%= admin_live_index_path %>">See all</a></small></h1>
                     </div>
                 </div>
             </div>
@@ -96,7 +103,7 @@
                     <ul class="media-list">
                         <% @approved_events.each do |event| %>
                             <% organizer = Organizer.find(event.organizer_id) %>
-                            <span class="col-md-9"><span class="col-md-2"><%= event.audits[event.audits.size - 1].created_at.to_formatted_s(:short) %></span><a href="<%= organizer_path(organizer) %>"><%= organizer.name %></a>'s event - <a href="<%= event_path(event) %>"><%= event.event_name %></a> - is currently live.</span>
+                            <span class="col-md-9"><span class="col-md-2"><%= event.audits.last.created_at.to_formatted_s(:short) %></span><a href="<%= organizer_path(organizer) %>"><%= organizer.name %></a>'s event - <a href="<%= event_path(event) %>"><%= event.event_name %></a> - is currently live.</span>
                         <% end %>
                     </ul>
                 </div>

@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-12">
                 <ul class="media-list">
-                    <% @event.each do |event| %>
+                    <% @events.each do |event| %>
                         <a href= "<%= validate_event_path(event) %> " >
                         <li class="media">
                             <span class="pull-left">
@@ -58,7 +58,7 @@
                         </a>
                     <% end %>
                 </ul>
-                <%= will_paginate @event, renderer: BootstrapPagination::Rails  %>
+                <%= will_paginate @events, renderer: BootstrapPagination::Rails  %>
             </div>
         </div>
     </div>

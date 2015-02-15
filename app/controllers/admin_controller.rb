@@ -51,7 +51,7 @@ class AdminController < ApplicationController
 	
 	def live_index
 		if params[:search]
-			@events = Event.search(params[:search]).paginate(page: params[:page])
+			@events = Event.live.where(params[:search]).paginate(page: params[:page])
 		else
 	      	@events = Event.live.paginate(page: params[:page])
 		end
@@ -130,7 +130,7 @@ class AdminController < ApplicationController
 	def dashboard
 		@vets = []
 		Vet.all.each do |vet|
-			if vet.audits == nil
+			if vet.audits != nil
 				if vet.audits[0].created_at && vet.is_vet? && !vet.is_pending_vet?
 					@vets << vet
 				end
@@ -139,11 +139,20 @@ class AdminController < ApplicationController
 		@vets.sort! { |a,b| a.audits[0].created_at <=> b.audits[0].created_at }
 		@vets = @vets.take(10)
 		
+		@licence_renewal = []
+		Vet.all.each do |vet|
+			if vet.is_vet? && !vet.is_pending_vet?
+				@licence_renewal << vet
+			end
+		end
+		@licence_renewal.sort! { |a,b| a.audits.select{|x| x.comment == "licence renewal"} <=> b.audits.select{|x| x.comment == "licence renewal"} }
+		@licence_renewal = @licence_renewal.take(10)
+		
 		@pending_events = []
 		@approved_events = []
 		@live_events = []
 		Event.all.each do |event|
-			if event.audits == nil
+			if event.audits != nil
 				if event.audits[0].created_at
 					if event.status == "Pending"
 						@pending_events << event
@@ -158,15 +167,12 @@ class AdminController < ApplicationController
 		
 		@pending_events.sort! { |a,b| a.audits[0].created_at <=> b.audits[0].created_at }
 		@pending_events = @pending_events.take(10)
-		@approved_events.sort! { |a,b| a.audits[a.audits.size - 1].created_at <=> b.audits[b.audits.size - 1].created_at }
+		@approved_events.sort! { |a,b| a.audits.last.created_at <=> b.audits.last.created_at }
 		@approved_events = @approved_events.take(10)
-		@live_events.sort! { |a,b| a.audits[a.audits.size - 1].created_at <=> b.audits[b.audits.size - 1].created_at }
+		@live_events.sort! { |a,b| a.audits.last.created_at <=> b.audits.last.created_at }
 		@live_events = @live_events.take(10)
 	end
-	
-	def recently_claimed_profiles
-		
-	end
+
 	
 	def admin_create_params
 		params.require(:admin).permit(:name, :email, :password, :password_confirmation)

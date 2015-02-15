@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     
     def after_sign_in_path_for(resource)
       if resource.is_admin?
-          admin_pending_index_path
+          dashboard_path
       elsif resource.is_organizer?
           manage_event_path(current_user)
       elsif resource.is_vet?
@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
     end
 
     rescue_from ActiveRecord::RecordNotFound do |exception|
-      flash[:error] = "Something went wong. Please contact the admin for more details."
+      flash[:error] = "Something went wong. Please contact the admin for more details. #{exception.inspect}"
       redirect_to root_url
     end
 end
