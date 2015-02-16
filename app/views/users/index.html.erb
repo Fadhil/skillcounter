@@ -24,25 +24,28 @@
                             <a href= "<%= organizer_path(user) %>" >
                         <% end %>
                         <li class="media">
-                            <span class="pull-left"><%= image_tag user.avatar.url(:thumb), class:"img-thumbnail" %></span>
-                            <div class="media-body">
-                                <div class="col-md-7 col-sm-7">
-                                    <h3 class="media-heading"><%= user.name %></h3>
-                                    <span>Member since: <span class="member-since"><%= user.member_since %></span></span>
-                                    <p>License status: <b class="isactive text-success">Active</b></p>
-                                </div>
-                                <div class="col-md-5 col-sm-5">
-                                    <span class="label label-points">
-                                        <span class="text-success"><%= user.current_points %>
-                                            <span class="glyphicon glyphicon-fire"></span>
+                            <div class="media-body col-md-12">
+                                
+                                <div class="row col-md-12">
+                                    <div class="col-md-1"><span class="pull-left"><%= image_tag user.avatar.url(:thumb), class:"img-thumbnail" %></span></div>
+                                    <div class="col-md-6 col-sm-7">
+                                        <h3 class="media-heading"><%= user.name %></h3>
+                                        <span>Member since: <span class="member-since"><%= user.member_since %></span></span>
+                                        <p>License status: <b class="isactive text-success">Active</b></p>
+                                    </div>
+                                    <div class="col-md-offset-1 col-md-3 col-sm-5">
+                                        <span class="label label-points">
+                                            <span class="text-success"><%= user.current_points %>
+                                                <span class="glyphicon glyphicon-fire"></span>
+                                            </span>
+                                            <hr>
+                                            <span class="text-warning"><%= user.expiring_points %>
+                                                <span class="glyphicon glyphicon-fire"></span>
+                                                <small>expiring on 31st Sep <%= Date.today.year + 1 %></small>
+                                            </span>
                                         </span>
-                                        <hr>
-                                        <span class="text-warning"><%= user.expiring_points %>
-                                            <span class="glyphicon glyphicon-fire"></span>
-                                            <small>expiring on 31st Sep <%= Date.today.year + 1 %></small>
-                                        </span>
-                                    </span>
-                        	       <div class="pull-right" style="padding-top:5px"><%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %></div>
+                            	       <div class="pull-right" style="padding-top:5px"><%= link_to 'Delete', user_path(user), method: :delete, :confirm =>"Delete #{user.name}'s account", class: "btn btn-danger" %></div>
+                                    </div>
                                 </div>
                             </div>
                         </li>
