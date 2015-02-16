@@ -67,6 +67,7 @@ SkillCounter::Application.routes.draw do
   get 'admin/approved_index' => 'admin#approved_index', as: :admin_approved_index
   get 'admin/live_index' => 'admin#live_index', as: :admin_live_index
   get 'admin/dashboard' => 'admin#dashboard', as: :dashboard
+  get 'admin/licence_renewal_index' => 'admin#licence_renewal_index', as: :admin_licence_renewal_index
 
   get 'vets/new' => 'vets#new'
   post 'vets/validate_claim_profile' => 'vets#validate_claim_profile'

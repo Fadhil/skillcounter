@@ -1,0 +1,20 @@
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header custom-with_input">
+                    <h1>Licence renewal applications</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="media-list">
+                    <% @vets.each do |vet| %>
+                        <span class="col-md-9"><span class="col-md-2"><%= vet.audits.select{|x| x.comment == "licence renewal"}[0].created_at.to_formatted_s(:short) %></span><a href="<%= vet_path(vet) %>"><%= vet.name %></a> has just applied for a licence renewal.</span>
+                    <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>

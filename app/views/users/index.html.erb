@@ -17,7 +17,7 @@
             </div>
             <ul class="media-list">
                 <% @users.each do |user| %>
-                    <% if !user.is_admin? %>
+                    <% if user.is_vet? || user.is_organizer? %>
                         <% if user.is_vet? %>
                             <a href= "<%= vet_path(user) %>" >
                         <% elsif user.is_organizer? %>

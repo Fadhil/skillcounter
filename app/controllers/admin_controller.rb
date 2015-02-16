@@ -32,29 +32,32 @@ class AdminController < ApplicationController
 
 
 	def pending_index
-		if params[:search]
-			@events = Event.search(params[:search]).paginate(page: params[:page])
-		else
-	      	@events = Event.pending.paginate(page: params[:page])
-		end
+      	@events = Event.pending.paginate(page: params[:page])
 	end
 	
 	
 	def approved_index
-		if params[:search]
-			@events = Event.search(params[:search]).paginate(page: params[:page])
-		else
-	      	@events = Event.approved.paginate(page: params[:page])
-		end
+      	@events = Event.approved.paginate(page: params[:page])
 	end
 	
 	
 	def live_index
-		if params[:search]
-			@events = Event.live.where(params[:search]).paginate(page: params[:page])
-		else
-	      	@events = Event.live.paginate(page: params[:page])
+		@events = Event.live.paginate(page: params[:page])
+	end
+	
+	
+	def licence_renewal_index
+		@vets = []
+		Vet.all.each do |vet|
+			if vet.is_vet? && !vet.is_pending_vet?
+				vet.audits.each do |a|
+					if (a.comment == "licence renewal") && (a.created_at > Date.today.change(year: (Date.today.year - 1)))
+						@vets << vet
+					end
+				end
+			end
 		end
+		@vets.sort! { |a,b| a.audits.select{|x| x.comment == "licence renewal"} <=> b.audits.select{|x| x.comment == "licence renewal"} }
 	end
 	
 
@@ -142,7 +145,11 @@ class AdminController < ApplicationController
 		@licence_renewal = []
 		Vet.all.each do |vet|
 			if vet.is_vet? && !vet.is_pending_vet?
-				@licence_renewal << vet
+				vet.audits.each do |a|
+					if a.comment == "licence renewal"
+						@licence_renewal << vet
+					end
+				end
 			end
 		end
 		@licence_renewal.sort! { |a,b| a.audits.select{|x| x.comment == "licence renewal"} <=> b.audits.select{|x| x.comment == "licence renewal"} }
