@@ -4,7 +4,7 @@
             <a href="<%= event_path(event) %>">
                 <li class="media">
                     <span class="pull-left"><%= image_tag event.poster.url(:thumb), class:"img-thumbnail" %></span>
-                    <div class="media-body" >
+                    <div class="media-body col-md-12" >
                         <div class="col-md-9 col-sm-9">
                             <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span><%= event.start_date_time %></span>
                             <h3 class="media-heading"><%= event.event_name %>

@@ -5,9 +5,9 @@
             <% object.each do |event| %>
                     <a href="<%= event_path(event) %>"> 
                         <li class="media">
-                            <span class="pull-left"><%= image_tag event.poster.url(:thumb), class:"img-thumbnail" %></span>
-                            <div class="media-body">
-                                <div class="col-md-10 col-sm-10">
+                            <div class="media-body col-md-12">
+                                <div class="col-md-1"><span class="pull-left"><%= image_tag event.poster.url(:thumb), class:"img-thumbnail" %></span></div>
+                                <div class="col-md-7 col-sm-10">
                                     <span class="label label-date"><span class="glyphicon glyphicon-calendar"></span> <%=event.start_date_time%></span>
                                     <h3 class="media-heading"><%= event.event_name %>
                                         <% if event.status == "Pending" %>

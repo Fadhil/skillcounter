@@ -46,6 +46,7 @@ class EventsController < ApplicationController
     @event = current_user.events.build(event_params)
     @event.status = "Pending"
     
+    
     if @event.start_date_time > @event.end_date_time
       redirect_to :back, error: "The start date must be before the end date."
     elsif @event.start_date_time < (Date.today + 7)
@@ -201,6 +202,6 @@ class EventsController < ApplicationController
 
 
   def event_params
-    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker, :speaker_bio, :bio_url, :schedule, :poster, :reason, :attendance_list, :number_participants)
+    params.require(:event).permit(:event_name, :description, :location, :start_date_time, :end_date_time, :event_page_url, :status, :point, :category, :speaker, :speaker_bio, :bio_url, :schedule, :poster, :reason, :attendance_list, :number_participants, :organizer_id)
   end
 end
