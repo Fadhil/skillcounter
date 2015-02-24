@@ -12,11 +12,11 @@ class OrganizersController < ApplicationController
 
 
   def create
-    @organizer = Organizer.new
-    @organizer.add_role("Organizer")
+    @organizer = Organizer.new(organizer_params)
     @organizer.member_since = Date.today
 
     if @organizer.save
+      @organizer.add_role("Organizer")
       Mailer.organizer_welcome_email(@organizer).deliver
       redirect_to root_path, success: "Successfully registered."
     else
