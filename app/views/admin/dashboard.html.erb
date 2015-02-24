@@ -49,7 +49,7 @@
                         <span class="col-lg 10 col-md-12 col-sm-12 col-xs-12">
                         <% @licence_renewal.each do |vet| %>
                             <span class="col-lg 10 col-md-12 col-sm-12 col-xs-12">
-                                <span class="col-lg-2 col-md-2 col-sm-2 col-xs-12">><%= vet.audits.select{|x| x.comment == "licence renewal"}.first.created_at.to_formatted_s(:short) %></span>
+                                <span class="col-lg-2 col-md-2 col-sm-2 col-xs-12"><%= vet.audits.select{|x| x.comment == "licence renewal"}.first.created_at.to_formatted_s(:short) %></span>
                                 <a href="<%= vet_path(vet) %>"><%= vet.name %></a> has just applied for a licence renewal.
                             </span>
                         <% end %>

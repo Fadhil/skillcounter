@@ -71,12 +71,29 @@ class VetsController < ApplicationController
 
 
   def update
-    @vet = Vet.find(params[:id])
+    vet = Vet.find(params[:id])
     
-    if @vet.update_attributes(vet_params)
-      redirect_to vet_path(id: @vet.id), success: "Successfully Updated"
+    vet.name = params[:vet][:name]
+    vet.email = params[:vet][:email]
+    vet.contact_number = params[:vet][:contact_number]
+
+    if (avatar = params[:vet][:avatar]) != nil
+      vet.avatar = avatar
+    end
+    if (password = params[:vet][:password]) != "" && (password_confirmation = params[:vet][:password_confirmation]) != ""
+      vet.password = password
+      vet.password_confirmation = password_confirmation
+      password_changed = true
+    end
+    
+    if vet.save
+      if password_changed
+        redirect_to new_user_session_path, success: "Your password has been updated. Please sign in again."
+      else
+        redirect_to vet_path(id: vet.id), success: "Your details have been successfully updated."
+      end
     else
-      render :edit
+      redirect_to edit_vet_path(vet.id), error: "Something went wrong. Your details have not been updated."
     end
   end
 

@@ -15,7 +15,7 @@
                 <li><%= link_to 'Manage Users', users_path %> </li>
                 <li><%= link_to 'Manage Events', admin_event_index_path %> </li>
                 <li><%= link_to 'Manage Fees', payments_path %></li>
-                <li><%= link_to 'Admin Dashboard', dashboard_path %></li>
+                <li><%= link_to 'Dashboard', dashboard_path %></li>
                 <% if user_signed_in?
                     the_link = link_to destroy_user_session_path, method: :delete do
 				%>

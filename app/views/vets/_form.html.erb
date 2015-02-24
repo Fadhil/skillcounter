@@ -15,20 +15,20 @@
         <div class="col-sm-6"><%= f.text_field :name, class: "form-control" %></div>
     </div>
     <div class="form-group">
-        <label for="LicenceNumber" class="col-sm-3 control-label">Licence number</label>
-        <div class="col-sm-6"><%= f.text_field :licence_number, class: "form-control" %></div>
-    </div>
-    <div class="form-group">
-        <label for="ICNumber" class="col-sm-3 control-label">IC number</label>
-        <div class="col-sm-6"><%= f.text_field :ic_number, class: "form-control" %></div>
+        <label for="Email" class="col-sm-3 control-label">Email</label>
+        <div class="col-sm-6"><%= f.text_field :email, class: "form-control" %></div>
     </div>
     <div class="form-group">
         <label for="ContactNumber" class="col-sm-3 control-label">Contact number</label>
         <div class="col-sm-6"><%= f.text_field :contact_number, class: "form-control" %></div>
     </div>
     <div class="form-group">
-        <label for="Email" class="col-sm-3 control-label">Email</label>
-        <div class="col-sm-6"><%= f.text_field :email, class: "form-control" %></div>
+        <label for="Password" class="col-sm-3 control-label">Password</label>
+        <div class="col-sm-6"><%= f.password_field :password, class: "form-control" %></div>
+    </div>
+    <div class="form-group">
+        <label for="PasswordConfirmation" class="col-sm-3 control-label">Password confirmation</label>
+        <div class="col-sm-6"><%= f.password_field :password_confirmation, class: "form-control" %></div>
     </div>
     <div class="form-group">
         <label for="Avatar" class="col-sm-3 control-label">Avatar</label>
