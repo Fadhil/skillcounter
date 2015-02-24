@@ -107,7 +107,7 @@ class VetsController < ApplicationController
   def redeem_licence
       @vet = Vet.find(params[:id])
       @enough_points = false
-      points = @vet.current_points
+      points = @vet.current_points + @vet.expiring_points
         
       if points > 80
         @enough_points = true
