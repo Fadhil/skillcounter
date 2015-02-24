@@ -113,7 +113,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="media-list">
-                        <% @approved_events.each do |event| %>
+                        <% @live_events.each do |event| %>
                             <% organizer = Organizer.find(event.organizer_id) %>
                             <span class="col-lg 10 col-md-12 col-sm-12 col-xs-12">
                                 <span class="col-lg-2 col-md-2 col-sm-2 col-xs-12"><%= event.audits.last.created_at.to_formatted_s(:short) %></span>
