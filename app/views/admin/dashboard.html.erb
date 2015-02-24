@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-header custom-with_input">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h1>Recently claimed profiles</h1></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h2>Recently claimed profiles</h2></div>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-header custom-with_input">
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h1>Licence renewal applications</h1></div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h2>Licence renewal applications</h2></div>
                         <div class="col-lg-offset-2 col-lg-1 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2 col-xs-12"><h2><small><a href="<%= admin_licence_renewal_index_path %>">See all</a></small></h2></div>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-header custom-with_input">
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h1>Recently created events</h1></div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h2>Recently created events</h2></div>
                         <div class="col-lg-offset-2 col-lg-1 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2 col-xs-12"><h2><small><a href="<%= admin_pending_index_path %>">See all</a></small></h2></div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-header custom-with_input">
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h1>Recently approved events</h1></div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h2>Recently approved events</h2></div>
                         <div class="col-lg-offset-2 col-lg-1 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2 col-xs-12"><h2><small><a href="<%= admin_approved_index_path %>">See all</a></small></h2></div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-header custom-with_input">
-                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h1>Currently live events</h1></div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12"><h2>Currently live events</h2></div>
                         <div class="col-lg-offset-2 col-lg-1 col-md-offset-1 col-md-2 col-sm-offset-1 col-sm-2 col-xs-12"><h2><small><a href="<%= admin_live_index_path %>">See all</a></small></h2></div>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="page-header custom-with_input">
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h1>Ongoing events</h1></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><h2>Ongoing events</h2></div>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@
                     <ul class="media-list">
                         <% @live_events.each do |event| %>
                             <span class="col-lg 10 col-md-12 col-sm-12 col-xs-12">
-                                <span class="col-lg-2 col-md-2 col-sm-2 col-xs-12">FROM <%= event.start_date_time.strftime(format='%A, %b %d') %> UNTIL <%= event.end_date_time.strftime(format='%A, %b %d') %></span>
+                                <span class="col-lg-3 col-md-4 col-sm-5 col-xs-12"><%= event.start_date_time.strftime(format='%A, %b %d') %> to <%= event.end_date_time.strftime(format='%A, %b %d') %></span>
                                 <a href="<%= event_path(event) %>"><%= event.event_name %></a>
                             </span>
                         <% end %>
