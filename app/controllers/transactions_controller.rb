@@ -57,6 +57,7 @@ class TransactionsController < ApplicationController
 		    			vet.expiring_points = 0
 		    			vet.save
 		    			vet.add_role('Vet')
+		    			vet.remove_role("Pending_vet")
           				Mailer.send_welcome_email(vet, vet.generate_password).deliver
 		        		redirect_to root_path, success: "Successfully claimed profile. An email has been sent to your email with a temporary password and login details."
 		      		else

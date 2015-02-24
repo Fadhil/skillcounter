@@ -13,7 +13,7 @@
         <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
             <ul class="nav navbar-nav navbar-right">
                 <li><%= link_to 'Manage Events', manage_event_path(current_user) %> </li>
-                <li><%= link_to 'Dashboard', organizer_path(current_user) %> </li>
+                <li><%= link_to 'My Profile', organizer_path(current_user) %> </li>
                 <% if user_signed_in?
                     the_link = link_to destroy_user_session_path, method: :delete do
 				%>

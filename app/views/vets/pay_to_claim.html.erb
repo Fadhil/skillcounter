@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html class="no-js">
   <head>
@@ -8,7 +7,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
     <link rel="stylesheet" href="../styles/main.css">
   </head>
   <body>
@@ -23,7 +21,7 @@
             <form class="form-signin" role="form">
                 <h4 class="form-signin-heading">Payment</h4>
                 <p>You will need to make a payment of
-                <span class="text-success"><% fee = Payment.find_by(description: "Profile claim fee"%><%=fee.fee%></span> before you can claim your profile</p>
+                <span class="text-success"><% fee = Payment.find_by(description: "Profile claim fee"%><%=number_with_precision(fee.fee, precission: 2)%></span> before you can claim your profile</p>
                 <p>Click below to proceed with payment</p>
                 <br>
 <!--                 <input type="text" class="form-control input-lg" placeholder="Credit card no." required="" autofocus="">

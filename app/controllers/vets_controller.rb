@@ -55,7 +55,7 @@ class VetsController < ApplicationController
   def validate_claim_profile
     @vet = Vet.where(params[:vet]).first # Look for a Vet with the params given
 
-    if @vet && @vet.encrypted_password.blank? # A valid unclaimed vet exists
+    if @vet && @vet.is_pending_vet? # A valid unclaimed vet exists
       fee = Payment.where(description:"Profile claim fee").first
       flash.now[:notice] = "Found your profile. <br/>You will need to make a payment of RM #{fee.fee} before you can claim your profile.".html_safe
       render 'transactions/pay_to_claim'
@@ -171,7 +171,7 @@ class VetsController < ApplicationController
 
 
   def vet_params
-    params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :current_points, :expiring_points, :avatar, :ip_address, :express_token, :express_payer_id, :purchased_at)
+    params.require(:vet).permit(:name, :email, :password, :password_confirmation, :ic_number, :licence_number, :contact_number, :current_points, :expiring_points, :avatar, :ip_address, :express_token, :express_payer_id, :purchased_at)
   end
   
 end

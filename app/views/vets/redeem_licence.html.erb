@@ -23,7 +23,7 @@
             <form class="form-signin" role="form">
                 <h4 class="form-signin-heading">Payment</h4>
                 <p>You will need to make a payment of RM
-                <span class="text-success"><% fee = Payment.find_by(description: "Licence renewal fee") %><%= fee.fee%></span> to renew your licence.</p>
+                <span class="text-success"><% fee = Payment.find_by(description: "Licence renewal fee") %><%= number_with_precision(fee.fee, precision: 2) %></span> to renew your licence.</p>
                 <p>Click below to proceed with payment</p>
                 <br>
 <!--                 <input type="text" class="form-control input-lg" placeholder="Credit card no." required="" autofocus="">
